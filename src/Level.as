@@ -13,6 +13,7 @@ package
 		
 		public function Level()
 		{
+			var carpet:Object = { thruster : [], cannon : [] };
 			var c:CarpetEntity = new CarpetEntity();
 			carpets.push(c);
 			add(c);
