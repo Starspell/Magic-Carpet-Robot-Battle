@@ -10,6 +10,7 @@ package
 		public function CarpetWorldBG()
 		{
 			super();
+			layer = 1;
 			graphic = new Image(CARPET);
 		}
 	}
