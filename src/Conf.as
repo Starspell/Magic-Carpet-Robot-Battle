@@ -16,6 +16,6 @@ package
 		public static var down:Number = 2;
 		public static var right:Number = 3;
 		
-		public static var thrusterForce = 1;
+		public static var thrusterForce:Number = 1;
 	}
 }

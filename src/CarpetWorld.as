@@ -20,6 +20,7 @@ package
 			}
 			player = new Player(this, 0, 0);
 			add(player);
+			add(new CarpetWorldBG());
 		}
 
 		public function tileTL(x:int, y:int):Array {
