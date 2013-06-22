@@ -1,5 +1,6 @@
 package
 {
+	import net.flashpunk.graphics.Image;
 	import net.flashpunk.World;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
@@ -7,6 +8,8 @@ package
 
 	public class CarpetWorld extends World
 	{		
+		[Embed(source = '../assets/sprites/carpetarea.png')] private const CARPET:Class;
+		
 		private var blocks:Object;
 		public var player:Player;
 		private var grid:Array;
@@ -14,6 +17,9 @@ package
 
 		public function CarpetWorld(blocks:Object)
 		{
+			super();
+			addGraphic(new Image(CARPET), -20, 0, 0);
+			
 			// initialise grid
 			grid = new Array();
 			var i:int, j:int;
@@ -51,7 +57,7 @@ package
 				if (done) break;
 			}
 			if (!done) trace("couldn't place player...");
-			add(new CarpetWorldBG());
+			
 			worldBuffer = new BitmapData(
 				Conf.carpetSize[0] * Conf.carpetTileSize[0],
 				Conf.carpetSize[1] * Conf.carpetTileSize[1], false, 0
