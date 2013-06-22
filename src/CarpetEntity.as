@@ -9,15 +9,12 @@ package
 		
 		private var velA:Number; //Angular velocity.
 		private var acnA:Number; //Angular acceleration.
-		private static const MOI:Number; //Moment of Inertia.
 		
 		private var velX:Number;
 		private var velY:Number;
 		
 		private var acnX:Number;
 		private var acnY:Number;
-		
-		private static const mass:Number;
 		
 		private var carpet:Object;
 		
@@ -37,17 +34,32 @@ package
 			//Handle thrusters.
 			for (var thruster in carpet.thruster)
 			{
-				switch(thruster.dir) 
+				if (thruster.on)
 				{
-					case 0: //fore
-						
-						break;
-					case 1: //port
-						break;
-					case 2: //aft
-						break;
-					case 3: //starboard
-						break;
+					var thrusterAngle:Number;
+					
+					switch(thruster.dir) 
+					{
+						case Conf.up:
+							thrusterAngle = a;
+							break;
+						case Conf.left:
+							thrusterAngle = a + (Math.PI / 2);
+							break;
+						case Conf.down:
+							thrusterAngle = a + Math.PI;
+							break;
+						case Conf.right:
+							thrusterAngle = a - (Math.PI / 2);
+							break;
+					}
+					
+					// Sort out force.
+					netForceX += Math.cos(thrusterAngle) * Conf.thrusterForce;
+					netForceY += Math.sin(thrusterAngle) * Conf.thrusterForce;
+					
+					// Sort out moment.
+					
 				}
 			}
 			
@@ -56,6 +68,9 @@ package
 			{
 				
 			}
+			
+			acnX = netForceX / Conf.carpetMass;
+			acnY = netForceY / Conf.carpetMass;
 		}
 	}
 }
