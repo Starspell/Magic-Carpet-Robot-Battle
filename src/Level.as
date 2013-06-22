@@ -16,6 +16,7 @@ package
 		public var carpetWorld:CarpetWorld;
 		public var carpetGraphic:Image;
 		private var seaTiles:TiledImage = new TiledImage(SEA, Conf.levelSize[0], Conf.levelSize[1]);
+		public var carpetEnt:CarpetEntity;
 		
 		public function Level()
 		{
@@ -23,6 +24,8 @@ package
 // 			add(new CarpetEntity(blocks));
 			carpetWorld = new CarpetWorld(blocks);
 			carpetGraphic = (addGraphic(new Image(carpetWorld.worldBuffer), -2).graphic as Image);
+			carpetEnt = new CarpetEntity(blocks);
+			add(carpetEnt);
 			addGraphic(seaTiles, 0, 0, 0);
 		}
 		
