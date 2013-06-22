@@ -25,6 +25,8 @@ package
 		{
 			this.blocks = blocks;
 			super(500, 350, new Image(CARPET));
+			setHitbox(40, 60);
+			layer = -10;
 		}
 		
 		override public function update():void
