@@ -20,8 +20,7 @@ package
 		
 		public function Level()
 		{
-			var blocks:Object = {thruster: [[0, 0]], cannon: []}
-// 			add(new CarpetEntity(blocks));
+			var blocks:Object = {thruster: [[0, 0]], cannon: []};
 			carpetWorld = new CarpetWorld(blocks);
 			carpetGraphic = (addGraphic(new Image(carpetWorld.worldBuffer), -2).graphic as Image);
 			carpetEnt = new CarpetEntity(blocks);

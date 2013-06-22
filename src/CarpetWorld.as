@@ -18,7 +18,13 @@ package
 		public function CarpetWorld(blocks:Object)
 		{
 			super();
-			addGraphic(new Image(CARPET), -20, 0, 0);
+			
+			worldBuffer = new BitmapData(
+				Conf.carpetSize[0] * Conf.carpetTileSize[0],
+				Conf.carpetSize[1] * Conf.carpetTileSize[1], false, 0
+			);
+			
+			addGraphic(new Image(CARPET), 1, 0, 0);
 			
 			// initialise grid
 			grid = new Array();
@@ -57,12 +63,8 @@ package
 				if (done) break;
 			}
 			if (!done) trace("couldn't place player...");
-			
-			worldBuffer = new BitmapData(
-				Conf.carpetSize[0] * Conf.carpetTileSize[0],
-				Conf.carpetSize[1] * Conf.carpetTileSize[1], false, 0
-			);
 		}
+		
 		public override function add(e:Entity):Entity {
 			e.renderTarget = worldBuffer;
 			trace(e);
