@@ -1,5 +1,6 @@
 package
 {
+	import flash.utils.Dictionary;
 	import net.flashpunk.Entity;
 	
 	public class CarpetEntity extends Entity
@@ -18,22 +19,28 @@ package
 		
 		private static const mass:Number;
 		
-		public function CarpetEntity():void
+		private var Carpet:Dictionary;
+		
+		public function CarpetEntity()
 		{
 			
 		}
 		
 		override public function update():void
 		{
+			var netForceX:Number = 0;
+			var netForceY:Number = 0;
+
+			var netMomentX:Number = 0;
+			var netMomentY:Number = 0;
 			
-			this.world.getType("block", blocks);
-			for (var b in blocks)
+			for (var block in Carpet)
 			{
-				if (b is Thruster)
+				if (block is Thruster)
 				{
 					
 				}
-				else if (b is Cannon)
+				else if (block is Cannon)
 				{
 					
 				}
