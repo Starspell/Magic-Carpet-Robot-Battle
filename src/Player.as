@@ -6,15 +6,12 @@ package
 	 * ...
 	 * @author Sarah
 	 */
-	public class Player extends Entity
+	public class Player extends Block
 	{
-		private var carpet:CarpetWorld;
 
-		public function Player(carpet:CarpetWorld, startX:int, startY:int)
+		public function Player(carpet:CarpetWorld, x:int, y:int)
 		{
-			this.carpet = carpet;
-// 			var pos:Array = this.carpet.getEntityPos(this, startX, startY);
-// 			super(pos[0], pos[1]);
+			super(carpet, x, y);
 		}
 		
 	}

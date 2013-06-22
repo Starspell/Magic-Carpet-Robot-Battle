@@ -13,9 +13,10 @@ package
 		
 		public function Level()
 		{
-			var c:CarpetEntity = new CarpetEntity();
+			var blocks:Object = {thruster: [], cannon: []}
+// 			add(new CarpetEntity(blocks));
+			var c:CarpetWorld = new CarpetWorld(blocks);
 			carpets.push(c);
-			add(c);
 		}
 		
 	}
