@@ -10,6 +10,7 @@ package
 	{
 		public var carpet:CarpetWorld;
 		public var pos:Array;
+		public var dir:Number; // Should be Conf.up, down, left or right.
 		
 		public function Block(carpet:CarpetWorld, x:int, y:int)
 		{

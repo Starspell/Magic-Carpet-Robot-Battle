@@ -6,9 +6,7 @@ package
 	 */
 	public class Thruster extends Block
 	{
-		//Direction encoded as follows:
-		
-		public var dir:Number;
+		public var on:Boolean;
 		
 		public function Thruster(carpet:CarpetWorld, x:int, y:int)
 		{
