@@ -26,7 +26,6 @@ package
 		override public function update():void
 		{
 			
-			
 			this.world.getType("block", blocks);
 			for (var b in blocks)
 			{

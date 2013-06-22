@@ -1,8 +1,6 @@
 package
 {
 	import net.flashpunk.World;
-	import net.flashpunk.graphics;
-	import Conf;
 	
 	/**
 	 * ...
@@ -11,11 +9,13 @@ package
 	public class Level extends World
 	{
 		public var size:Array = Conf.levelSize;
-		public var player:Player;
+		public var carpets:Array = [];
 		
 		public function Level()
 		{
-			player = new Player(100, 100);
+			var c:CarpetEntity = new CarpetEntity();
+			carpets.push(c);
+			add(c);
 		}
 		
 	}

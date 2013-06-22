@@ -11,7 +11,7 @@ package
 		{
 			super(1000, 700, 60, false);
 
-			FP.world = new Level();
+			FP.world = new CarpetWorld();
 		}
 	}
 }
