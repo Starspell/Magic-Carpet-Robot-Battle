@@ -2,25 +2,36 @@ package
 {
 	import flash.utils.Dictionary;
 	import net.flashpunk.Entity;
+	import net.flashpunk.graphics.Image;
 	
 	public class CarpetEntity extends Entity
 	{
-		private var a:Number; //The angle carpet is facing in radians ACW from +ve X axis.
+		[Embed(source = '../assets/sprites/carpetentity.png')] private const CARPET:Class;
 		
-		private var velA:Number; //Angular velocity.
-		private var acnA:Number; //Angular acceleration.
+		private var a:Number = 0; //The angle carpet is facing in radians ACW from +ve X axis.
 		
-		private var velX:Number;
-		private var velY:Number;
+		private var velA:Number = 0; //Angular velocity.
+		private var acnA:Number = 0; //Angular acceleration.
 		
-		private var acnX:Number;
-		private var acnY:Number;
+		private var velX:Number = 0;
+		private var velY:Number = 0;
 		
-		private var carpet:Object;
+		private var acnX:Number = 0;
+		private var acnY:Number = 0;
 		
-		public function CarpetEntity()
+		private var blocks:Object;
+		
+		private var image:Image;
+		
+		public function CarpetEntity(blocks:Object)
 		{
-			
+			this.blocks = blocks;
+			image = new Image(CARPET);
+			image.originX = 20;
+			image.originY = 30;
+			super(500, 350, image);
+			setHitbox(40, 60);
+			layer = -10;
 		}
 		
 		override public function update():void
@@ -33,7 +44,7 @@ package
 			var dist:Number;
 			
 			//Handle thrusters.
-			for (var thruster in carpet.thruster)
+			for each (var thruster:Thruster in blocks.thruster)
 			{
 				if (thruster.on)
 				{
@@ -43,19 +54,19 @@ package
 					{
 						case Conf.up:
 							thrusterAngle = a;
-							dist = - (pos[0] - (Conf.carpetSize[0] / 2));
+							dist = - (thruster.pos[0] - (Conf.carpetSize[0] / 2));
 							break;
 						case Conf.left:
 							thrusterAngle = a + (Math.PI / 2);
-							dist = - (pos[1] - (Conf.carpetSize[1] / 2));
+							dist = - (thruster.pos[1] - (Conf.carpetSize[1] / 2));
 							break;
 						case Conf.down:
 							thrusterAngle = a + Math.PI;
-							dist = pos[0] - (Conf.carpetSize[0] / 2);
+							dist = thruster.pos[0] - (Conf.carpetSize[0] / 2);
 							break;
 						case Conf.right:
 							thrusterAngle = a - (Math.PI / 2);
-							dist = pos[1] - (Conf.carpetSize[1] / 2);
+							dist = thruster.pos[1] - (Conf.carpetSize[1] / 2);
 							break;
 					}
 					
@@ -69,7 +80,7 @@ package
 			}
 			
 			//Handle cannons.
-			for (var cannon in carpet.cannon)
+			for each (var cannon:Cannon in blocks.cannon)
 			{
 				
 			}
@@ -77,6 +88,8 @@ package
 			// Friction.
 			netForceX -= velX * Conf.carpetFriction;
 			netForceY -= velY * Conf.carpetFriction;
+			
+			netMoment -= velA * Conf.carpetRotFriction;
 			
 			acnX = netForceX / Conf.carpetMass;
 			acnY = netForceY / Conf.carpetMass;
@@ -90,6 +103,8 @@ package
 			x += velX;
 			y += velY;
 			a += velA;
+			
+			image.angle = Conf.radiansToDegrees(a);
 		}
 	}
 }

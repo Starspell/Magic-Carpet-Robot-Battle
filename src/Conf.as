@@ -17,9 +17,17 @@ package
 		public static var right:int = 3;
 		
 		// Carpet related constants
-		public static var thrusterForce:Number = 1;
+		public static var thrusterForce:Number = 0.1;
 		public static var carpetMass:Number = 1;
-		public static var carpetMOI:Number = 1;
-		public static var carpetFriction:Number = 1;
+		public static var carpetMOI:Number = 10000;
+		public static var carpetFriction:Number = 0.1;
+		public static var carpetRotFriction:Number = 0.1;
+		
+		public static function radiansToDegrees(rad:Number):Number
+		{
+			rad /= (2 * Math.PI);
+			rad *= 360;
+			return rad;
+		}
 	}
 }
