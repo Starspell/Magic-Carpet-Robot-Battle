@@ -4,10 +4,10 @@ package
 	 * ...
 	 * @author Sarah
 	 */
-	public class Canon extends Block 
+	public class Cannon extends Block 
 	{
 		
-		public function Canon() 
+		public function Cannon() 
 		{
 			
 		}
