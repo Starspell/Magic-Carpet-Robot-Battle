@@ -1,4 +1,4 @@
-package  
+package
 {
 	import net.flashpunk.Entity;
 	
@@ -6,10 +6,10 @@ package
 	 * ...
 	 * @author Sarah
 	 */
-	public class Player extends Entity 
+	public class Player extends Entity
 	{
 		
-		public function Player(startX:int, startY:int) 
+		public function Player(startX:int, startY:int)
 		{
 			super(startX, startY);
 		}
