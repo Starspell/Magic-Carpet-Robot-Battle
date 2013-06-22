@@ -9,9 +9,9 @@ package
 	{
 		public function Main()
 		{
-			super(1000, 700, 60, false);
-
-			FP.world = new CarpetWorld();
+			super(1000, 700, 60, true);
+			
+			FP.world = new Level();
 		}
 	}
 }
