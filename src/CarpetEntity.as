@@ -1,8 +1,8 @@
 package
 {
-	import net.flashpunk.Entity
+	import net.flashpunk.Entity;
 	
-	public class Carpet extends Entity
+	public class CarpetEntity extends Entity
 	{
 		private var a:Number; //The angle carpet is facing in radians ACW from +ve X axis.
 		
@@ -18,9 +18,7 @@ package
 		
 		private static const mass:Number;
 		
-		private var blocks:Array;
-		
-		public function Carpet():void
+		public function CarpetEntity():void
 		{
 			
 		}
