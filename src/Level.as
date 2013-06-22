@@ -1,4 +1,4 @@
-package  
+package
 {
 	import net.flashpunk.World;
 	
@@ -6,13 +6,16 @@ package
 	 * ...
 	 * @author Sarah
 	 */
-	public class Level extends World 
+	public class Level extends World
 	{
-		public var player:Player;
+		public var size:Array = Conf.levelSize;
+		public var carpets:Array = [];
 		
-		public function Level() 
+		public function Level()
 		{
-			player = new Player(100, 100);
+			var c:CarpetEntity = new CarpetEntity();
+			carpets.push(c);
+			add(c);
 		}
 		
 	}

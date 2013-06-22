@@ -1,4 +1,4 @@
-package  
+package
 {
 	import net.flashpunk.Entity;
 	
@@ -6,12 +6,15 @@ package
 	 * ...
 	 * @author Sarah
 	 */
-	public class Player extends Entity 
+	public class Player extends Entity
 	{
-		
-		public function Player(startX:int, startY:int) 
+		private var carpet:CarpetWorld;
+
+		public function Player(carpet:CarpetWorld, startX:int, startY:int)
 		{
-			super(startX, startY);
+			this.carpet = carpet;
+// 			var pos:Array = this.carpet.getEntityPos(this, startX, startY);
+// 			super(pos[0], pos[1]);
 		}
 		
 	}
