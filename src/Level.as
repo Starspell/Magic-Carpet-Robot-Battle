@@ -9,16 +9,20 @@ package
 	public class Level extends World
 	{
 		public var size:Array = Conf.levelSize;
-		public var carpets:Array = [];
+		public var carpetWorld:CarpetWorld;
 		
 		public function Level()
 		{
 			var blocks:Object = {thruster: [[0,0]], cannon: []}
 // 			add(new CarpetEntity(blocks));
-			var c:CarpetWorld = new CarpetWorld(blocks);
-			carpets.push(c);
+			carpetWorld = new CarpetWorld(blocks);
 		}
 		
+		override public function update():void
+		{
+			carpetWorld.update();
+			super.update();
+		}
 	}
 
 }

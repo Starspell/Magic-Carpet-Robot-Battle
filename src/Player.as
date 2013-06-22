@@ -8,6 +8,7 @@ package
 	 */
 	public class Player extends Block
 	{
+		[Embed(source = '../assets/sprites/player.png')] private const PLAYER:Class;
 
 		public function Player(carpet:CarpetWorld, x:int, y:int)
 		{
