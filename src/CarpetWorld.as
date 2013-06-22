@@ -1,10 +1,14 @@
 package
 {
+	import net.flashpunk.graphics.TiledImage;
 	import net.flashpunk.World;
 
 	public class CarpetWorld extends World
 	{
+		[Embed(source = '../assets/sprites/sea.png')] private const SEA:Class;
+		
 		private var blocks:Object;
+		private var seaTiles:TiledImage = new TiledImage(SEA, Conf.levelSize[0], Conf.levelSize[1]);
 		public var player:Player;
 
 		public function CarpetWorld(blocks:Object)
@@ -21,6 +25,7 @@ package
 			player = new Player(this, 0, 0);
 			add(player);
 			add(new CarpetWorldBG());
+			addGraphic(seaTiles, 0, 0, 0);
 		}
 
 		public function tileTL(x:int, y:int):Array {

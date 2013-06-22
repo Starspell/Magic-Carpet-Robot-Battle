@@ -23,6 +23,18 @@ package
 			carpetWorld.update();
 			super.update();
 		}
+		
+		override public function updateLists():void
+		{
+			carpetWorld.updateLists();
+			super.updateLists();
+		}
+		
+		override public function render():void
+		{
+			carpetWorld.render();
+			super.render();
+		}
 	}
 
 }
