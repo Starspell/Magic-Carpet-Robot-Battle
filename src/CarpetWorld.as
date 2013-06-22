@@ -19,7 +19,7 @@ package
 			for (var i:int = 0; i < bClasses.length; i++) {
 				var bList:Array = blocks[bNames[i]];
 				for (var j:int = 0; j < bList.length; j++) {
-					bList[j] = bClasses[i](this, bList[j][0], bList[j][1]);
+					bList[j] = new bClasses[i](this, bList[j][0], bList[j][1]);
 				}
 			}
 			player = new Player(this, 0, 0);

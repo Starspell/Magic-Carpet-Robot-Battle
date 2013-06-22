@@ -13,7 +13,7 @@ package
 		
 		public function Level()
 		{
-			var blocks:Object = {thruster: [], cannon: []}
+			var blocks:Object = {thruster: [[0,0]], cannon: []}
 // 			add(new CarpetEntity(blocks));
 			carpetWorld = new CarpetWorld(blocks);
 		}
