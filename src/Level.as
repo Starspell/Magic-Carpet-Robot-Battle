@@ -21,7 +21,7 @@ package
 		
 		public function Level()
 		{
-			var blocks:Object = {thruster: [[0, 0]], cannon: []}
+			var blocks:Object = {thruster: [], cannon: []}
 			carpets = new Array();
 			carpets.push(new CarpetWorld(blocks));
 			carpetEnt = new CarpetEntity(blocks);

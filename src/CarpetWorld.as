@@ -1,6 +1,7 @@
 package
 {
 	import net.flashpunk.graphics.Image;
+
 	import net.flashpunk.World;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
@@ -18,7 +19,13 @@ package
 		public function CarpetWorld(blocks:Object)
 		{
 			super();
-			addGraphic(new Image(CARPET), -20, 0, 0);
+			
+			worldBuffer = new BitmapData(
+				Conf.carpetSize[0] * Conf.carpetTileSize[0],
+				Conf.carpetSize[1] * Conf.carpetTileSize[1], false, 0
+			);
+			
+			addGraphic(new Image(CARPET), 1, 0, 0);
 			
 			// initialise grid
 			grid = new Array();
@@ -57,15 +64,13 @@ package
 				if (done) break;
 			}
 			if (!done) trace("couldn't place player...");
-			
-			worldBuffer = new BitmapData(
-				Conf.carpetSize[0] * Conf.carpetTileSize[0],
-				Conf.carpetSize[1] * Conf.carpetTileSize[1], false, 0
-			);
 		}
-		public override function add(e:Entity):Entity {
+		
+		override public function add(e:Entity):Entity
+		{
+			if (e is Thruster) blocks.thruster.push(e);
+			else if (e is Cannon) blocks.cannon.push(e);
 			e.renderTarget = worldBuffer;
-			trace(e);
 			return super.add(e);
 		}
 
