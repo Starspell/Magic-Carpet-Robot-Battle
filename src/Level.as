@@ -8,10 +8,11 @@ package
 	 */
 	public class Level extends World 
 	{
+		public var player:Player;
 		
 		public function Level() 
 		{
-			
+			player = new Player(100, 100);
 		}
 		
 	}

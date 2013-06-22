@@ -9,9 +9,9 @@ package
 	public class Player extends Entity 
 	{
 		
-		public function Player() 
+		public function Player(startX:int, startY:int) 
 		{
-			
+			super(startX, startY);
 		}
 		
 	}
