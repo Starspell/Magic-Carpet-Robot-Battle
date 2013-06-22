@@ -14,12 +14,14 @@ package
 		public var size:Array = Conf.levelSize;
 		public var carpetWorld:CarpetWorld;
 		private var seaTiles:TiledImage = new TiledImage(SEA, Conf.levelSize[0], Conf.levelSize[1]);
+		public var carpetEnt:CarpetEntity;
 		
 		public function Level()
 		{
 			var blocks:Object = {thruster: [[0,0]], cannon: []}
-// 			add(new CarpetEntity(blocks));
 			carpetWorld = new CarpetWorld(blocks);
+			carpetEnt = new CarpetEntity(blocks);
+			add(carpetEnt);
 			addGraphic(seaTiles, 0, 0, 0);
 		}
 		
