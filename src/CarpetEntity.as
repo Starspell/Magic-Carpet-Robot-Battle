@@ -9,15 +9,12 @@ package
 		
 		private var velA:Number; //Angular velocity.
 		private var acnA:Number; //Angular acceleration.
-		private static const MOI:Number; //Moment of Inertia.
 		
 		private var velX:Number;
 		private var velY:Number;
 		
 		private var acnX:Number;
 		private var acnY:Number;
-		
-		private static const mass:Number;
 		
 		private var carpet:Object;
 		
@@ -72,8 +69,8 @@ package
 				
 			}
 			
-			acnX = netForceX / mass;
-			acnY = netForceY / mass;
+			acnX = netForceX / Conf.carpetMass;
+			acnY = netForceY / Conf.carpetMass;
 		}
 	}
 }
