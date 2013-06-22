@@ -68,10 +68,8 @@ package
 		
 		override public function add(e:Entity):Entity
 		{
-			var t:Thruster = e as Thruster;
-			var c:Cannon = e as Cannon;
-			if (t) blocks.thruster.push(t);
-			else if (c) blocks.cannon.push(c);
+			if (e is Thruster) blocks.thruster.push(e);
+			else if (e is Cannon) blocks.cannon.push(e);
 			e.renderTarget = worldBuffer;
 			return super.add(e);
 		}
