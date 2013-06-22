@@ -11,11 +11,14 @@ package
 		public static var carpetTileSize:Array = [40, 40];
 		
 		// Directions on carpet
-		public static var up:Number = 0;
-		public static var left:Number = 1;
-		public static var down:Number = 2;
-		public static var right:Number = 3;
+		public static var up:int = 0;
+		public static var left:int = 1;
+		public static var down:int = 2;
+		public static var right:int = 3;
 		
-		public static var thrusterForce = 1;
+		// Carpet related constants
+		public static var thrusterForce:Number = 1;
+		public static var carpetMass:Number = 1;
+		public static var carpetMOI:Number = 1;
 	}
 }
