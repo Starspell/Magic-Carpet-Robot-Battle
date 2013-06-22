@@ -20,11 +20,13 @@ package
 		
 		public function Level()
 		{
-			var blocks:Object = {thruster: [[0, 0]], cannon: []}
-// 			add(new CarpetEntity(blocks));
+			var blocks:Object = {thruster: [], cannon: []}
 			carpetWorld = new CarpetWorld(blocks);
 			carpetGraphic = (addGraphic(new Image(carpetWorld.worldBuffer), -2).graphic as Image);
 			carpetEnt = new CarpetEntity(blocks);
+			var t:Thruster = new Thruster(carpetWorld, 1, 1);
+			t.dir = Conf.down;
+			carpetWorld.add(t);
 			add(carpetEnt);
 			addGraphic(seaTiles, 0, 0, 0);
 		}

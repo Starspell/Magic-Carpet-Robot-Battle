@@ -1,5 +1,6 @@
 package
 {
+	import net.flashpunk.Entity;
 	import net.flashpunk.World;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
@@ -57,9 +58,14 @@ package
 				Conf.carpetSize[1] * Conf.carpetTileSize[1], false, 0
 			);
 		}
-		public override function add(e:Entity):Entity {
+		
+		override public function add(e:Entity):Entity
+		{
+			var t:Thruster = e as Thruster;
+			var c:Cannon = e as Cannon;
+			if (t) blocks.thruster.push(t);
+			else if (c) blocks.cannon.push(c);
 			e.renderTarget = worldBuffer;
-			trace(e);
 			return super.add(e);
 		}
 

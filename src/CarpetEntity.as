@@ -21,10 +21,15 @@ package
 		
 		private var blocks:Object;
 		
+		private var image:Image;
+		
 		public function CarpetEntity(blocks:Object)
 		{
 			this.blocks = blocks;
-			super(500, 350, new Image(CARPET));
+			image = new Image(CARPET);
+			image.originX = 20;
+			image.originY = 30;
+			super(500, 350, image);
 			setHitbox(40, 60);
 			layer = -10;
 		}
@@ -84,6 +89,8 @@ package
 			netForceX -= velX * Conf.carpetFriction;
 			netForceY -= velY * Conf.carpetFriction;
 			
+			netMoment -= velA * Conf.carpetRotFriction;
+			
 			acnX = netForceX / Conf.carpetMass;
 			acnY = netForceY / Conf.carpetMass;
 			
@@ -96,6 +103,8 @@ package
 			x += velX;
 			y += velY;
 			a += velA;
+			
+			image.angle = Conf.radiansToDegrees(a);
 		}
 	}
 }
