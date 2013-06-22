@@ -19,7 +19,7 @@ package
 		
 		private static const mass:Number;
 		
-		private var Carpet:Dictionary;
+		private var carpet:Object;
 		
 		public function CarpetEntity()
 		{
@@ -34,16 +34,27 @@ package
 			var netMomentX:Number = 0;
 			var netMomentY:Number = 0;
 			
-			for (var block in Carpet)
+			//Handle thrusters.
+			for (var thruster in carpet.thruster)
 			{
-				if (block is Thruster)
+				switch(thruster.dir) 
 				{
-					
+					case 0: //fore
+						
+						break;
+					case 1: //port
+						break;
+					case 2: //aft
+						break;
+					case 3: //starboard
+						break;
 				}
-				else if (block is Cannon)
-				{
-					
-				}
+			}
+			
+			//Handle cannons.
+			for (var cannon in carpet.cannon)
+			{
+				
 			}
 		}
 	}
