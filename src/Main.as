@@ -10,7 +10,7 @@ package
 		public function Main()
 		{
 			super(1000, 700, 60, true);
-			FP.world = new CarpetWorld({thruster:[],cannon:[]});
+			FP.world = new Level();
 		}
 	}
 }

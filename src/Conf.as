@@ -20,5 +20,6 @@ package
 		public static var thrusterForce:Number = 1;
 		public static var carpetMass:Number = 1;
 		public static var carpetMOI:Number = 1;
+		public static var carpetFriction:Number = 1;
 	}
 }

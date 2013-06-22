@@ -2,15 +2,19 @@ package
 {
 	import net.flashpunk.World;
 	import net.flashpunk.Entity;
+	import net.flashpunk.FP;
+	import flash.display.BitmapData;
 
 	public class CarpetWorld extends World
-	{
+	{		
 		private var blocks:Object;
 		public var player:Player;
 		private var grid:Array;
+		public var worldBuffer:BitmapData;
 
 		public function CarpetWorld(blocks:Object)
 		{
+			// initialise grid
 			grid = new Array();
 			var i:int, j:int;
 			for (i = 0; i < Conf.carpetSize[0]; i++) {
@@ -19,13 +23,17 @@ package
 					grid[i].push(null);
 				}
 			}
+			// create and add blocks
 			this.blocks = blocks;
 			var bClasses:Array = [Thruster, Cannon];
 			var bNames:Array = ["thruster", "cannon"];
 			for (i = 0; i < bClasses.length; i++) {
 				var bList:Array = blocks[bNames[i]];
 				for (j = 0; j < bList.length; j++) {
-					bList[j] = new bClasses[i](this, bList[j][0], bList[j][1]);
+					var b:Block = new bClasses[i](this, bList[j][0],
+												  bList[j][1]);
+					bList[j] = b;
+					grid[i][j] = b;
 					add(bList[j]);
 				}
 			}
@@ -44,15 +52,25 @@ package
 			}
 			if (!done) trace("couldn't place player...");
 			add(new CarpetWorldBG());
+			worldBuffer = new BitmapData(
+				Conf.carpetSize[0] * Conf.carpetTileSize[0],
+				Conf.carpetSize[1] * Conf.carpetTileSize[1], false, 0
+			);
+		}
+		public override function add(e:Entity):Entity {
+			e.renderTarget = worldBuffer;
+			trace(e);
+			return super.add(e);
 		}
 
 		public function tileTL(x:int, y:int):Array {
 			return [Conf.carpetTileSize[0] * x, Conf.carpetTileSize[1] * y];
 		}
 
-		public function setPos(e:Entity, x:int, y:int):void {
+		public function setPos(e:Block, x:int, y:int):void {
+			grid[e.pos[0]][e.pos[1]] = null;
 			grid[x][y] = e;
-			(e as Block).pos = [x, y];
+			e.pos = [x, y];
 			e.x = Conf.carpetTileSize[0] * x;
 			e.y = Conf.carpetTileSize[1] * y;
 		}
