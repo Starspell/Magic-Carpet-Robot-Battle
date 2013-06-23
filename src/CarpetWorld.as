@@ -65,7 +65,7 @@ package
 				}
 				if (remain == 0) break;
 			}
-			if (remain) trace("couldn't place all players...");
+			if (remain) throw new Error("couldn't place all players...");
 		}
 		
 		override public function add(e:Entity):Entity
