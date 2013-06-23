@@ -21,40 +21,43 @@ package
 		public override function set pos(pos:Array):void
 		{
 			super.pos = pos;
-			//sides Array = [up, left, down, right]
+			//sides Array = [left, up, right, down]
 			var sides:Array = [false, false, false, false];
+			var tempOn:Boolean = false;
+			
 			if(pos[1] == 1)
 			{
 				//Sets up to true
 				sides[Conf.up] = true;
-				on = true;
+				tempOn = true;
 			}
-			else if(pos[0] == 1)
+			if(pos[0] == 1)
 			{
 				//Sets left to true
 				sides[Conf.left] = true;
-				on = true;
+				tempOn = true;
 			}
-			else if(pos[1] == Conf.carpetSize[1] - 2)
+			if(pos[1] == Conf.carpetSize[1] - 2)
 			{
 				//Sets down to true
 				sides[Conf.down] = true;
-				on = true;
+				tempOn = true;
 			}
-			else if(pos[0] == Conf.carpetSize[0] - 2)
+			if(pos[0] == Conf.carpetSize[0] - 2)
 			{
 				//Sets right to true
 				sides[Conf.right] = true;
-				on = true;
+				tempOn = true;
 			}
-			else
-			{
-				on = false;
-			}
+			
+			on = tempOn;
 			
 			if (on)
 			{
-				trace(sides);
+				if ( pos[0] == 1 && pos[1] == 10 )
+				{
+					trace(sides);
+				}
 				setDir(sides);
 			}
 		}
