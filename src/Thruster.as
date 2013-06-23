@@ -15,15 +15,17 @@ package
 		
 		public var offGraphic:Image;
 		public var onGraphic:Spritemap;
-		private var flare:Image;
+		private var flare:Spritemap;
 		
 		public function Thruster(carpet:CarpetWorld, x:int, y:int)
 		{
 			sidesOrdered = [Conf.up, Conf.down, Conf.left, Conf.right];
 			
-			flare = new Image(FLARE);
+			flare = new Spritemap(FLARE, 40, 60);
 			carpet.addGraphic(flare, -1);
 			flare.visible = false;
+			flare.add("on", [0, 1, 2, 3], 5, true);
+			flare.play("on");
 			
 			offGraphic = new Image(IMG);
 			

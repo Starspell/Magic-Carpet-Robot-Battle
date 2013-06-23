@@ -108,7 +108,7 @@ package
 		}
 		
 		// Fire a bullet from a cannon at carpetx,carpetY on carpet, in direction dir.
-		public function fire(carpetX:int, carpetY:int, dir:int)
+		public function fire(carpetX:int, carpetY:int, dir:int):void
 		{
 			var x:Number = (carpetX - (Conf.carpetSize[0] / 2)) / (Conf.carpetSize[0] / 2);
 			var y:Number = ( - (carpetY - (Conf.carpetSize[1] / 2))) / (Conf.carpetSize[1] / 2);
