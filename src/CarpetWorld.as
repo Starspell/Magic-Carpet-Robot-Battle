@@ -45,9 +45,9 @@ package
 				for (j = 0; j < bList.length; j++) {
 					var b:Block = new bClasses[i](this, bList[j][0],
 												  bList[j][1]);
+					grid[bList[j][0]][bList[j][1]] = b;
 					bList[j] = b;
-					grid[i][j] = b;
-					add(bList[j]);
+					add(b);
 				}
 			}
 			// put player in an empty tile
@@ -68,8 +68,6 @@ package
 		
 		override public function add(e:Entity):Entity
 		{
-			if (e is Thruster) blocks.thruster.push(e);
-			else if (e is Cannon) blocks.cannon.push(e);
 			e.renderTarget = worldBuffer;
 			return super.add(e);
 		}
