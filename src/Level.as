@@ -22,6 +22,8 @@ package
 		public var nextCheckpoint:int;
 		public var ident:int;
 		
+		public var worldDims:Array = [];
+		
 		public function Level(ident:int)
 		{
 			ident = ident;
@@ -31,17 +33,6 @@ package
 			carpetGraphics = new Array();
 			var blocks:Object = { thruster: [[1, 1]], cannon: [[2, 3]] };
 			nextCheckpoint = 0;
-			
-			// All the thrusters!
-			/*var t:Array = [];
-            for (var i:int = 1; i <= 6; ++i)
-            {
-                for (var j:int = 1; j <= 10; ++j)
-                {
-                    t.push([i, j]);
-                }
-            }
-            var blocks:Object = { thruster: t, cannon: [] }*/
 
 			addCarpet(blocks, 1, 30, 20);
 
@@ -56,6 +47,9 @@ package
 					add(new Gate(args[0], args[1], args[2], args[3], this, i));
 				}
 			}
+			
+			worldDims[0] = Conf.levelSize[0];
+			worldDims[1] = Conf.levelSize[1];
 		}
 
 		private function addCarpet(blocks:Object, nPlayers:int, x:int,
