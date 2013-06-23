@@ -23,6 +23,9 @@ package
 		public static var carpetFriction:Number = 0.1;
 		public static var carpetRotFriction:Number = 0.1;
 		
+		// Player related constants
+		public static var tweenTime:Number = 10;
+		
 		public static function radiansToDegrees(rad:Number):Number
 		{
 			rad /= (2 * Math.PI);

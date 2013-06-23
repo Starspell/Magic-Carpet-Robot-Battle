@@ -25,6 +25,7 @@ package
 		{
 			return _pos;
 		}
+		//DO NOT CALL ON PLAYER
 		public function set pos(pos:Array):void
 		{
 			//sides Array = [up, left, down, right]
