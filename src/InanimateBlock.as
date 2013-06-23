@@ -49,11 +49,16 @@ package
 				sides[Conf.right] = true;
 				tempOn = true;
 			}
+			else
+			{
+				on = false;
+			}
 			
 			on = tempOn;
 			
 			if (on)
 			{
+				trace(sides);
 				setDir(sides);
 			}
 		}
