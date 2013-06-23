@@ -97,7 +97,7 @@ package
 				//Target is destroyed
 				nextCheckpoint++;
 				if (cp is Target) remove(cp);
-				else if (cp is Gate) ; //Gate code here!
+				else if (cp is Gate) {}; //Gate code here!
 				trace(nextCheckpoint);
 				if (nextCheckpoint == Conf.levelData[ident].length) {
 					trace("win");

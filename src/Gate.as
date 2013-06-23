@@ -44,7 +44,7 @@ package
 			norm = new Point(tang.y, -tang.x);
 			
 			numEntity.x = x + tang.x * halfLength;
-			numEntity.y = y + tang.y * halfLength;
+			numEntity.y = y + tang.y * halfLength - 5;
 		}
 		
 		override public function render():void
@@ -52,7 +52,6 @@ package
 			if(passed) Draw.linePlus(x + 20, y + 20, endX + 20, endY + 20, 0xFF00FF, 0.5, 30);
 			else Draw.linePlus(x + 20, y + 20, endX + 20, endY + 20, 0xFFFFFF, 0.5, 30);
 			super.render();
-			numEntity.render();
 		}
 		
 	}

@@ -23,8 +23,12 @@ package
 			this.num = num;
 			
 			Text.font = "My Font";
-			var fontTemp:Text = new Text(String(num));
+			var fontTemp:Text = new Text(String(num + 1));
 			fontTemp.size = 35;
+			fontTemp.color = 0x8AD4F1;
+			// I want to add a black / dark surround to the lettering
+			// Not sure how to do it
+			//fontTemp.setStyle("outline", );
 			numEntity = new Entity(x, y, fontTemp);
 		}
 		
@@ -32,6 +36,12 @@ package
 		{
 			passed = true;
 			(world as Level).checkpointPassed(this);
+		}
+		
+		override public function render():void
+		{
+			super.render();
+			numEntity.render();
 		}
 	}
 }
