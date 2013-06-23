@@ -36,8 +36,16 @@ package
 			x += velX;
 			y += velY;
 			
+			var tempWorld:Level = this.world as Level;
+			
+			if ( !tempWorld )
+			{
+				return;
+			}
+			
 			// Destroy if off screen
-			if (x < 0 || y < 0 || x > Conf.levelSize[0] || y > Conf.levelSize[1])
+			if (x < tempWorld.worldBoundaryCoords[0].x || y < tempWorld.worldBoundaryCoords[0].y 
+				|| x > tempWorld.worldBoundaryCoords[1].x || y > tempWorld.worldBoundaryCoords[1].y)
 			{
 				this.world.remove(this);
 			}

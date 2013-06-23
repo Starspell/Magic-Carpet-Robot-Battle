@@ -141,14 +141,19 @@ package
 				}
 			}
 			
-			var topLeft:Point = (this.world as Level). worldBoundaryCoords[0];
-			var bottomRight:Point = (this.world as Level). worldBoundaryCoords[1];
+			var level:Level = this.world as Level;
 			
-			if (left < topLeft.x || right > bottomRight.x) velX = - velX * Conf.edgeRepel;
-			if (top < topLeft.y || bottom > bottomRight.y) velY = - velY * Conf.edgeRepel;
-			
-			this.world.camera.x = x - ((Conf.levelSize[0] / 2) + 175);
-			this.world.camera.y = y - (Conf.levelSize[1] / 2);
+			if ( level )
+			{
+				var topLeft:Point = level.worldBoundaryCoords[0];
+				var bottomRight:Point = level.worldBoundaryCoords[1];
+				
+				if (left < topLeft.x || right > bottomRight.x) velX = - velX * Conf.edgeRepel;
+				if (top < topLeft.y || bottom > bottomRight.y) velY = - velY * Conf.edgeRepel;
+				
+				this.world.camera.x = x - ((Conf.screenSize[0] / 2) + 175);
+				this.world.camera.y = y - (Conf.screenSize[1] / 2);
+			}
 		}
 		
 		override public function moveCollideX(e:Entity):Boolean

@@ -6,6 +6,7 @@ package
 	import net.flashpunk.World;
 	import net.flashpunk.graphics.TiledImage;
 	import net.flashpunk.graphics.Image;
+	import net.flashpunk.utils.Draw;
 	
 	/**
 	 * ...
@@ -15,7 +16,6 @@ package
 	{
 		[Embed(source = '../assets/sprites/sea.png')] private const SEA:Class;
 		
-		//public var size:Array = Conf.levelSize;
 		private var seaTiles:TiledImage;
 		public var carpetWorlds:Array;
 		public var carpetGraphics:Array;
@@ -28,7 +28,6 @@ package
 		public function Level(ident:int)
 		{
 			ident = ident;
-			addGraphic(seaTiles);
 			carpetWorlds = new Array();
 			carpetEnts = new Array();
 			carpetGraphics = new Array();
@@ -70,7 +69,12 @@ package
 			worldBoundaryCoords[0] = new Point(boundaries[0] - Conf.boundarySpace, boundaries[2] - Conf.boundarySpace);
 			worldBoundaryCoords[1] = new Point(boundaries[1] + Conf.boundarySpace, boundaries[3] + Conf.boundarySpace);
 			
-			seaTiles = new TiledImage(SEA, worldBoundaryCoords[1].x - worldBoundaryCoords[0].x, worldBoundaryCoords[1].y - worldBoundaryCoords[0].y)
+			seaTiles = new TiledImage(SEA, worldBoundaryCoords[1].x - worldBoundaryCoords[0].x + Conf.boundarySpace * 3, 
+											worldBoundaryCoords[1].y - worldBoundaryCoords[0].y + Conf.boundarySpace * 2);
+			var seaTileEnt:Entity = addGraphic(seaTiles);
+			seaTileEnt.layer = 1;
+			seaTileEnt.x = worldBoundaryCoords[0].x - Conf.boundarySpace * 1.5;
+			seaTileEnt.y = worldBoundaryCoords[0].y - Conf.boundarySpace;
 		}
 
 		private function addCarpet(blocks:Object, nPlayers:int, x:int,
@@ -103,8 +107,14 @@ package
 				carpetWorlds[i].render();
 				carpetGraphics[i].updateBuffer();
 			}
-			return super.render();
+			super.render();
+			
+			Draw.linePlus( worldBoundaryCoords[0].x, worldBoundaryCoords[0].y, worldBoundaryCoords[1].x, worldBoundaryCoords[0].y, 0xFFFFFF, 1, 5);
+			Draw.linePlus( worldBoundaryCoords[1].x, worldBoundaryCoords[0].y, worldBoundaryCoords[1].x, worldBoundaryCoords[1].y, 0xFFFFFF, 1, 5);
+			Draw.linePlus( worldBoundaryCoords[1].x, worldBoundaryCoords[1].y, worldBoundaryCoords[0].x, worldBoundaryCoords[1].y, 0xFFFFFF, 1, 5);
+			Draw.linePlus( worldBoundaryCoords[0].x, worldBoundaryCoords[1].y, worldBoundaryCoords[0].x, worldBoundaryCoords[0].y, 0xFFFFFF, 1, 5);
 		}
+		
 		public function checkpointPassed(cp:Checkpoint): void
 		{
 			if (cp.num == nextCheckpoint)
