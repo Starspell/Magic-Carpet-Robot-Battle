@@ -8,7 +8,7 @@ package
 	[SWF(width = '1000', height = '700')]
 	public class Main extends Engine
 	{
-		public static var devMode:Boolean = true;
+		public static var devMode:Boolean = false;
 		
 		public function Main()
 		{
