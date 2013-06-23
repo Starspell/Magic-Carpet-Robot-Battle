@@ -31,16 +31,17 @@ package
 			carpetWorlds = new Array();
 			carpetEnts = new Array();
 			carpetGraphics = new Array();
-			var blocks:Object = { thruster: [[1, 1]], cannon: [[2, 3]] };
 			nextCheckpoint = 0;
-
-			addCarpet(blocks, 1, 30, 20);
 			
 			var boundaries:Array = [null, null, null, null];
 
 			var data:Object = Conf.levelData[ident];
 			var linePts:Array = [[], []];
 			var pts:Array = data.startPts;
+
+			var blocks:Object = { thruster: [[1, 1]], cannon: [[2, 3]] };
+			addCarpet(blocks, 1, 30, 20, .5 * (pts[0][0] + pts[1][0]),
+					  .5 * (pts[0][1] + pts[1][1]));
 			
 			var hw:int = add(new Buoy(pts[0][0], pts[0][1])).halfWidth;
 			var hh:int = add(new Buoy(pts[1][0], pts[1][1])).halfHeight;
@@ -87,14 +88,14 @@ package
 			worldBoundaryCoords[1] = new Point(boundaries[1] + Conf.boundarySpace, boundaries[3] + Conf.boundarySpace);
 		}
 
-		private function addCarpet(blocks:Object, nPlayers:int, x:int,
-								   y:int):void {
+		private function addCarpet(blocks:Object, nPlayers:int, wx:int, wy:int,
+								   ex:int, ey:int):void {
 			var cw:CarpetWorld = new CarpetWorld(blocks, nPlayers);
 			carpetWorlds.push(cw);
-			var e:Entity = addGraphic(new Image(cw.worldBuffer), -2, x, y);
+			var e:Entity = addGraphic(new Image(cw.worldBuffer), -2, wx, wy);
 			e.graphic.scrollX = e.graphic.scrollY = 0;
 			carpetGraphics.push(e.graphic as Image);
-			var ce:CarpetEntity = new CarpetEntity(blocks);
+			var ce:CarpetEntity = new CarpetEntity(blocks, ex, ey);
 			carpetEnts.push(ce);
 			add(ce);
 		}

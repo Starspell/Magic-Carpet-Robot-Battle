@@ -28,14 +28,14 @@ package
 		
 		private var fireCounter:int = 0;
 		
-		public function CarpetEntity(blocks:Object)
+		public function CarpetEntity(blocks:Object, x:int, y:int)
 		{
 			this.blocks = blocks;
 			image = new Image(CARPET);
 			a = Math.PI / 2
 			image.originX = 20;
 			image.originY = 30;
-			super(500, 350, image);
+			super(x, y, image);
 			setHitbox(60, 60, 30, 30);
 			layer = -2;
 			
