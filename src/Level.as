@@ -96,7 +96,8 @@ package
 			{
 				//Target is destroyed
 				numCheckpoints++;
-				remove(cp);
+				if (cp is Target) remove(cp);
+				else if (cp is Gate) ; //Gate code here!
 			}
 		}
 		
