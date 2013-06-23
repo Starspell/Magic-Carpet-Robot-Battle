@@ -58,7 +58,6 @@ package
 			
 			if (on)
 			{
-				trace(sides);
 				setDir(sides);
 			}
 		}

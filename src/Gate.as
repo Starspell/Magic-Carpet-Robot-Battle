@@ -2,6 +2,7 @@ package
 {
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Image;
+	import net.flashpunk.utils.Draw;
 	/**
 	 * ...
 	 * @author Sarah
@@ -32,6 +33,11 @@ package
 			}
 		}
 		
+		override public function render():void
+		{
+			Draw.linePlus(x + 20, y + 20, endX + 20, endY + 20, 0xFFFFFF, 0.5, 30);
+			super.render();
+		}
 	}
 
 }
