@@ -141,8 +141,8 @@ package
 				}
 			}
 			
-			if (left < 0 || right > this.world.worldDims[0]) velX = - velX * Conf.edgeRepel;
-			if (top < 0 || bottom > this.world.worldDims[1]) velY = - velY * Conf.edgeRepel;
+			if (left < 0 || right > (this.world as Level).worldDims[0]) velX = - velX * Conf.edgeRepel;
+			if (top < 0 || bottom > (this.world as Level).worldDims[1]) velY = - velY * Conf.edgeRepel;
 			
 			this.world.camera.x = x - ((Conf.levelSize[0] / 2) + 175);
 			this.world.camera.y = y - (Conf.levelSize[1] / 2);
