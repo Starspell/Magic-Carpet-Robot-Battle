@@ -11,6 +11,8 @@ package
 	{
 		private var sprite:Spritemap;
 		private var keys:Array;
+		private var isMoving:Boolean = false;
+		private var moveCounter:int;
 
 		[Embed(source = '../assets/sprites/player.png')] private const IMG:Class;
 
@@ -61,9 +63,21 @@ package
 			}
 			if (!(nDirs == 1 || (nDirs == 2 && gotLast))) {
 				// multiple directions: don't move
+				isMoving = false;
 				return;
 			}
-			if (!(gotLast && nDirs == 1)) setDir(dir);
+			if (gotLast && nDirs == 1) dir = this.dir;
+
+			// check whether to move
+			if (isMoving && dir == this.dir) {
+				moveCounter -= 1;
+			} else {
+				isMoving = true;
+				moveCounter = Conf.moveDelay;
+			}
+			if (dir != this.dir) setDir(dir);
+			if (moveCounter > 0) return;
+
 			// boundary detection
 			i = this.dir % 2; // axis
 			j = (this.dir >= 2) ? 1 : -1; // direction on this axis
