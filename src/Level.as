@@ -84,13 +84,13 @@ package
 
 			worldBoundaryCoords[0] = new Point(boundaries[0] - Conf.boundarySpace, boundaries[2] - Conf.boundarySpace);
 			worldBoundaryCoords[1] = new Point(boundaries[1] + Conf.boundarySpace, boundaries[3] + Conf.boundarySpace);
-			
-			seaTiles = new TiledImage(SEA, worldBoundaryCoords[1].x - worldBoundaryCoords[0].x + Conf.boundarySpace * 3, 
-											worldBoundaryCoords[1].y - worldBoundaryCoords[0].y + Conf.boundarySpace * 2);
+
+			seaTiles = new TiledImage(SEA, worldBoundaryCoords[1].x - worldBoundaryCoords[0].x,
+										   worldBoundaryCoords[1].y - worldBoundaryCoords[0].y);
 			var seaTileEnt:Entity = addGraphic(seaTiles);
 			seaTileEnt.layer = 1;
-			seaTileEnt.x = worldBoundaryCoords[0].x - Conf.boundarySpace * 1.5;
-			seaTileEnt.y = worldBoundaryCoords[0].y - Conf.boundarySpace;
+			seaTileEnt.x = worldBoundaryCoords[0].x;
+			seaTileEnt.y = worldBoundaryCoords[0].y;
 		}
 
 		private function addCarpet(blocks:Object, nPlayers:int, wx:int, wy:int,
@@ -104,7 +104,7 @@ package
 			carpetEnts.push(ce);
 			add(ce);
 		}
-		
+
 		override public function update():void
 		{
 			for each (var c:CarpetWorld in carpetWorlds) c.update();
