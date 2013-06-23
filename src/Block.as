@@ -11,6 +11,7 @@ package
 		public var carpet:CarpetWorld;
 		public var _pos:Array;
 		public var dir:int; // Should be Conf.up, down, left or right.
+		public var sidesOrdered:Array;
 		
 		public function Block(carpet:CarpetWorld, x:int, y:int)
 		{

@@ -5,7 +5,7 @@ package
 	 * ...
 	 * @author Sarah
 	 */
-	public class Cannon extends InanimateBlock
+	public class Cannon extends Block
 	{
 		[Embed(source = '../assets/sprites/cannon.png')] private const IMG:Class;
 
