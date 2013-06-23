@@ -24,6 +24,8 @@ package
 		public static var carpetFriction:Number = 0.1;
 		public static var carpetRotFriction:Number = 5;
 		
+		// Other Entity Constants
+		
 		// Player related constants
 		public static var playerKeys:Array = [
 			{

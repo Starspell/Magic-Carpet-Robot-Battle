@@ -18,6 +18,7 @@ package
 		public var carpetWorlds:Array;
 		public var carpetGraphics:Array;
 		public var carpetEnts:Array;
+		public var numTarDes:int;
 		
 		public function Level()
 		{
@@ -26,6 +27,7 @@ package
 			carpetEnts = new Array();
 			carpetGraphics = new Array();
 			var blocks:Object = { thruster: [[1, 1]], cannon: [[2, 3]] };
+			numTarDes = 0;
 			
 			// All the thrusters!
 			/*var t:Array = [];
@@ -74,6 +76,16 @@ package
 			}
 			return super.render();
 		}
+		public function targetDestroyed(target:Target): void
+		{
+			if (target.targetNumber == numTarDes)
+			{
+				//Target is destroyed
+				numTarDes++;
+				remove(target);
+			}
+		}
+		
 	}
 
 }
