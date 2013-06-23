@@ -11,15 +11,22 @@ package
 		
 		protected var lifeLeft:Number;
 		
-		public function Bullet(angle:Number, speed:Number, x:Number, y:Number)
+		public function Bullet(velX:Number, velY:Number, x:Number, y:Number)
 		{
-			graphic = new Image(IMG);
+			var i:Image = new Image(IMG);
+			i.originX = 10;
+			i.originY = 10;
+			graphic = i;
 			
-			velX = Math.cos(angle) * speed;
-			velY = Math.sin(angle) * speed;
+			this.velX = velX;
+			this.velY = velY;
 			
 			this.x = x;
 			this.y = y;
+			
+			
+			
+			layer = -1000000;
 		}
 		override public function update():void
 		{

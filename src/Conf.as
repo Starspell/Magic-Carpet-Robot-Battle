@@ -41,6 +41,6 @@ package
 			return rad;
 		}
 		
-		public static var bulletSpeed:Number = 2;
+		public static var bulletSpeed:Number = 4;
 	}
 }

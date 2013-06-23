@@ -3,6 +3,7 @@ package
 	import flash.utils.Dictionary;
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Image;
+	import net.flashpunk.utils.Draw;
 	
 	public class CarpetEntity extends Entity
 	{
@@ -111,18 +112,22 @@ package
 			a -= velA;
 			
 			image.angle = 90 - Conf.radiansToDegrees(a);
+			fire(1, 1, 1);
 		}
 		
 		// Fire a bullet from a cannon at carpetx,carpetY on carpet, in direction dir.
 		public function fire(carpetX:int, carpetY:int, dir:int):void
 		{
-			var x:Number = (carpetX - (Conf.carpetSize[0] / 2)) / (Conf.carpetSize[0] / 2);
-			var y:Number = ( - (carpetY - (Conf.carpetSize[1] / 2))) / (Conf.carpetSize[1] / 2);
+			var scaledX:Number = 5 * (carpetX + 0.5 - (Conf.carpetSize[0] / 2));
+			var scaledY:Number =  5 * (carpetY + 0.5 - (Conf.carpetSize[1] / 2));
 			
-			var bulletX:Number = 20 * (x * Math.cos(a) - y * Math.sin(a));
-			var bulletY:Number = 30 * (x * Math.sin(a) + y * Math.cos(a));
+			var cannonA:Number = a - (Math.PI / 2);
 			
+			var rotatedX:Number = scaledX * Math.cos(cannonA) - scaledY * Math.sin(cannonA);
+			var rotatedY:Number = scaledX * Math.sin(cannonA) + scaledY * Math.cos(cannonA);
+
 			var bulletA:Number;
+			
 			switch(dir)
 			{
 				case Conf.up:
@@ -138,8 +143,10 @@ package
 					bulletA = a - (Math.PI / 2);
 					break;
 			}
-			
-			this.world.add(new Bullet(bulletA, Conf.bulletSpeed, bulletX + this.x, bulletY + this.y));
+			this.world.add(new Bullet(Conf.bulletSpeed * Math.cos(bulletA + Math.PI) + velX, 
+				Conf.bulletSpeed * Math.sin(bulletA + Math.PI) + velY, 
+				this.x + rotatedX, 
+				this.y + rotatedY));
 		}
 	}
 }
