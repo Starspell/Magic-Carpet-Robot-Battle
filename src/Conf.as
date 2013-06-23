@@ -22,8 +22,7 @@ package
 		public static var carpetMass:Number = 1;
 		public static var carpetMOI:Number = 1000;
 		public static var carpetFriction:Number = 0.1;
-		public static var carpetRotFriction:Number = 10;
-		public static var clampingSpeed:Number = 0.0001;
+		public static var carpetRotFriction:Number = 5;
 		
 		// Player related constants
 		public static var playerKeys:Array = [

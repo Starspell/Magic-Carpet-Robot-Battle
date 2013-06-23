@@ -101,16 +101,16 @@ package
 			return grid[pos[0]][pos[1]];
 		}
 
-		public function moveTo(e:Block, x:int, y:int, cb:Function):void {
-			// move a block to the x, y tile position, calling cb when the move
-			// is complete
+		public function moveInDir(e:Block, dir:int, cb:Function):void {
+			// move a block in direction dir, calling cb when finished
+			var pos:Array = tileInDir(e.pos, dir);
 			grid[e.pos[0]][e.pos[1]] = null;
-			grid[x][y] = e;
-			e.pos = [x, y];
+			grid[pos[0]][pos[1]] = e;
+			e.pos = pos;
 			// animation
 			FP.tween(e, {
-					x: x * Conf.carpetTileSize[0],
-					y: y * Conf.carpetTileSize[1]
+					x: pos[0] * Conf.carpetTileSize[0],
+					y: pos[1] * Conf.carpetTileSize[1]
 				}, Conf.tweenTime, {
 					tweener: FP.tweener, complete: cb
 				}

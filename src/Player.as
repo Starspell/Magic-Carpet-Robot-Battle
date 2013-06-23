@@ -78,7 +78,7 @@ package
 					nDirs += int(dirs[i]);
 				}
 			}
-			if (!(nDirs == 1 || (nDirs == 2 && gotLast))) {
+			if (!(nDirs == 1 || nDirs == 2)) {
 				// multiple directions: don't move
 				isMoving = false;
 				return;
@@ -130,12 +130,9 @@ package
 				}
 			}
 			canMove = false;
-			carpet.moveTo(this, pos[0] + dp[0], pos[1] + dp[1], moveDone);
+			carpet.moveInDir(this, dir, moveDone);
 			if (blockToMove !== null) {
-				carpet.moveTo(
-					blockToMove, blockToMove.pos[0] + dp[0],
-					blockToMove.pos[1] + dp[1], blockToMove.moveDone
-				);
+				carpet.moveInDir(blockToMove, dir, blockToMove.moveDone);
 			}
 		}
 	}

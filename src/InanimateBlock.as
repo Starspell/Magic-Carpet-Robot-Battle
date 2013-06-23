@@ -54,10 +54,6 @@ package
 			
 			if (on)
 			{
-				if ( pos[0] == 1 && pos[1] == 10 )
-				{
-					trace(sides);
-				}
 				setDir(sides);
 			}
 		}

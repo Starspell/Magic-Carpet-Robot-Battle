@@ -27,6 +27,7 @@ package
 		{
 			this.blocks = blocks;
 			image = new Image(CARPET);
+			a = Math.PI / 2
 			image.originX = 20;
 			image.originY = 30;
 			super(500, 350, image);
@@ -89,7 +90,7 @@ package
 			netForceX -= velX * Conf.carpetFriction;
 			netForceY -= velY * Conf.carpetFriction;
 			
-			//netMoment -= velA * velA * Conf.carpetRotFriction;
+			netMoment -= velA * velA * Conf.carpetRotFriction;
 			
 			acnX = netForceX / Conf.carpetMass;
 			acnY = netForceY / Conf.carpetMass;
@@ -100,12 +101,16 @@ package
 			velY += acnY;
 			velA += acnA;
 			
-			x += velX;
-			y += velY;
-			a += velA;
+			// Smoothly moves very low speed to 0.
+			velA *= 0.99;
+			velX *= 0.99;
+			velY *= 0.99;
+			
+			x -= velX;
+			y -= velY;
+			a -= velA;
 			
 			image.angle = 90 - Conf.radiansToDegrees(a);
-			fire(1, 1, 1);
 		}
 		
 		// Fire a bullet from a cannon at carpetx,carpetY on carpet, in direction dir.

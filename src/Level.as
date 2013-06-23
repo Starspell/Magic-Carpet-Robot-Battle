@@ -26,7 +26,7 @@ package
 			carpetEnts = new Array();
 			carpetGraphics = new Array();
 			var blocks:Object = { thruster: [[1, 1]], cannon: [[2, 3]] };
-			 
+			
 			// All the thrusters!
 			/*var t:Array = [];
             for (var i:int = 1; i <= 6; ++i)
