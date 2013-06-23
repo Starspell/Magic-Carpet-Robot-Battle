@@ -145,14 +145,25 @@ package
 			
 			if (tempLevel)
 			{
-				var topLeft:Point = tempLevel. worldBoundaryCoords[0];
-				var bottomRight:Point = tempLevel. worldBoundaryCoords[1];
+				var topLeft:Point = tempLevel.worldBoundaryCoords[0];
+				var bottomRight:Point = tempLevel.worldBoundaryCoords[1];
 				
 				if (left < topLeft.x || right > bottomRight.x) velX = - velX * Conf.edgeRepel;
 				if (top < topLeft.y || bottom > bottomRight.y) velY = - velY * Conf.edgeRepel;
 				
-				this.world.camera.x = x - ((Conf.screenSize[0] / 2) + 175);
-				this.world.camera.y = y - (Conf.screenSize[1] / 2);
+				this.world.camera.x = Math.max(
+					topLeft.x, Math.min(
+						bottomRight.x - Conf.screenSize[0],
+						x - ((Conf.screenSize[0] / 2) + 175)
+					)
+				);
+				this.world.camera.y = Math.max(
+					topLeft.y, Math.min(
+						bottomRight.y - Conf.screenSize[1],
+						y - (Conf.screenSize[1] / 2)
+					)
+				);
+				trace(this.world.camera.x, this.world.camera.y);
 			}
 		}
 		

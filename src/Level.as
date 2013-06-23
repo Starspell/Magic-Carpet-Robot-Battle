@@ -30,8 +30,6 @@ package
 			carpetEnts = new Array();
 			carpetGraphics = new Array();
 			nextCheckpoint = 0;
-			
-			var boundaries:Array = [null, null, null, null];
 
 			var data:Object = Conf.levelData[ident];
 			var linePts:Array = [[], []];
@@ -57,22 +55,6 @@ package
 					linePts[0].push([args[0] + hw, args[1] + hh]);
 					linePts[1].push([args[2] + hw, args[3] + hh]);
 				}
-				
-				// World creation
-				if ( boundaries[0] == null )
-				{
-					boundaries[0] = args[0]; // Smallest x
-					boundaries[1] = args[0]; // Largest x
-					boundaries[2] = args[1]; // Smallest y
-					boundaries[3] = args[1]; // Largest y
-				}
-				else
-				{
-					if ( args[0] < boundaries[0] ) boundaries[0] = args[0];
-					if ( args[0] > boundaries[1] ) boundaries[1] = args[0];
-					if ( args[1] < boundaries[2] ) boundaries[2] = args[1];
-					if ( args[1] < boundaries[3] ) boundaries[3] = args[1];
-				}
 			}
 
 			pts = data.endPts;
@@ -82,6 +64,23 @@ package
 			linePts[1].push([pts[1][0] + hw, pts[1][1] + hh]);
 			add(new GuideLines(linePts));
 
+			// determine level size
+			var boundaries:Array = [null, null, null, null];
+			for each (var linePtsSide:Array in linePts) {
+				for each (var p:Array in linePtsSide) {
+					if ( boundaries[0] == null ) {
+						boundaries[0] = p[0]; // Smallest x
+						boundaries[1] = p[0]; // Largest x
+						boundaries[2] = p[1]; // Smallest y
+						boundaries[3] = p[1]; // Largest y
+					} else {
+						if ( p[0] < boundaries[0] ) boundaries[0] = p[0];
+						if ( p[0] > boundaries[1] ) boundaries[1] = p[0];
+						if ( p[1] < boundaries[2] ) boundaries[2] = p[1];
+						if ( p[1] > boundaries[3] ) boundaries[3] = p[1];
+					}
+				}
+			}
 			worldBoundaryCoords[0] = new Point(boundaries[0] - Conf.boundarySpace, boundaries[2] - Conf.boundarySpace);
 			worldBoundaryCoords[1] = new Point(boundaries[1] + Conf.boundarySpace, boundaries[3] + Conf.boundarySpace);
 
@@ -136,7 +135,6 @@ package
 				//Target is destroyed
 				nextCheckpoint++;
 				if (cp is Target) remove(cp);
-		
 				else if (cp is Gate) { }; //Gate code here!
 				
 				if (nextCheckpoint == Conf.levelData[ident].length) {
