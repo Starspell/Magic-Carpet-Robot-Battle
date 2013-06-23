@@ -34,8 +34,10 @@ package
 			image.originX = 20;
 			image.originY = 30;
 			super(500, 350, image);
-			setHitbox(40, 60, 20, 30);
+			setHitbox(60, 60, 30, 30);
 			layer = -10;
+			
+			type = "carpet";
 		}
 		
 		override public function update():void
@@ -103,9 +105,9 @@ package
 			velX *= 0.99;
 			velY *= 0.99;
 			
-			x -= velX;
-			y -= velY;
 			a -= velA;
+			
+			moveBy( -velX, -velY, "buoy");
 			
 			image.angle = 90 - Conf.radiansToDegrees(a);
 			
@@ -120,6 +122,20 @@ package
 				}
 				fireCounter = Conf.cannonFireInterval;
 			}
+		}
+		
+		override public function moveCollideX(e:Entity):Boolean
+		{
+			if (e.type == "buoy")
+				velX = -velX * Conf.buoyRepel;
+			return true;
+		}
+		
+		override public function moveCollideY(e:Entity):Boolean
+		{
+			if (e.type == "buoy")
+				velY = -velY * Conf.buoyRepel;
+			return true;
 		}
 		
 		// Fire a bullet from a cannon at carpetx,carpetY on carpet, in direction dir.
