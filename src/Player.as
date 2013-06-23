@@ -13,6 +13,7 @@ package
 		private var keys:Array;
 		private var isMoving:Boolean = false;
 		private var moveCounter:int;
+		private var moveDir:int;
 
 		[Embed(source = '../assets/sprites/player.png')] private const IMG:Class;
 
@@ -27,6 +28,7 @@ package
 			} else {
 				throw new Error("no configuration for player ID " + pID);
 			}
+			moveDir = dir;
 		}
 
 		private function setDir(dir:int):void {
@@ -53,11 +55,11 @@ package
 			// choose a direction
 			var nDirs:int = 0;
 			var gotLast:Boolean = false;
-			var dir:int;
+			var mDir:int;
 			for (i = 0; i < 4; i++) {
 				if (dirs[i]) {
-					if (i == this.dir) gotLast = true;
-					else dir = i;
+					if (i == moveDir) gotLast = true;
+					else mDir = i;
 					nDirs += int(dirs[i]);
 				}
 			}
@@ -66,17 +68,19 @@ package
 				isMoving = false;
 				return;
 			}
-			if (gotLast && nDirs == 1) dir = this.dir;
+			if (gotLast && nDirs == 1) mDir = moveDir;
 
 			// check whether to move
-			if (isMoving && dir == this.dir) {
+			if (isMoving && mDir == dir) {
 				moveCounter -= 1;
 			} else {
 				isMoving = true;
 				moveCounter = Conf.moveDelay;
 			}
-			if (dir != this.dir) setDir(dir);
+			trace(mDir, moveDir, isMoving, moveCounter);
+			if (mDir != dir) setDir(mDir);
 			if (moveCounter > 0) return;
+			moveDir = mDir;
 
 			// boundary detection
 			i = this.dir % 2; // axis

@@ -29,7 +29,7 @@ package
 			[Key.LEFT, Key.UP, Key.RIGHT, Key.DOWN]
 		];
 		public static var tweenTime:Number = 10;
-		public static var moveDelay:int = 5;
+		public static var moveDelay:int = 4;
 		
 		public static function radiansToDegrees(rad:Number):Number
 		{
