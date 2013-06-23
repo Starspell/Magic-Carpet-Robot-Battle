@@ -5,7 +5,7 @@ package
 	public class Conf
 	{
 		// map world
-		public static var levelSize:Array = [1000, 1000];
+		public static var levelSize:Array = [1000, 700];
 
 		// carpet world
 		public static var carpetSize:Array = [8, 12];
@@ -37,5 +37,7 @@ package
 			rad *= 360;
 			return rad;
 		}
+		
+		public static var bulletSpeed:Number = 2;
 	}
 }

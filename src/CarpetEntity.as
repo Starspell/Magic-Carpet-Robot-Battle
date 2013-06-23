@@ -58,7 +58,7 @@ package
 							break;
 						case Conf.left:
 							thrusterAngle = a + (Math.PI / 2);
-							dist = - (thruster.pos[1] - (Conf.carpetSize[1] / 2));
+							dist = thruster.pos[1] - (Conf.carpetSize[1] / 2);
 							break;
 						case Conf.down:
 							thrusterAngle = a + Math.PI;
@@ -66,7 +66,7 @@ package
 							break;
 						case Conf.right:
 							thrusterAngle = a - (Math.PI / 2);
-							dist = thruster.pos[1] - (Conf.carpetSize[1] / 2);
+							dist = -(thruster.pos[1] - (Conf.carpetSize[1] / 2));
 							break;
 					}
 					
@@ -105,6 +105,35 @@ package
 			a += velA;
 			
 			image.angle = 90 - Conf.radiansToDegrees(a);
+		}
+		
+		// Fire a bullet from a cannon at carpetx,carpetY on carpet, in direction dir.
+		public function fire(carpetX:int, carpetY:int, dir:int)
+		{
+			var x:Number = (carpetX - (Conf.carpetSize[0] / 2)) / (Conf.carpetSize[0] / 2);
+			var y:Number = ( - (carpetY - (Conf.carpetSize[1] / 2))) / (Conf.carpetSize[1] / 2);
+			
+			var bulletX:Number = 20 * (x * Math.cos(a) - y * Math.sin(a));
+			var bulletY:Number = 30 * (x * Math.sin(a) + y * Math.cos(a));
+			
+			var bulletA:Number;
+			switch(dir)
+			{
+				case Conf.up:
+					bulletA = a;
+					break;
+				case Conf.left:
+					bulletA = a + (Math.PI / 2);
+					break;
+				case Conf.down:
+					bulletA = -a;
+					break;
+				case Conf.right:
+					bulletA = a - (Math.PI / 2);
+					break;
+			}
+			
+			this.world.add(new Bullet(bulletA, Conf.bulletSpeed, bulletX, bulletY));
 		}
 	}
 }
