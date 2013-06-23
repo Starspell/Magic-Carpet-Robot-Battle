@@ -32,6 +32,7 @@ package
 		}
 		override public function update():void
 		{
+			moveBy(velX, velY, "Target")
 			x += velX;
 			y += velY;
 			
@@ -40,6 +41,17 @@ package
 			{
 				this.world.remove(this);
 			}
+		}
+		override public function moveCollideX(e:Entity):Boolean
+		{
+			(e as Checkpoint).pass();
+			return false;
+		}
+		
+		override public function moveCollideY(e:Entity):Boolean
+		{
+			(e as Checkpoint).pass();
+			return false;
 		}
 	}
 }
