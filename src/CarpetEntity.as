@@ -105,9 +105,9 @@ package
 			velX *= 0.99;
 			velY *= 0.99;
 			
-			x += velX;
-			y += velY;
-			a += velA;
+			x -= velX;
+			y -= velY;
+			a -= velA;
 			
 			image.angle = 90 - Conf.radiansToDegrees(a);
 		}
