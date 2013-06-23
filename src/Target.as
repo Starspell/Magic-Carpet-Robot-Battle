@@ -1,27 +1,19 @@
 package
 {
-	import net.flashpunk.Entity;
-	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
 	
 	/**
 	 * ...
 	 * @author Matthew
 	 */
-	public class Target extends Entity
+	public class Target extends Checkpoint
 	{
 		[Embed(source = '../assets/sprites/target.png')] private const IMG:Class;
-		public var targetNumber:int;
 		
-		public function Target(x:int, y:int, targetNum:int)
+		public function Target(x:int, y:int, num:int)
 		{
-			super(x, y);
+			super(x, y, num);
 			graphic = new Image(IMG);
-			targetNumber = targetNum;
-		}
-		public function destroy():void
-		{
-			(world as Level).targetDestroyed(this);
 		}
 	}
 }

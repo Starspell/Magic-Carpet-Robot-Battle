@@ -37,7 +37,7 @@ package
 			image.originY = 30;
 			super(500, 350, image);
 			setHitbox(60, 60, 30, 30);
-			layer = -10;
+			layer = -2;
 			
 			type = "carpet";
 		}
@@ -136,8 +136,7 @@ package
 			var gateParllDist:Number = toGate.x * g.tang.x + toGate.y * g.tang.y;
 			if (Math.abs(gateDist) < Conf.gateCollideDist && Math.abs(gateParllDist) < g.halfLength)
 			{
-				//this.world.passedGate(g, this);
-				g.passed = true;
+				g.pass();
 			}
 		}
 		

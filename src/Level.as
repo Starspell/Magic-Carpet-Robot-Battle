@@ -18,16 +18,18 @@ package
 		public var carpetWorlds:Array;
 		public var carpetGraphics:Array;
 		public var carpetEnts:Array;
-		public var numTarDes:int;
+		public var numCheckpoints:int;
+		public var ident:int;
 		
-		public function Level()
+		public function Level(ident:int)
 		{
+			ident = ident;
 			addGraphic(seaTiles);
 			carpetWorlds = new Array();
 			carpetEnts = new Array();
 			carpetGraphics = new Array();
 			var blocks:Object = { thruster: [[1, 1]], cannon: [[2, 3]] };
-			numTarDes = 0;
+			numCheckpoints = 0;
 			
 			// All the thrusters!
 			/*var t:Array = [];
@@ -41,9 +43,18 @@ package
             var blocks:Object = { thruster: t, cannon: [] }*/
 
 			addCarpet(blocks, 1, 30, 20);
-			
-			add(new Gate( 600, 300, 800, 300, this));
-			add(new Buoy( 600, 600 ));
+
+			// add targets and gates
+			var cpData:Array = Conf.levelData[ident].checkpoints;
+			var i:int;
+			for (i = 0; i < cpData.length; i++) {
+				var args:Object = cpData[i][1];
+				if (cpData[i][0] == "target") {
+					add(new Target(args[0], args[1], i));
+				} else { // cpData[i][0] == "gate"
+					add(new Gate(args[0], args[1], args[2], args[3], this, i));
+				}
+			}
 		}
 
 		private function addCarpet(blocks:Object, nPlayers:int, x:int,
@@ -79,13 +90,13 @@ package
 			}
 			return super.render();
 		}
-		public function targetDestroyed(target:Target): void
+		public function checkpointPassed(cp:Checkpoint): void
 		{
-			if (target.targetNumber == numTarDes)
+			if (cp.num == numCheckpoints)
 			{
 				//Target is destroyed
-				numTarDes++;
-				remove(target);
+				numCheckpoints++;
+				remove(cp);
 			}
 		}
 		
