@@ -45,13 +45,21 @@ package
 		override public function moveCollideX(e:Entity):Boolean
 		{
 			(e as Checkpoint).pass();
+			if (e is Target) explode(e);
 			return false;
 		}
 		
 		override public function moveCollideY(e:Entity):Boolean
 		{
 			(e as Checkpoint).pass();
+			if (e is Target) explode(e);
 			return false;
+		}
+		
+		private function explode(e:Entity):void
+		{
+			this.world.add(new Explosion(e.x + e.halfWidth, e.y + e.halfHeight));
+			this.world.remove(this);
 		}
 	}
 }

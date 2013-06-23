@@ -1,5 +1,7 @@
 package
 {
+	import flash.geom.Point;
+	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.World;
 	import net.flashpunk.graphics.TiledImage;
@@ -21,6 +23,8 @@ package
 		public var nextCheckpoint:int;
 		public var ident:int;
 		
+		public var worldBoundaryCoords:Array = [];
+		
 		public function Level(ident:int)
 		{
 			ident = ident;
@@ -30,19 +34,10 @@ package
 			carpetGraphics = new Array();
 			var blocks:Object = { thruster: [[1, 1]], cannon: [[2, 3]] };
 			nextCheckpoint = 0;
-			
-			// All the thrusters!
-			/*var t:Array = [];
-            for (var i:int = 1; i <= 6; ++i)
-            {
-                for (var j:int = 1; j <= 10; ++j)
-                {
-                    t.push([i, j]);
-                }
-            }
-            var blocks:Object = { thruster: t, cannon: [] }*/
 
 			addCarpet(blocks, 1, 30, 20);
+			
+			var boundaries:Array = [null, null, null, null];
 
 			var data:Object = Conf.levelData[ident];
 			var linePts:Array = [[], []];
@@ -64,25 +59,42 @@ package
 					linePts[0].push([args[0] + hw, args[1] + hh]);
 					linePts[1].push([args[2] + hw, args[3] + hh]);
 				}
+				
+				// World creation
+				if ( boundaries[0] == null )
+				{
+					boundaries[0] = args[0]; // Smallest x
+					boundaries[1] = args[0]; // Largest x
+					boundaries[2] = args[1]; // Smallest y
+					boundaries[3] = args[1]; // Largest y
+				}
+				else
+				{
+					if ( args[0] < boundaries[0] ) boundaries[0] = args[0];
+					if ( args[0] > boundaries[1] ) boundaries[1] = args[0];
+					if ( args[1] < boundaries[2] ) boundaries[2] = args[1];
+					if ( args[1] < boundaries[3] ) boundaries[3] = args[1];
+				}
 			}
 
-			add(new Explosion(500, 500, 0, 60));
 			pts = data.endPts;
 			add(new Buoy(pts[0][0], pts[0][1]));
 			add(new Buoy(pts[1][0], pts[1][1]));
 			linePts[0].push([pts[0][0] + hw, pts[0][1] + hh]);
 			linePts[1].push([pts[1][0] + hw, pts[1][1] + hh]);
 			add(new GuideLines(linePts));
+			
+			worldBoundaryCoords[0] = new Point(boundaries[0] - Conf.boundarySpace, boundaries[2] - Conf.boundarySpace);
+			worldBoundaryCoords[1] = new Point(boundaries[1] + Conf.boundarySpace, boundaries[3] + Conf.boundarySpace);
 		}
 
 		private function addCarpet(blocks:Object, nPlayers:int, x:int,
 								   y:int):void {
 			var cw:CarpetWorld = new CarpetWorld(blocks, nPlayers);
 			carpetWorlds.push(cw);
-			carpetGraphics.push(
-				addGraphic(new Image(cw.worldBuffer), -2, x, y).graphic
-				as Image
-			);
+			var e:Entity = addGraphic(new Image(cw.worldBuffer), -2, x, y);
+			e.graphic.scrollX = e.graphic.scrollY = 0;
+			carpetGraphics.push(e.graphic as Image);
 			var ce:CarpetEntity = new CarpetEntity(blocks);
 			carpetEnts.push(ce);
 			add(ce);
@@ -115,7 +127,7 @@ package
 				//Target is destroyed
 				nextCheckpoint++;
 				if (cp is Target) remove(cp);
-				else if (cp is Gate) false; //Gate code here!
+				else if (cp is Gate) {}; //Gate code here!
 				trace(nextCheckpoint);
 				if (nextCheckpoint == Conf.levelData[ident].length) {
 					trace("win");

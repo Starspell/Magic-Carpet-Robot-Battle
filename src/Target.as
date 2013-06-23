@@ -16,6 +16,9 @@ package
 			graphic = new Image(IMG);
 			setHitbox(40, 40);
 			type = "Target";
+			
+			numEntity.x = x + 10;
+			numEntity.y = y;
 		}
 	}
 }
