@@ -23,6 +23,8 @@ package
 		public static var carpetMOI:Number = 1000;
 		public static var carpetFriction:Number = 0.1;
 		public static var carpetRotFriction:Number = 5;
+		public static var cannonFireInterval:int = 60;
+
 		
 		// Player related constants
 		public static var playerKeys:Array = [

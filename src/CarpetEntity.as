@@ -24,6 +24,8 @@ package
 		
 		private var image:Image;
 		
+		private var fireCounter:int = 0;
+		
 		public function CarpetEntity(blocks:Object)
 		{
 			this.blocks = blocks;
@@ -32,7 +34,7 @@ package
 			image.originX = 20;
 			image.originY = 30;
 			super(500, 350, image);
-			setHitbox(40, 60);
+			setHitbox(40, 60, 20, 30);
 			layer = -10;
 		}
 		
@@ -81,12 +83,6 @@ package
 				}
 			}
 			
-			//Handle cannons.
-			for each (var cannon:Cannon in blocks.cannon)
-			{
-				
-			}
-			
 			// Friction.
 			netForceX -= velX * Conf.carpetFriction;
 			netForceY -= velY * Conf.carpetFriction;
@@ -112,6 +108,18 @@ package
 			a -= velA;
 			
 			image.angle = 90 - Conf.radiansToDegrees(a);
+			
+			//Handle firing bullets.
+			--fireCounter;
+			if(fireCounter <= 0) 
+			{
+				for each (var cannon:Cannon in blocks.cannon)
+				{
+					if(cannon._on)
+						fire(cannon.pos[0], cannon.pos[1], cannon.dir);
+				}
+				fireCounter = Conf.cannonFireInterval;
+			}
 		}
 		
 		// Fire a bullet from a cannon at carpetx,carpetY on carpet, in direction dir.
