@@ -15,7 +15,7 @@ package
 			super(carpet, x, y);
 			graphic = new Image(IMG);
 		}
-		
+				
 	}
 
 }
