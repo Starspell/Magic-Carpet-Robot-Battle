@@ -86,6 +86,7 @@ package
 
 		public function tileInDir(pos:Array, dir:int):Array {
 			// get the [x, y] tile in direction dir from position pos
+			// returned tile might not be sensible
 			var dp:Array = [0, 0];
 			dp[dir % 2] = (dir >= 2) ? 1 : -1;
 			return [pos[0] + dp[0], pos[1] + dp[1]];
@@ -100,6 +101,8 @@ package
 			// get the block one tile in direction dir from position pos, or
 			// null
 			pos = tileInDir(pos, dir);
+			if (pos[0] < 0 || pos[0] >= Conf.carpetSize[0] - 1) return null;
+			// if row index is OoB, array returns null
 			return grid[pos[0]][pos[1]];
 		}
 
