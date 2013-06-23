@@ -5,14 +5,14 @@ package
 	 * ...
 	 * @author Sarah
 	 */
-	public class Cannon extends Block
+	public class Cannon extends InanimateBlock
 	{
 		[Embed(source = '../assets/sprites/cannon.png')] private const IMG:Class;
 
 		public function Cannon(carpet:CarpetWorld, x:int, y:int)
 		{
+			sidesOrdered = [Conf.left, Conf.right, Conf.up, Conf.down];
 			super(carpet, x, y);
-			sidesOrdered = [1, 3, 0, 2];
 			graphic = new Image(IMG);
 		}
 		

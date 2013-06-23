@@ -50,7 +50,7 @@ package
 				{
 					var thrusterAngle:Number;
 					
-					switch(thruster.dir) 
+					switch(thruster.dir)
 					{
 						case Conf.up:
 							thrusterAngle = a;
@@ -104,7 +104,7 @@ package
 			y += velY;
 			a += velA;
 			
-			image.angle = Conf.radiansToDegrees(a);
+			image.angle = 90 - Conf.radiansToDegrees(a);
 		}
 	}
 }

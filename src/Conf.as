@@ -1,5 +1,6 @@
 package
 {
+	import net.flashpunk.utils.Key;
 
 	public class Conf
 	{
@@ -11,10 +12,10 @@ package
 		public static var carpetTileSize:Array = [40, 40];
 		
 		// Directions on carpet
-		public static var up:int = 0;
-		public static var left:int = 1;
-		public static var down:int = 2;
-		public static var right:int = 3;
+		public static var left:int = 0;
+		public static var up:int = 1;
+		public static var right:int = 2;
+		public static var down:int = 3;
 		
 		// Carpet related constants
 		public static var thrusterForce:Number = 0.1;
@@ -22,6 +23,12 @@ package
 		public static var carpetMOI:Number = 10000;
 		public static var carpetFriction:Number = 0.1;
 		public static var carpetRotFriction:Number = 0.1;
+		
+		// Player related constants
+		public static var playerKeys:Array = [
+			[Key.LEFT, Key.UP, Key.RIGHT, Key.DOWN]
+		];
+		public static var tweenTime:Number = 10;
 		
 		public static function radiansToDegrees(rad:Number):Number
 		{

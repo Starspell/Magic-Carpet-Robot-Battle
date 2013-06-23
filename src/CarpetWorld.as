@@ -12,11 +12,10 @@ package
 		[Embed(source = '../assets/sprites/carpetarea.png')] private const CARPET:Class;
 		
 		private var blocks:Object;
-		public var player:Player;
 		private var grid:Array;
 		public var worldBuffer:BitmapData;
 
-		public function CarpetWorld(blocks:Object)
+		public function CarpetWorld(blocks:Object, nPlayers:int = 1)
 		{
 			super();
 			
@@ -45,39 +44,54 @@ package
 				for (j = 0; j < bList.length; j++) {
 					var b:Block = new bClasses[i](this, bList[j][0],
 												  bList[j][1]);
+					grid[bList[j][0]][bList[j][1]] = b;
 					bList[j] = b;
-					grid[i][j] = b;
-					add(bList[j]);
+					add(b);
 				}
 			}
 			// put player in an empty tile
-			var done:Boolean = false;
+			var remain:int = nPlayers;
+			var pID:int = 0;
 			for (i = 0; i < Conf.carpetSize[0]; i++) {
 				for (j = 0; j < Conf.carpetSize[1]; j++) {
 					if (grid[i][j] === null) {
-						player = new Player(this, i, j);
-						add(player);
-						done = true;
-						break;
+						add(new Player(this, i, j, pID));
+						pID++;
+						remain -= 1;
+						if (remain == 0) break;
 					}
 				}
-				if (done) break;
+				if (remain == 0) break;
 			}
-			if (!done) trace("couldn't place player...");
-			
-			add(new Thruster(this, 2, 2));
+			if (remain) trace("couldn't place all players...");
 		}
 		
 		override public function add(e:Entity):Entity
 		{
-			if (e is Thruster) blocks.thruster.push(e);
-			else if (e is Cannon) blocks.cannon.push(e);
 			e.renderTarget = worldBuffer;
 			return super.add(e);
 		}
 
 		public function tileTL(x:int, y:int):Array {
 			return [Conf.carpetTileSize[0] * x, Conf.carpetTileSize[1] * y];
+		}
+
+		public function isFree(x:int, y:int):Boolean {
+			return grid[x][y] === null;
+		}
+
+		public function moveTo(e:Block, x:int, y:int, cb:Function):void {
+			grid[e.pos[0]][e.pos[1]] = null;
+			grid[x][y] = e;
+			e.pos = [x, y];
+			// animation
+			FP.tween(e, {
+					x: x * Conf.carpetTileSize[0],
+					y: y * Conf.carpetTileSize[1]
+				}, Conf.tweenTime, {
+					tweener: FP.tweener, complete: cb
+				}
+			);
 		}
 
 		public function setPos(e:Block, x:int, y:int):void {
