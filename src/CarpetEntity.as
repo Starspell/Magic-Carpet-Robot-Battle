@@ -27,6 +27,7 @@ package
 		{
 			this.blocks = blocks;
 			image = new Image(CARPET);
+			a = Math.PI / 2
 			image.originX = 20;
 			image.originY = 30;
 			super(500, 350, image);
