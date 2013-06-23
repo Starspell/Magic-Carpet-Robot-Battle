@@ -2,23 +2,27 @@ package
 {
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Image;
+	import net.flashpunk.graphics.Spritemap;
 	
 	public class Bullet extends Entity
 	{
 		[Embed(source = '../assets/sprites/bullet.png')] private const IMG:Class;
 		protected var velX:Number;
 		protected var velY:Number;
+		private var animation:Spritemap;
 		
 		protected var lifeLeft:Number;
 		
 		public function Bullet(velX:Number, velY:Number, x:Number, y:Number)
 		{
-			var i:Image = new Image(IMG);
+			animation = new Spritemap(IMG, 20, 20);
+			animation.add("blob", [0, 1], 0.1, true);
+			animation.play("blob");
+			graphic = animation;
+			
 			setHitbox(20, 20, 10, 10);
-			i.originX = 10;
-			i.originY = 10;
-
-			graphic = i;
+			animation.originX = 10;
+			animation.originY = 10;
 			
 			this.velX = velX;
 			this.velY = velY;
