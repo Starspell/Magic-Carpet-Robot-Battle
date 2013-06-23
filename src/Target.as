@@ -14,6 +14,8 @@ package
 		{
 			super(x, y, num);
 			graphic = new Image(IMG);
+			setHitbox(40, 40);
+			type = "Target";
 		}
 	}
 }
