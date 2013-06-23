@@ -23,8 +23,12 @@ package
 			onGraphic = new Image(IMGON);
 			on = true;
 			graphic = onGraphic;
-			originX = 20;
-			originY = 20;
+			setHitbox(40, 40);
+			
+			offGraphic.originX = Conf.carpetTileSize[0]/2;
+			onGraphic.originX = Conf.carpetTileSize[0]/2;
+			offGraphic.originY = Conf.carpetTileSize[1]/2; 
+			onGraphic.originY = Conf.carpetTileSize[1]/2;
 		}
 		
 		override public function update():void
@@ -35,7 +39,7 @@ package
 				if (dir == Conf.up) onGraphic.angle = 0;
 				else if (dir == Conf.left) onGraphic.angle = 90;
 				else if (dir == Conf.down) onGraphic.angle = 180;
-				else onGraphic.angle = 270; //dir = Conf.right
+				else onGraphic.angle = 270; //dir == Conf.right
 			}
 			else //off
 			{

@@ -13,7 +13,10 @@ package
 		{
 			sidesOrdered = [1, 3, 0, 2];
 			super(carpet, x, y);
-			graphic = new Image(IMG);
+			var g:Image = new Image(IMG);
+			g.originX = Conf.carpetTileSize[0] / 2;
+			g.originY = Conf.carpetTileSize[1] / 2;
+			graphic = g;
 		}
 		
 	}
