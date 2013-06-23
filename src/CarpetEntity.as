@@ -131,7 +131,7 @@ package
 			this.world.getClass(Gate, arr);
 			var g:Gate = arr[0] as Gate;
 			
-			var toGate:Point = new Point(this.x - g.x, this.y - g.y);
+			var toGate:Point = new Point(this.x - g.midX, this.y - g.midY);
 			var gateDist:Number = toGate.x * g.norm.x + toGate.y * g.norm.y;
 			var gateParllDist:Number = toGate.x * g.tang.x + toGate.y * g.tang.y;
 			if (Math.abs(gateDist) < Conf.gateCollideDist && Math.abs(gateParllDist) < g.halfLength)
