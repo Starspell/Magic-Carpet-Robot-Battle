@@ -63,11 +63,10 @@ package
 				// multiple directions: don't move
 				return;
 			}
-			setDir(dir);
+			if (!(gotLast && nDirs == 1)) setDir(dir);
 			// boundary detection
-			i = dir % 2; // axis
-			j = (dir >= 2) ? 1 : -1; // direction on this axis
-			trace(i, j, pos[i]);
+			i = this.dir % 2; // axis
+			j = (this.dir >= 2) ? 1 : -1; // direction on this axis
 			if (pos[i] + j == int(j == 1) * (Conf.carpetSize[i] - 1) + j) {
 				return;
 			}
@@ -75,7 +74,6 @@ package
 			dp[i] = j;
 			dp[int(!i)] = 0;
 			if (carpet.isFree(pos[0] + dp[0], pos[1] + dp[1])) {
-				trace(pos, dp);
 				canMove = false;
 				carpet.moveTo(this, pos[0] + dp[0], pos[1] + dp[1], moveDone);
 			}

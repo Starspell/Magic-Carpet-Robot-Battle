@@ -31,7 +31,6 @@ package
 		}
 
 		private function updateGraphic():void {
-			trace("AOEU", dir);
 			if (on)
 			{
 				graphic = onGraphic;
