@@ -14,6 +14,9 @@ package
 		
 		public var endGate:Entity;
 		
+		public var midX:Number;
+		public var midY:Number;
+		
 		private var endX:int;
 		private var endY:int;
 		
@@ -28,14 +31,16 @@ package
 			super(startX, startY, num);
 			this.endX = endX;
 			this.endY = endY;
+						
+			waterWorld.add(new Buoy(startX, startY, IMG));
+			waterWorld.add(new Buoy(endX, endY, IMG));
 			
 			tang = new Point(endX - startX, endY - startY);
+			midX = startX + tang.x / 2;
+			midY = startY + tang.y / 2;
 			halfLength = tang.length / 2;
 			tang.normalize(1);
 			norm = new Point(tang.y, -tang.x);
-			
-			waterWorld.add(new Buoy(startX, startY, IMG));
-			waterWorld.add(new Buoy(endX, endY, IMG));
 		}
 		
 		override public function render():void
