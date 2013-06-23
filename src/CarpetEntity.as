@@ -62,19 +62,19 @@ package
 					{
 						case Conf.up:
 							thrusterAngle = a;
-							dist = - (thruster.pos[0] - (Conf.carpetSize[0] / 2));
+							dist = - ((thruster.pos[0] + 0.5) - (Conf.carpetSize[0] / 2));
 							break;
 						case Conf.left:
 							thrusterAngle = a - (Math.PI / 2);
-							dist = thruster.pos[1] - (Conf.carpetSize[1] / 2);
+							dist = (thruster.pos[1] + 0.5) - (Conf.carpetSize[1] / 2);
 							break;
 						case Conf.down:
 							thrusterAngle = a + Math.PI;
-							dist = thruster.pos[0] - (Conf.carpetSize[0] / 2);
+							dist = (thruster.pos[0] + 0.5) - (Conf.carpetSize[0] / 2);
 							break;
 						case Conf.right:
 							thrusterAngle = a + (Math.PI / 2);
-							dist = -(thruster.pos[1] - (Conf.carpetSize[1] / 2));
+							dist = -((thruster.pos[1] + 0.5) - (Conf.carpetSize[1] / 2));
 							break;
 					}
 					
@@ -141,14 +141,18 @@ package
 				}
 			}
 			
-			var topLeft:Point = (this.world as Level). worldBoundaryCoords[0];
-			var bottomRight:Point = (this.world as Level). worldBoundaryCoords[1];
-			
-			if (left < topLeft.x || right > bottomRight.x) velX = - velX * Conf.edgeRepel;
-			if (top < topLeft.y || bottom > bottomRight.y) velY = - velY * Conf.edgeRepel;
-			
-			this.world.camera.x = x - ((Conf.levelSize[0] / 2) + 175);
-			this.world.camera.y = y - (Conf.levelSize[1] / 2);
+			var tempLevel = this.world as Level;
+			if (tempLevel)
+			{
+				var topLeft:Point = tempLevel. worldBoundaryCoords[0];
+				var bottomRight:Point = tempLevel. worldBoundaryCoords[1];
+				
+				if (left < topLeft.x || right > bottomRight.x) velX = - velX * Conf.edgeRepel;
+				if (top < topLeft.y || bottom > bottomRight.y) velY = - velY * Conf.edgeRepel;
+				
+				this.world.camera.x = x - ((Conf.levelSize[0] / 2) + 175);
+				this.world.camera.y = y - (Conf.levelSize[1] / 2);
+			}
 		}
 		
 		override public function moveCollideX(e:Entity):Boolean
