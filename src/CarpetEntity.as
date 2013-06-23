@@ -112,7 +112,6 @@ package
 			a -= velA;
 			
 			image.angle = 90 - Conf.radiansToDegrees(a);
-			fire(1, 1, 1);
 		}
 		
 		// Fire a bullet from a cannon at carpetx,carpetY on carpet, in direction dir.
