@@ -1,6 +1,7 @@
 package
 {
 	import net.flashpunk.Entity;
+	import net.flashpunk.FP;
 	
 	/**
 	 * ...
@@ -19,6 +20,14 @@ package
 			pos = [x, y];
 			var fpPos:Array = this.carpet.tileTL(x, y);
 			super(fpPos[0], fpPos[1]);
+		}
+
+		public function tweenTo(x:int, y:int, cb:Function):void
+		{
+			FP.tween(
+				this, {x: x, y: y}, Conf.tweenTime,
+				{tweener: FP.tweener, complete: cb}
+			);
 		}
 
 		public function get pos():Array

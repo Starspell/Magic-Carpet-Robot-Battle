@@ -3,6 +3,7 @@ package
 	import flash.display.Sprite;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.graphics.Spritemap;
+	import net.flashpunk.FP;
 	/**
 	 * ...
 	 * @author Sarah
@@ -36,15 +37,20 @@ package
 			onGraphic.add("right", [3], 0, false);
 			
 			super(carpet, x, y);
-			
-			updateFlare();
+			flare.originX = Conf.carpetTileSize[0] / 2;
+			flare.x = this.x + Conf.carpetTileSize[0] / 2;
+			flare.y = this.y + Conf.carpetTileSize[1] / 2;
 		}
 		
-		private function updateFlare():void
+		override public function tweenTo(x:int, y:int, cb:Function):void
 		{
-			flare.x = x + Conf.carpetTileSize[0] / 2;
-			flare.y = y + Conf.carpetTileSize[1] / 2;
-			flare.originX = Conf.carpetTileSize[0] / 2;
+			super.tweenTo(x, y, cb);
+			FP.tween(flare,
+				{
+					x: x + Conf.carpetTileSize[0] / 2,
+					y: y + Conf.carpetTileSize[1] / 2
+				}, Conf.tweenTime, {tweener: FP.tweener, complete: cb}
+			);
 		}
 
 		private function updateGraphic():void {
@@ -52,7 +58,6 @@ package
 			{
 				graphic = onGraphic;
 				flare.visible = true;
-				updateFlare();
 				
 				if (dir == Conf.up)
 				{

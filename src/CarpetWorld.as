@@ -55,7 +55,9 @@ package
 			for (i = 0; i < Conf.carpetSize[0]; i++) {
 				for (j = 0; j < Conf.carpetSize[1]; j++) {
 					if (grid[i][j] === null) {
-						add(new Player(this, i, j, pID));
+						var p:Player = new Player(this, i, j, pID);
+						p.layer = -1;
+						add(p);
 						pID++;
 						remain -= 1;
 						if (remain == 0) break;
@@ -108,13 +110,8 @@ package
 			grid[pos[0]][pos[1]] = e;
 			e.pos = pos;
 			// animation
-			FP.tween(e, {
-					x: pos[0] * Conf.carpetTileSize[0],
-					y: pos[1] * Conf.carpetTileSize[1]
-				}, Conf.tweenTime, {
-					tweener: FP.tweener, complete: cb
-				}
-			);
+			e.tweenTo(pos[0] * Conf.carpetTileSize[0],
+					  pos[1] * Conf.carpetTileSize[1], cb);
 		}
 
 		public function setPos(e:Block, x:int, y:int):void {
