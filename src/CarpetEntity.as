@@ -140,8 +140,9 @@ package
 					g.pass();
 				}
 			}
-
+			
 			var tempLevel:Level = this.world as Level;
+			
 			if (tempLevel)
 			{
 				var topLeft:Point = tempLevel. worldBoundaryCoords[0];
@@ -150,8 +151,8 @@ package
 				if (left < topLeft.x || right > bottomRight.x) velX = - velX * Conf.edgeRepel;
 				if (top < topLeft.y || bottom > bottomRight.y) velY = - velY * Conf.edgeRepel;
 				
-				this.world.camera.x = x - ((Conf.levelSize[0] / 2) + 175);
-				this.world.camera.y = y - (Conf.levelSize[1] / 2);
+				this.world.camera.x = x - ((Conf.screenSize[0] / 2) + 175);
+				this.world.camera.y = y - (Conf.screenSize[1] / 2);
 			}
 		}
 		

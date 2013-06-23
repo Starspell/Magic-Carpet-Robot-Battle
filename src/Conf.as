@@ -4,8 +4,9 @@ package
 
 	public class Conf
 	{
+		public static const screenSize:Array = [1000, 700];
+		
 		// map world
-		public static var levelSize:Array = [1000, 700];
 		public static var levelData:Array = [
 			// level 1
 			{
