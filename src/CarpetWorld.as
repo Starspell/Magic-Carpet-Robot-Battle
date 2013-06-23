@@ -47,6 +47,7 @@ package
 					grid[bList[j][0]][bList[j][1]] = b;
 					bList[j] = b;
 					add(b);
+					trace(b.dir);
 				}
 			}
 			// put player in an empty tile

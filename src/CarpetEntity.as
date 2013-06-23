@@ -104,7 +104,7 @@ package
 			y += velY;
 			a += velA;
 			
-			image.angle = Conf.radiansToDegrees(a);
+			image.angle = 90 - Conf.radiansToDegrees(a);
 		}
 	}
 }
