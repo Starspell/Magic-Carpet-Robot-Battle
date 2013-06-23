@@ -56,6 +56,7 @@ package
 		
 		public static function radiansToDegrees(rad:Number):Number
 		{
+			rad %= (2 * Math.PI);
 			rad /= (2 * Math.PI);
 			rad *= 360;
 			return rad;
