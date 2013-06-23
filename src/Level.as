@@ -18,7 +18,7 @@ package
 		public var carpetWorlds:Array;
 		public var carpetGraphics:Array;
 		public var carpetEnts:Array;
-		public var numCheckpoints:int;
+		public var nextCheckpoint:int;
 		public var ident:int;
 		
 		public function Level(ident:int)
@@ -29,7 +29,7 @@ package
 			carpetEnts = new Array();
 			carpetGraphics = new Array();
 			var blocks:Object = { thruster: [[1, 1]], cannon: [[2, 3]] };
-			numCheckpoints = 0;
+			nextCheckpoint = 0;
 			
 			// All the thrusters!
 			/*var t:Array = [];
@@ -92,11 +92,16 @@ package
 		}
 		public function checkpointPassed(cp:Checkpoint): void
 		{
-			if (cp.num == numCheckpoints)
+			if (cp.num == nextCheckpoint)
 			{
 				//Target is destroyed
-				numCheckpoints++;
-				remove(cp);
+				nextCheckpoint++;
+				if (cp is Target) remove(cp);
+				else if (cp is Gate) ; //Gate code here!
+				trace(nextCheckpoint);
+				if (nextCheckpoint == Conf.levelData[ident].length) {
+					trace("win");
+				}
 			}
 		}
 		

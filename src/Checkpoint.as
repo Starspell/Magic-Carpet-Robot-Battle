@@ -10,6 +10,8 @@ package
 	{
 		public var num:int;
 		
+		public var passed:Boolean = false;
+		
 		public function Checkpoint(x:int, y:int, num:int)
 		{
 			super(x, y);
@@ -17,6 +19,7 @@ package
 		}
 		public function pass():void
 		{
+			passed = true;
 			(world as Level).checkpointPassed(this);
 		}
 	}
