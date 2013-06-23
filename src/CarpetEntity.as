@@ -35,7 +35,7 @@ package
 			image.originY = 30;
 			super(500, 350, image);
 			setHitbox(60, 60, 30, 30);
-			layer = -10;
+			layer = -2;
 			
 			type = "carpet";
 		}

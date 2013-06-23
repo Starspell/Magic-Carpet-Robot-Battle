@@ -6,6 +6,18 @@ package
 	{
 		// map world
 		public static var levelSize:Array = [1000, 700];
+		public static var levelData:Array = [
+			// level 1
+			{
+				// list of [type, data]
+				// for target: data is position
+				// for gate: data is [startx, starty, endx, endy]
+				checkpoints: [
+					["target", [500, 400]],
+					["gates", [600, 300, 800, 400]]
+				]
+			}
+		];
 
 		// carpet world
 		public static var carpetSize:Array = [8, 12];

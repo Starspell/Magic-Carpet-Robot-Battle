@@ -28,7 +28,7 @@ package
 			
 			
 			
-			layer = -1000000;
+			layer = -3;
 		}
 		override public function update():void
 		{

@@ -1,4 +1,4 @@
-package  
+package
 {
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Image;
@@ -7,7 +7,7 @@ package
 	 * ...
 	 * @author Sarah
 	 */
-	public class Gate extends Buoy 
+	public class Gate extends Checkpoint
 	{
 		[Embed(source = '../assets/sprites/gateCone.png')] private const IMG:Class;
 		
@@ -16,21 +16,15 @@ package
 		private var endX:int;
 		private var endY:int;
 		
-		public function Gate(startX:int, startY:int, endX:int = 0, endY:int = 0, waterWorld:Level = null) 
+		public function Gate(startX:int, startY:int, endX:int, endY:int,
+							 waterWorld:Level, num:int)
 		{
-			super(startX, startY);
-			
+			super(startX, startY, num);
 			this.endX = endX;
 			this.endY = endY;
-			
-			graphic = new Image(IMG);
-			
-			if ( waterWorld )
-			{
-				endGate = waterWorld.addGraphic(new Image(IMG), -1, endX, endY);
-				endGate.setHitbox(40, 40);
-				endGate.type = "buoy";
-			}
+
+			waterWorld.add(new Buoy(startX, startY, IMG));
+			waterWorld.add(new Buoy(endX, endY, IMG));
 		}
 		
 		override public function render():void
