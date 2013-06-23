@@ -1,5 +1,6 @@
 package
 {
+	import flash.geom.Point;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.World;
@@ -22,7 +23,7 @@ package
 		public var nextCheckpoint:int;
 		public var ident:int;
 		
-		public var worldDims:Array = [];
+		public var worldBoundaryCoords:Array = [];
 		
 		public function Level(ident:int)
 		{
@@ -35,6 +36,8 @@ package
 			nextCheckpoint = 0;
 
 			addCarpet(blocks, 1, 30, 20);
+			
+			var boundaries:Array = [null, null, null, null];
 
 			// add targets and gates
 			var cpData:Array = Conf.levelData[ident].checkpoints;
@@ -46,10 +49,26 @@ package
 				} else { // cpData[i][0] == "gate"
 					add(new Gate(args[0], args[1], args[2], args[3], this, i));
 				}
+				
+				// World creation
+				if ( boundaries[0] == null )
+				{
+					boundaries[0] = args[0];	// Smallest x
+					boundaries[1] = args[0];	// Largest x
+					boundaries[2] = args[1];	// Smallest y
+					boundaries[3] = args[1];	// Largest y
+				}
+				else
+				{
+					if ( args[0] < boundaries[0] ) boundaries[0] = args[0];
+					if ( args[0] > boundaries[1] ) boundaries[1] = args[0];
+					if ( args[1] < boundaries[2] ) boundaries[2] = args[1];
+					if ( args[1] < boundaries[3] ) boundaries[3] = args[1];
+				}
 			}
 			
-			worldDims[0] = Conf.levelSize[0];
-			worldDims[1] = Conf.levelSize[1];
+			worldBoundaryCoords[0] = new Point(boundaries[0] - Conf.boundarySpace, boundaries[2] - Conf.boundarySpace);
+			worldBoundaryCoords[1] = new Point(boundaries[1] + Conf.boundarySpace, boundaries[3] + Conf.boundarySpace);
 		}
 
 		private function addCarpet(blocks:Object, nPlayers:int, x:int,
