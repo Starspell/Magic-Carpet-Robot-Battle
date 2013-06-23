@@ -140,6 +140,9 @@ package
 					g.pass();
 				}
 			}
+			
+			this.world.camera.x = x - ((Conf.levelSize[0] / 2) + 175);
+			this.world.camera.y = y - (Conf.levelSize[1] / 2);
 		}
 		
 		override public function moveCollideX(e:Entity):Boolean

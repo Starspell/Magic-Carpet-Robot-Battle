@@ -58,7 +58,7 @@ package
 		
 		private function explode(e:Entity):void
 		{
-			this.world.add(new Explosion(e.x, e.y, - Conf.radiansToDegrees(Math.atan2(velY, velX))));
+			this.world.add(new Explosion(e.x + e.halfWidth, e.y + e.halfHeight));
 			this.world.remove(this);
 		}
 	}

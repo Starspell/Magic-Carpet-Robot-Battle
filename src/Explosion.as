@@ -13,11 +13,11 @@ package
 		
 		[Embed(source = '../assets/sprites/debris.png')] private const IMG:Class;
 	
-		public function Explosion(x:Number, y:Number, angle:Number, lifeTime:int = 60)
+		public function Explosion(x:Number, y:Number, lifeTime:int = 30)
 		{
 			emitter = new Emitter(IMG, 100, 100);
 			emitter.newType("explosion", [0]);
-			emitter.setMotion("explosion", angle, 50, 10, 90, 20, 1);
+			emitter.setMotion("explosion", 0, 50, 40, 360, 20, 1);
 			emitter.setAlpha("explosion", 1, 0);
 			graphic = emitter;
 			this.x = x; this.y = y;
@@ -35,6 +35,8 @@ package
 					this.world.remove(this);
 			}
 			emitter.emit("explosion", 0, 0);
+			
+			(graphic as Emitter).setAlpha("explosion", (lifeTime - time) / lifeTime, 0);
 		}
 	}
 }

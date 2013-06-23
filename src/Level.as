@@ -1,5 +1,6 @@
 package
 {
+	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.World;
 	import net.flashpunk.graphics.TiledImage;
@@ -61,10 +62,9 @@ package
 								   y:int):void {
 			var cw:CarpetWorld = new CarpetWorld(blocks, nPlayers);
 			carpetWorlds.push(cw);
-			carpetGraphics.push(
-				addGraphic(new Image(cw.worldBuffer), -2, x, y).graphic
-				as Image
-			);
+			var e:Entity = addGraphic(new Image(cw.worldBuffer), -2, x, y);
+			e.graphic.scrollX = e.graphic.scrollY = 0;
+			carpetGraphics.push(e.graphic as Image);
 			var ce:CarpetEntity = new CarpetEntity(blocks);
 			carpetEnts.push(ce);
 			add(ce);
