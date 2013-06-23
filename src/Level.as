@@ -55,6 +55,8 @@ package
 					add(new Gate(args[0], args[1], args[2], args[3], this, i));
 				}
 			}
+			
+			add(new Explosion(500, 500, 0, 60));
 		}
 
 		private function addCarpet(blocks:Object, nPlayers:int, x:int,
