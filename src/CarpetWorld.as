@@ -64,6 +64,8 @@ package
 				if (done) break;
 			}
 			if (!done) trace("couldn't place player...");
+			
+			add(new Thruster(this, 2, 2));
 		}
 		
 		override public function add(e:Entity):Entity
