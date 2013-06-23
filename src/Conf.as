@@ -23,6 +23,10 @@ package
 		public static var carpetMOI:Number = 1000;
 		public static var carpetFriction:Number = 0.1;
 		public static var carpetRotFriction:Number = 5;
+		public static var cannonFireInterval:int = 60;
+		
+		public static var buoyRepel:Number = 3; 
+
 		
 		// Other Entity Constants
 		

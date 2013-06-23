@@ -41,6 +41,9 @@ package
             var blocks:Object = { thruster: t, cannon: [] }*/
 
 			addCarpet(blocks, 1, 30, 20);
+			
+			add(new Gate( 600, 300, 800, 300, this));
+			add(new Buoy( 600, 600 ));
 		}
 
 		private function addCarpet(blocks:Object, nPlayers:int, x:int,

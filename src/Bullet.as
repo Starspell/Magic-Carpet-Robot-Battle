@@ -14,8 +14,10 @@ package
 		public function Bullet(velX:Number, velY:Number, x:Number, y:Number)
 		{
 			var i:Image = new Image(IMG);
+			setHitbox(20, 20, 10, 10);
 			i.originX = 10;
 			i.originY = 10;
+
 			graphic = i;
 			
 			this.velX = velX;

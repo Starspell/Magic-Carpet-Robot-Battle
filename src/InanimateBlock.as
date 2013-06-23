@@ -49,6 +49,10 @@ package
 				sides[Conf.right] = true;
 				tempOn = true;
 			}
+			else
+			{
+				on = false;
+			}
 			
 			on = tempOn;
 			

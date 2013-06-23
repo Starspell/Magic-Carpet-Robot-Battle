@@ -15,6 +15,7 @@ package
 		private var isMoving:Boolean = false;
 		private var moveCounter:int;
 		private var moveDir:int;
+		private var movingDir:int;
 		private var grabbedBlock:Block;
 
 		[Embed(source = '../assets/sprites/player.png')] private const IMG:Class;
@@ -34,7 +35,7 @@ package
 			} else {
 				throw new Error("no configuration for player ID " + pID);
 			}
-			moveDir = dir;
+			movingDir = moveDir = dir;
 		}
 
 		private function setDir(dir:int):void {
@@ -86,19 +87,20 @@ package
 			if (gotLast && nDirs == 1) mDir = moveDir;
 
 			// check whether to move
-			if (isMoving && mDir == dir) {
+			if (isMoving && mDir == movingDir) {
 				moveCounter -= 1;
 			} else {
 				isMoving = true;
 				moveCounter = Conf.moveDelay;
 			}
-			if (mDir != dir) setDir(mDir);
+			movingDir = mDir;
+			if (mDir != dir && grabbedBlock === null) setDir(mDir);
 			if (moveCounter > 0) return;
 			moveDir = mDir;
 
 			// boundary detection
-			i = dir % 2; // axis
-			j = (dir >= 2) ? 1 : -1; // direction on this axis
+			i = movingDir % 2; // axis
+			j = (movingDir >= 2) ? 1 : -1; // direction on this axis
 			if (pos[i] + j == int(j == 1) * (Conf.carpetSize[i] - 1) + j) {
 				return;
 			}
@@ -107,9 +109,9 @@ package
 			var blockingBlock:Block = null;
 			if (grabbedBlock !== null) {
 				blockToMove = grabbedBlock;
-				blockingBlock = carpet.blockInDir(pos, dir);
+				blockingBlock = carpet.blockInDir(pos, movingDir);
 			} else {
-				blockingBlock = blockToMove = carpet.blockInDir(pos, dir);
+				blockingBlock = blockToMove = carpet.blockInDir(pos, movingDir);
 			}
 			if (blockingBlock !== null && blockingBlock !== blockToMove) {
 				// there's a block in the way that we're not moving
@@ -117,7 +119,7 @@ package
 			}
 			if (blockToMove !== null) {
 				// moving a block: check if it can move
-				var bPos:Array = carpet.tileInDir(blockToMove.pos, dir);
+				var bPos:Array = carpet.tileInDir(blockToMove.pos, movingDir);
 				if (bPos[0] < 1 || bPos[0] >= Conf.carpetSize[0] - 1 ||
 					bPos[1] < 1 || bPos[1] >= Conf.carpetSize[1] - 1) {
 					// block would move off screen
@@ -130,9 +132,9 @@ package
 				}
 			}
 			canMove = false;
-			carpet.moveInDir(this, dir, moveDone);
+			carpet.moveInDir(this, movingDir, moveDone);
 			if (blockToMove !== null) {
-				carpet.moveInDir(blockToMove, dir, blockToMove.moveDone);
+				carpet.moveInDir(blockToMove, movingDir, blockToMove.moveDone);
 			}
 		}
 	}
