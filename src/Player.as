@@ -78,7 +78,7 @@ package
 					nDirs += int(dirs[i]);
 				}
 			}
-			if (!(nDirs == 1 || (nDirs == 2 && gotLast))) {
+			if (!(nDirs == 1 || nDirs == 2)) {
 				// multiple directions: don't move
 				isMoving = false;
 				return;

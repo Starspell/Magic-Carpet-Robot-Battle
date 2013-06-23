@@ -10,8 +10,8 @@ package
 	public class Thruster extends InanimateBlock
 	{
 		[Embed(source = '../assets/sprites/thruster.png')] private const IMG:Class;
-		[Embed(source = '../assets/sprites/flare.png')] private const FLARE:Class;
 		[Embed(source = '../assets/sprites/thrusteron.png')] private const IMGON:Class;
+		[Embed(source = '../assets/sprites/flare.png')] private const FLARE:Class;
 		
 		public var offGraphic:Image;
 		public var onGraphic:Spritemap;
