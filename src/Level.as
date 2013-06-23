@@ -107,6 +107,7 @@ package
 				carpetWorlds[i].render();
 				carpetGraphics[i].updateBuffer();
 			}
+			
 			super.render();
 			
 			Draw.linePlus( worldBoundaryCoords[0].x, worldBoundaryCoords[0].y, worldBoundaryCoords[1].x, worldBoundaryCoords[0].y, 0xFFFFFF, 1, 5);
