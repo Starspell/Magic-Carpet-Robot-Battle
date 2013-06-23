@@ -10,12 +10,17 @@ package
 		public static var levelData:Array = [
 			// level 1
 			{
+				// positions to start the lines at
+				startPts: [[400, 80], [700, 120]],
+				// right positions to end the lines at
+				endPts: [[600, 600], [850, 630]],
 				// list of [type, data]
 				// for target: data is position
 				// for gate: data is [startx, starty, endx, endy]
 				checkpoints: [
 					["target", [500, 400]],
-					["gates", [600, 300, 800, 400]]
+					["gates", [600, 300, 800, 250]],
+					["gates", [600, 400, 850, 500]]
 				]
 			}
 		];

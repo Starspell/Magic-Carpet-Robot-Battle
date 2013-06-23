@@ -7,7 +7,6 @@ package
 	import net.flashpunk.graphics.TiledImage;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.utils.Draw;
-	
 	/**
 	 * ...
 	 * @author Sarah
@@ -15,14 +14,13 @@ package
 	public class Level extends World
 	{
 		[Embed(source = '../assets/sprites/sea.png')] private const SEA:Class;
-		
+
 		private var seaTiles:TiledImage;
 		public var carpetWorlds:Array;
 		public var carpetGraphics:Array;
 		public var carpetEnts:Array;
 		public var nextCheckpoint:int;
 		public var ident:int;
-		
 		public var worldBoundaryCoords:Array = [];
 		
 		public function Level(ident:int)
@@ -38,8 +36,16 @@ package
 			
 			var boundaries:Array = [null, null, null, null];
 
+			var data:Object = Conf.levelData[ident];
+			var linePts:Array = [[], []];
+			var pts:Array = data.startPts;
+			
+			var hw:int = add(new Buoy(pts[0][0], pts[0][1])).halfWidth;
+			var hh:int = add(new Buoy(pts[1][0], pts[1][1])).halfHeight;
+			linePts[0].push([pts[0][0] + hw, pts[0][1] + hh]);
+			linePts[1].push([pts[1][0] + hw, pts[1][1] + hh]);
 			// add targets and gates
-			var cpData:Array = Conf.levelData[ident].checkpoints;
+			var cpData:Array = data.checkpoints;
 			var i:int;
 			for (i = 0; i < cpData.length; i++) {
 				var args:Object = cpData[i][1];
@@ -47,15 +53,17 @@ package
 					add(new Target(args[0], args[1], i));
 				} else { // cpData[i][0] == "gate"
 					add(new Gate(args[0], args[1], args[2], args[3], this, i));
+					linePts[0].push([args[0] + hw, args[1] + hh]);
+					linePts[1].push([args[2] + hw, args[3] + hh]);
 				}
 				
 				// World creation
 				if ( boundaries[0] == null )
 				{
-					boundaries[0] = args[0];	// Smallest x
-					boundaries[1] = args[0];	// Largest x
-					boundaries[2] = args[1];	// Smallest y
-					boundaries[3] = args[1];	// Largest y
+					boundaries[0] = args[0]; // Smallest x
+					boundaries[1] = args[0]; // Largest x
+					boundaries[2] = args[1]; // Smallest y
+					boundaries[3] = args[1]; // Largest y
 				}
 				else
 				{
@@ -65,7 +73,14 @@ package
 					if ( args[1] < boundaries[3] ) boundaries[3] = args[1];
 				}
 			}
-			
+
+			pts = data.endPts;
+			add(new Buoy(pts[0][0], pts[0][1]));
+			add(new Buoy(pts[1][0], pts[1][1]));
+			linePts[0].push([pts[0][0] + hw, pts[0][1] + hh]);
+			linePts[1].push([pts[1][0] + hw, pts[1][1] + hh]);
+			add(new GuideLines(linePts));
+
 			worldBoundaryCoords[0] = new Point(boundaries[0] - Conf.boundarySpace, boundaries[2] - Conf.boundarySpace);
 			worldBoundaryCoords[1] = new Point(boundaries[1] + Conf.boundarySpace, boundaries[3] + Conf.boundarySpace);
 			
@@ -115,8 +130,8 @@ package
 			Draw.linePlus( worldBoundaryCoords[1].x, worldBoundaryCoords[1].y, worldBoundaryCoords[0].x, worldBoundaryCoords[1].y, 0xFFFFFF, 1, 5);
 			Draw.linePlus( worldBoundaryCoords[0].x, worldBoundaryCoords[1].y, worldBoundaryCoords[0].x, worldBoundaryCoords[0].y, 0xFFFFFF, 1, 5);
 		}
-		
-		public function checkpointPassed(cp:Checkpoint): void
+
+		public function checkpointPassed(cp:Checkpoint):Boolean
 		{
 			if (cp.num == nextCheckpoint)
 			{
@@ -124,11 +139,11 @@ package
 				nextCheckpoint++;
 				if (cp is Target) remove(cp);
 				else if (cp is Gate) {}; //Gate code here!
-				trace(nextCheckpoint);
 				if (nextCheckpoint == Conf.levelData[ident].length) {
 					trace("win");
 				}
-			}
+				return true;
+			} else return false;
 		}
 		
 	}
