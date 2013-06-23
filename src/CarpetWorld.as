@@ -72,15 +72,38 @@ package
 			return super.add(e);
 		}
 
-		public function tileTL(x:int, y:int):Array {
+		public function tileTL(x:int, y:int):Array{
+			// get the top-left corner of an x, y tile on the drawn image
 			return [Conf.carpetTileSize[0] * x, Conf.carpetTileSize[1] * y];
 		}
 
 		public function isFree(x:int, y:int):Boolean {
+			// check if an x, y tile is empty
 			return grid[x][y] === null;
 		}
 
+		public function tileInDir(pos:Array, dir:int):Array {
+			// get the [x, y] tile in direction dir from position pos
+			var dp:Array = [0, 0];
+			dp[dir % 2] = (dir >= 2) ? 1 : -1;
+			return [pos[0] + dp[0], pos[1] + dp[1]];
+		}
+
+		public function blockInTile(pos:Array):Block {
+			// get the block in the given [x, y] tile, or null
+			return grid[pos[0]][pos[1]];
+		}
+
+		public function blockInDir(pos:Array, dir:int):Block {
+			// get the block one tile in direction dir from position pos, or
+			// null
+			pos = tileInDir(pos, dir);
+			return grid[pos[0]][pos[1]];
+		}
+
 		public function moveTo(e:Block, x:int, y:int, cb:Function):void {
+			// move a block to the x, y tile position, calling cb when the move
+			// is complete
 			grid[e.pos[0]][e.pos[1]] = null;
 			grid[x][y] = e;
 			e.pos = [x, y];
@@ -95,6 +118,7 @@ package
 		}
 
 		public function setPos(e:Block, x:int, y:int):void {
+			// set a block's x, y tile position without animation
 			grid[e.pos[0]][e.pos[1]] = null;
 			grid[x][y] = e;
 			e.pos = [x, y];

@@ -25,15 +25,17 @@ package
 			carpetWorlds = new Array();
 			carpetEnts = new Array();
 			carpetGraphics = new Array();
-			var blocks:Object = { thruster: [], cannon: [[2,3]] };
-			addCarpet(blocks, 1);
+			var blocks:Object = { thruster: [[1, 1]], cannon: [[2, 3]] };
+			addCarpet(blocks, 1, 30, 20);
 		}
 
-		private function addCarpet(blocks:Object, nPlayers:int):void {
+		private function addCarpet(blocks:Object, nPlayers:int, x:int,
+								   y:int):void {
 			var cw:CarpetWorld = new CarpetWorld(blocks, nPlayers);
 			carpetWorlds.push(cw);
 			carpetGraphics.push(
-				addGraphic(new Image(cw.worldBuffer), -2).graphic as Image
+				addGraphic(new Image(cw.worldBuffer), -2, x, y).graphic
+				as Image
 			);
 			var ce:CarpetEntity = new CarpetEntity(blocks);
 			carpetEnts.push(ce);

@@ -26,7 +26,10 @@ package
 		
 		// Player related constants
 		public static var playerKeys:Array = [
-			[Key.LEFT, Key.UP, Key.RIGHT, Key.DOWN]
+			{
+				move: [Key.LEFT, Key.UP, Key.RIGHT, Key.DOWN],
+				grab: [Key.SPACE, Key.SHIFT]
+			}
 		];
 		public static var tweenTime:Number = 10;
 		public static var moveDelay:int = 4;

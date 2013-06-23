@@ -31,7 +31,7 @@ package
 			_pos = pos;
 		}
 
-		protected function moveDone():void
+		public function moveDone():void
 		{
 			canMove = true;
 		}
