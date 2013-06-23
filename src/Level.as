@@ -15,8 +15,8 @@ package
 	{
 		[Embed(source = '../assets/sprites/sea.png')] private const SEA:Class;
 		
-		public var size:Array = Conf.levelSize;
-		private var seaTiles:TiledImage = new TiledImage(SEA, Conf.levelSize[0], Conf.levelSize[1]);
+		//public var size:Array = Conf.levelSize;
+		private var seaTiles:TiledImage;
 		public var carpetWorlds:Array;
 		public var carpetGraphics:Array;
 		public var carpetEnts:Array;
@@ -69,6 +69,8 @@ package
 			
 			worldBoundaryCoords[0] = new Point(boundaries[0] - Conf.boundarySpace, boundaries[2] - Conf.boundarySpace);
 			worldBoundaryCoords[1] = new Point(boundaries[1] + Conf.boundarySpace, boundaries[3] + Conf.boundarySpace);
+			
+			seaTiles = new TiledImage(SEA, worldBoundaryCoords[1].x - worldBoundaryCoords[0].x, worldBoundaryCoords[1].y - worldBoundaryCoords[0].y)
 		}
 
 		private function addCarpet(blocks:Object, nPlayers:int, x:int,

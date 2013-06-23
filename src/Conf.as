@@ -5,7 +5,7 @@ package
 	public class Conf
 	{
 		// map world
-		public static var levelSize:Array = [1000, 700];
+		//public static var levelSize:Array = [1000, 700];
 		public static var levelData:Array = [
 			// level 1
 			{
