@@ -97,6 +97,10 @@ package
 				//Target is destroyed
 				numCheckpoints++;
 				remove(cp);
+				trace(numCheckpoints);
+				if (numCheckpoints == Conf.levelData[ident].length) {
+					trace("win");
+				}
 			}
 		}
 		
