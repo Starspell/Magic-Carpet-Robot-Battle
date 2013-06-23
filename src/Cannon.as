@@ -16,5 +16,4 @@ package
 			graphic = new Image(IMG);
 		}
 	}
-
 }

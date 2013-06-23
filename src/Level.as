@@ -25,7 +25,19 @@ package
 			carpetWorlds = new Array();
 			carpetEnts = new Array();
 			carpetGraphics = new Array();
-			var blocks:Object = { thruster: [[1, 1]], cannon: [[2, 3]] };
+			//var blocks:Object = { thruster: [[1, 1]], cannon: [[2, 3]] };
+			 
+			// All the thrusters!
+			var t:Array = [];
+            for (var i:int = 1; i <= 6; ++i)
+            {
+                for (var j:int = 1; j <= 10; ++j)
+                {
+                    t.push([i, j]);
+                }
+            }
+            var blocks:Object = { thruster: t, cannon: [] }
+
 			addCarpet(blocks, 1, 30, 20);
 		}
 
