@@ -18,6 +18,7 @@ package
 				]
 			}
 		];
+		public static var boundarySpace:int = 500;
 
 		// carpet world
 		public static var carpetSize:Array = [8, 12];
