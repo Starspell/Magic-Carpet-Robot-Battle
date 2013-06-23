@@ -26,25 +26,25 @@ package
 			if(pos[1] == 1)
 			{
 				//Sets up to true
-				sides[0] = true;
+				sides[Conf.up] = true;
 				on = true;
 			}
 			else if(pos[0] == 1)
 			{
 				//Sets left to true
-				sides[1] = true;
+				sides[Conf.left] = true;
 				on = true;
 			}
 			else if(pos[1] == Conf.carpetSize[1] - 2)
 			{
 				//Sets down to true
-				sides[2] = true;
+				sides[Conf.down] = true;
 				on = true;
 			}
 			else if(pos[0] == Conf.carpetSize[0] - 2)
 			{
 				//Sets right to true
-				sides[3] = true;
+				sides[Conf.right] = true;
 				on = true;
 			}
 			else
@@ -54,6 +54,7 @@ package
 			
 			if (on)
 			{
+				trace(sides);
 				setDir(sides);
 			}
 		}

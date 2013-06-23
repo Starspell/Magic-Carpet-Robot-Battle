@@ -39,6 +39,19 @@ package
             var blocks:Object = { thruster: t, cannon: [] }
 
 			addCarpet(blocks, 1, 30, 20);
+			/*
+			var t:Array = [];
+			for (var i:int = 1; i <= 6; ++i)
+			{
+				for (var j:int = 1; j <= 10; ++j)
+				{
+					t.push([i, j]);
+				}
+			}
+			var blocks:Object = { thruster: t, cannon: [] }
+
+			addCarpet(blocks, 1);
+			*/
 		}
 
 		private function addCarpet(blocks:Object, nPlayers:int, x:int,

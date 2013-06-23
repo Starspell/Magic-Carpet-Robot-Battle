@@ -89,7 +89,7 @@ package
 			netForceX -= velX * Conf.carpetFriction;
 			netForceY -= velY * Conf.carpetFriction;
 			
-			netMoment -= velA * Conf.carpetRotFriction;
+			//netMoment -= velA * velA * Conf.carpetRotFriction;
 			
 			acnX = netForceX / Conf.carpetMass;
 			acnY = netForceY / Conf.carpetMass;
@@ -105,6 +105,7 @@ package
 			a += velA;
 			
 			image.angle = 90 - Conf.radiansToDegrees(a);
+			fire(1, 1, 1);
 		}
 		
 		// Fire a bullet from a cannon at carpetx,carpetY on carpet, in direction dir.
@@ -133,7 +134,7 @@ package
 					break;
 			}
 			
-			this.world.add(new Bullet(bulletA, Conf.bulletSpeed, bulletX, bulletY));
+			this.world.add(new Bullet(bulletA, Conf.bulletSpeed, bulletX + this.x, bulletY + this.y));
 		}
 	}
 }
