@@ -28,14 +28,14 @@ package
 		
 		private var fireCounter:int = 0;
 		
-		public function CarpetEntity(blocks:Object)
+		public function CarpetEntity(blocks:Object, x:int, y:int)
 		{
 			this.blocks = blocks;
 			image = new Image(CARPET);
 			a = Math.PI / 2
 			image.originX = 20;
 			image.originY = 30;
-			super(500, 350, image);
+			super(x, y, image);
 			setHitbox(60, 60, 30, 30);
 			layer = -2;
 			
@@ -62,19 +62,19 @@ package
 					{
 						case Conf.up:
 							thrusterAngle = a;
-							dist = - (thruster.pos[0] - (Conf.carpetSize[0] / 2));
+							dist = - ((thruster.pos[0] + 0.5) - (Conf.carpetSize[0] / 2));
 							break;
 						case Conf.left:
 							thrusterAngle = a - (Math.PI / 2);
-							dist = thruster.pos[1] - (Conf.carpetSize[1] / 2);
+							dist = (thruster.pos[1] + 0.5) - (Conf.carpetSize[1] / 2);
 							break;
 						case Conf.down:
 							thrusterAngle = a + Math.PI;
-							dist = thruster.pos[0] - (Conf.carpetSize[0] / 2);
+							dist = (thruster.pos[0] + 0.5) - (Conf.carpetSize[0] / 2);
 							break;
 						case Conf.right:
 							thrusterAngle = a + (Math.PI / 2);
-							dist = -(thruster.pos[1] - (Conf.carpetSize[1] / 2));
+							dist = -((thruster.pos[1] + 0.5) - (Conf.carpetSize[1] / 2));
 							break;
 					}
 					
@@ -139,6 +139,20 @@ package
 				{
 					g.pass();
 				}
+			}
+			
+			var tempLevel:Level = this.world as Level;
+			
+			if (tempLevel)
+			{
+				var topLeft:Point = tempLevel. worldBoundaryCoords[0];
+				var bottomRight:Point = tempLevel. worldBoundaryCoords[1];
+				
+				if (left < topLeft.x || right > bottomRight.x) velX = - velX * Conf.edgeRepel;
+				if (top < topLeft.y || bottom > bottomRight.y) velY = - velY * Conf.edgeRepel;
+				
+				this.world.camera.x = x - ((Conf.screenSize[0] / 2) + 175);
+				this.world.camera.y = y - (Conf.screenSize[1] / 2);
 			}
 		}
 		

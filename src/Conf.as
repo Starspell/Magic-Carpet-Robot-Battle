@@ -4,20 +4,27 @@ package
 
 	public class Conf
 	{
+		public static const screenSize:Array = [1000, 700];
+		
 		// map world
-		public static var levelSize:Array = [1000, 700];
 		public static var levelData:Array = [
 			// level 1
 			{
+				// positions to start the lines at
+				startPts: [[400, 80], [700, 120]],
+				// right positions to end the lines at
+				endPts: [[600, 600], [850, 630]],
 				// list of [type, data]
 				// for target: data is position
 				// for gate: data is [startx, starty, endx, endy]
 				checkpoints: [
 					["target", [500, 400]],
-					["gates", [600, 300, 800, 400]]
+					["gates", [600, 300, 800, 250]],
+					["gates", [600, 400, 850, 500]]
 				]
 			}
 		];
+		public static var boundarySpace:int = 500;
 
 		// carpet world
 		public static var carpetSize:Array = [8, 12];
@@ -36,8 +43,9 @@ package
 		public static var carpetFriction:Number = 0.1;
 		public static var carpetRotFriction:Number = 5;
 		public static var cannonFireInterval:int = 60;
-		
-		public static var buoyRepel:Number = 3; 
+		// Carpet bouncing consts:
+		public static var buoyRepel:Number = 3; //Buoy repulsion factor on bounce.
+		public static var edgeRepel:Number = 3; //Edge of world repulsion factor on bounce.
 		
 		public static var gateCollideDist:Number = 15;
 
