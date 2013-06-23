@@ -65,7 +65,7 @@ package
 							dist = - (thruster.pos[0] - (Conf.carpetSize[0] / 2));
 							break;
 						case Conf.left:
-							thrusterAngle = a + (Math.PI / 2);
+							thrusterAngle = a - (Math.PI / 2);
 							dist = thruster.pos[1] - (Conf.carpetSize[1] / 2);
 							break;
 						case Conf.down:
@@ -73,7 +73,7 @@ package
 							dist = thruster.pos[0] - (Conf.carpetSize[0] / 2);
 							break;
 						case Conf.right:
-							thrusterAngle = a - (Math.PI / 2);
+							thrusterAngle = a + (Math.PI / 2);
 							dist = -(thruster.pos[1] - (Conf.carpetSize[1] / 2));
 							break;
 					}
