@@ -11,7 +11,7 @@ package
 		
 		public function Thruster(carpet:CarpetWorld, x:int, y:int)
 		{
-			sidesOrdered = [0, 2, 1, 3];
+			sidesOrdered = [Conf.up, Conf.down, Conf.left, Conf.right];
 			super(carpet, x, y);
 			graphic = new Image(IMG);
 		}

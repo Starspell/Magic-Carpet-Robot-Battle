@@ -50,7 +50,7 @@ package
 				{
 					var thrusterAngle:Number;
 					
-					switch(thruster.dir) 
+					switch(thruster.dir)
 					{
 						case Conf.up:
 							thrusterAngle = a;

@@ -26,18 +26,18 @@ package
 			carpetEnts = new Array();
 			carpetGraphics = new Array();
 			var blocks:Object = {thruster: [[1, 1]], cannon: []}
-			addCarpet(blocks);
+			addCarpet(blocks, 1);
 		}
 
-		private function addCarpet(blocks:Object):void {
-			var cw:CarpetWorld = new CarpetWorld(blocks);
+		private function addCarpet(blocks:Object, nPlayers:int):void {
+			var cw:CarpetWorld = new CarpetWorld(blocks, nPlayers);
 			carpetWorlds.push(cw);
 			carpetGraphics.push(
 				addGraphic(new Image(cw.worldBuffer), -2).graphic as Image
 			);
-// 			var ce:CarpetEntity = new CarpetEntity(blocks);
-// 			carpetEnts.push(ce);
-// 			add(ce);
+			var ce:CarpetEntity = new CarpetEntity(blocks);
+			carpetEnts.push(ce);
+			add(ce);
 		}
 		
 		override public function update():void

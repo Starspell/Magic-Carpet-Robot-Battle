@@ -11,7 +11,7 @@ package
 
 		public function Cannon(carpet:CarpetWorld, x:int, y:int)
 		{
-			sidesOrdered = [1, 3, 0, 2];
+			sidesOrdered = [Conf.left, Conf.right, Conf.up, Conf.down];
 			super(carpet, x, y);
 			graphic = new Image(IMG);
 		}

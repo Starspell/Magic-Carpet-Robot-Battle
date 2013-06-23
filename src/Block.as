@@ -11,6 +11,7 @@ package
 		public var carpet:CarpetWorld;
 		public var _pos:Array;
 		public var dir:int; // Should be Conf.up, down, left or right.
+		public var canMove:Boolean = true;
 		
 		public function Block(carpet:CarpetWorld, x:int, y:int)
 		{
@@ -28,6 +29,11 @@ package
 		public function set pos(pos:Array):void
 		{
 			_pos = pos;
+		}
+
+		protected function moveDone():void
+		{
+			canMove = true;
 		}
 	}
 }
