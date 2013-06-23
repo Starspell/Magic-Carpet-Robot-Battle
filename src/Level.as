@@ -22,7 +22,6 @@ package
 		public var carpetEnts:Array;
 		public var nextCheckpoint:int;
 		public var ident:int;
-		
 		public var worldBoundaryCoords:Array = [];
 		
 		public function Level(ident:int)
@@ -83,7 +82,7 @@ package
 			linePts[0].push([pts[0][0] + hw, pts[0][1] + hh]);
 			linePts[1].push([pts[1][0] + hw, pts[1][1] + hh]);
 			add(new GuideLines(linePts));
-			
+
 			worldBoundaryCoords[0] = new Point(boundaries[0] - Conf.boundarySpace, boundaries[2] - Conf.boundarySpace);
 			worldBoundaryCoords[1] = new Point(boundaries[1] + Conf.boundarySpace, boundaries[3] + Conf.boundarySpace);
 		}
@@ -120,7 +119,7 @@ package
 			}
 			return super.render();
 		}
-		public function checkpointPassed(cp:Checkpoint): void
+		public function checkpointPassed(cp:Checkpoint):Boolean
 		{
 			if (cp.num == nextCheckpoint)
 			{
@@ -128,11 +127,11 @@ package
 				nextCheckpoint++;
 				if (cp is Target) remove(cp);
 				else if (cp is Gate) {}; //Gate code here!
-				trace(nextCheckpoint);
 				if (nextCheckpoint == Conf.levelData[ident].length) {
 					trace("win");
 				}
-			}
+				return true;
+			} else return false;
 		}
 		
 	}

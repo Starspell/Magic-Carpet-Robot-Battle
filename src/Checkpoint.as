@@ -34,8 +34,7 @@ package
 		
 		public function pass():void
 		{
-			passed = true;
-			(world as Level).checkpointPassed(this);
+			if ((world as Level).checkpointPassed(this)) passed = true;
 		}
 		
 		override public function render():void

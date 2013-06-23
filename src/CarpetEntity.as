@@ -140,7 +140,7 @@ package
 					g.pass();
 				}
 			}
-			
+
 			var topLeft:Point = (this.world as Level). worldBoundaryCoords[0];
 			var bottomRight:Point = (this.world as Level). worldBoundaryCoords[1];
 			
