@@ -25,7 +25,7 @@ package
 			flare = new Spritemap(FLARE, 40, 60);
 			carpet.addGraphic(flare, -1);
 			flare.visible = false;
-			flare.add("on", [0, 1, 2, 3], 5, true);
+			flare.add("on", [0, 1, 2, 3], .4, true);
 			flare.play("on");
 			
 			offGraphic = new Image(IMG);

@@ -85,8 +85,10 @@ package
 			worldBoundaryCoords[0] = new Point(boundaries[0] - Conf.boundarySpace, boundaries[2] - Conf.boundarySpace);
 			worldBoundaryCoords[1] = new Point(boundaries[1] + Conf.boundarySpace, boundaries[3] + Conf.boundarySpace);
 
-			seaTiles = new TiledImage(SEA, worldBoundaryCoords[1].x - worldBoundaryCoords[0].x,
-										   worldBoundaryCoords[1].y - worldBoundaryCoords[0].y);
+			seaTiles = new TiledImage(
+				SEA, worldBoundaryCoords[1].x - worldBoundaryCoords[0].x,
+				worldBoundaryCoords[1].y - worldBoundaryCoords[0].y
+			);
 			var seaTileEnt:Entity = addGraphic(seaTiles);
 			seaTileEnt.layer = 1;
 			seaTileEnt.x = worldBoundaryCoords[0].x;
@@ -125,11 +127,6 @@ package
 			}
 			
 			super.render();
-			
-			Draw.linePlus( worldBoundaryCoords[0].x, worldBoundaryCoords[0].y, worldBoundaryCoords[1].x, worldBoundaryCoords[0].y, 0xFFFFFF, 1, 5);
-			Draw.linePlus( worldBoundaryCoords[1].x, worldBoundaryCoords[0].y, worldBoundaryCoords[1].x, worldBoundaryCoords[1].y, 0xFFFFFF, 1, 5);
-			Draw.linePlus( worldBoundaryCoords[1].x, worldBoundaryCoords[1].y, worldBoundaryCoords[0].x, worldBoundaryCoords[1].y, 0xFFFFFF, 1, 5);
-			Draw.linePlus( worldBoundaryCoords[0].x, worldBoundaryCoords[1].y, worldBoundaryCoords[0].x, worldBoundaryCoords[0].y, 0xFFFFFF, 1, 5);
 		}
 
 		public function checkpointPassed(cp:Checkpoint):Boolean
