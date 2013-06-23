@@ -140,13 +140,13 @@ package
 				case Conf.up:
 					bulletA = a;
 					break;
-				case Conf.left:
+				case Conf.right:
 					bulletA = a + (Math.PI / 2);
 					break;
 				case Conf.down:
-					bulletA = -a;
+					bulletA = a + Math.PI;
 					break;
-				case Conf.right:
+				case Conf.left:
 					bulletA = a - (Math.PI / 2);
 					break;
 			}
