@@ -1,6 +1,7 @@
 package
 {
 	import net.flashpunk.graphics.Image;
+	import net.flashpunk.graphics.Spritemap;
 	/**
 	 * ...
 	 * @author Sarah
@@ -11,7 +12,7 @@ package
 		[Embed(source = '../assets/sprites/thrusteron.png')] private const IMGON:Class;
 		
 		public var offGraphic:Image;
-		public var onGraphic:Image;
+		public var onGraphic:Spritemap;
 		
 		public var on:Boolean;
 		
@@ -20,15 +21,15 @@ package
 			sidesOrdered = [0, 2, 1, 3];
 			super(carpet, x, y);
 			offGraphic = new Image(IMG);
-			onGraphic = new Image(IMGON);
+			onGraphic = new Spritemap(IMGON, 40, 40);
+			onGraphic.add("up", [0], 0, false);
+			onGraphic.add("right", [1], 0, false);
+			onGraphic.add("down", [2], 0, false);
+			onGraphic.add("left", [3], 0, false);
+			graphic = onGraphic;
 			on = true;
 			graphic = onGraphic;
 			setHitbox(40, 40);
-			
-			offGraphic.originX = Conf.carpetTileSize[0]/2;
-			onGraphic.originX = Conf.carpetTileSize[0]/2;
-			offGraphic.originY = Conf.carpetTileSize[1]/2; 
-			onGraphic.originY = Conf.carpetTileSize[1]/2;
 		}
 		
 		override public function update():void
@@ -36,10 +37,10 @@ package
 			if (on)
 			{
 				graphic = onGraphic;
-				if (dir == Conf.up) onGraphic.angle = 0;
-				else if (dir == Conf.left) onGraphic.angle = 90;
-				else if (dir == Conf.down) onGraphic.angle = 180;
-				else onGraphic.angle = 270; //dir == Conf.right
+				if (dir == Conf.up) onGraphic.play("up");
+				else if (dir == Conf.left) onGraphic.play("left");
+				else if (dir == Conf.down) onGraphic.play("down");
+				else onGraphic.play("right"); //dir == Conf.right
 			}
 			else //off
 			{

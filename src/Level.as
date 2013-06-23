@@ -27,8 +27,8 @@ package
 			carpetGraphics = new Array();
 			var blocks:Object = {thruster: [[1, 1]], cannon: []}
 			addCarpet(blocks);
-			blocks.thruster[0].dir = Conf.down;
-			carpetWorlds[0].setPos(blocks.thruster[0], 1, 1);
+			blocks.thruster[0].dir = Conf.up;
+			//blocks.thruster[0].on = false;
 		}
 
 		private function addCarpet(blocks:Object):void {

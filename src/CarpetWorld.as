@@ -80,8 +80,8 @@ package
 			grid[e.pos[0]][e.pos[1]] = null;
 			grid[x][y] = e;
 			e.pos = [x, y];
-			e.x = Conf.carpetTileSize[0] * x + (Conf.carpetTileSize[0] / 2);
-			e.y = Conf.carpetTileSize[1] * y + (Conf.carpetTileSize[1] / 2);
+			e.x = Conf.carpetTileSize[0] * x;
+			e.y = Conf.carpetTileSize[1] * y;
 		}
 	}
 }
