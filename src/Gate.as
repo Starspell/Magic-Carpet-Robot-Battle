@@ -1,5 +1,6 @@
 package  
 {
+	import flash.geom.Point;
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.utils.Draw;
@@ -16,12 +17,24 @@ package
 		private var endX:int;
 		private var endY:int;
 		
+		public var norm:Point;
+		public var tang:Point;
+		
+		public var halfLength:Number;
+		
+		public var passed:Boolean = false;
+		
 		public function Gate(startX:int, startY:int, endX:int = 0, endY:int = 0, waterWorld:Level = null) 
 		{
 			super(startX, startY);
 			
 			this.endX = endX;
 			this.endY = endY;
+			
+			tang = new Point(endX - startX, endY - startY);
+			halfLength = tang.length / 2;
+			tang.normalize(1);
+			norm = new Point(tang.y, -tang.x);
 			
 			graphic = new Image(IMG);
 			
@@ -35,8 +48,10 @@ package
 		
 		override public function render():void
 		{
-			Draw.linePlus(x + 20, y + 20, endX + 20, endY + 20, 0xFFFFFF, 0.5, 30);
+			if(passed) Draw.linePlus(x + 20, y + 20, endX + 20, endY + 20, 0xFF00FF, 0.5, 30);
+			else Draw.linePlus(x + 20, y + 20, endX + 20, endY + 20, 0xFFFFFF, 0.5, 30);
 			super.render();
+			
 		}
 	}
 

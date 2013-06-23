@@ -26,6 +26,8 @@ package
 		public static var cannonFireInterval:int = 60;
 		
 		public static var buoyRepel:Number = 3; 
+		
+		public static var gateCollideDist:Number = 15;
 
 		
 		// Other Entity Constants

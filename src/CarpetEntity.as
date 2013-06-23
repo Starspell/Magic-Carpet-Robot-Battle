@@ -1,5 +1,7 @@
 package
 {
+	import flash.geom.Point;
+	import flash.geom.Vector3D;
 	import flash.utils.Dictionary;
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Image;
@@ -121,6 +123,21 @@ package
 						fire(cannon.pos[0], cannon.pos[1], cannon.dir);
 				}
 				fireCounter = Conf.cannonFireInterval;
+			}
+			
+			//var g:Gate = this.world.getNextGate();
+			
+			var arr:Array = [];
+			this.world.getClass(Gate, arr);
+			var g:Gate = arr[0] as Gate;
+			
+			var toGate:Point = new Point(this.x - g.x, this.y - g.y);
+			var gateDist:Number = toGate.x * g.norm.x + toGate.y * g.norm.y;
+			var gateParllDist:Number = toGate.x * g.tang.x + toGate.y * g.tang.y;
+			if (Math.abs(gateDist) < Conf.gateCollideDist && Math.abs(gateParllDist) < g.halfLength)
+			{
+				//this.world.passedGate(g, this);
+				g.passed = true;
 			}
 		}
 		
