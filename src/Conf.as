@@ -9,6 +9,10 @@ package
 		public static var levelData:Array = [
 			// level 1
 			{
+				// positions to start the lines at
+				startPts: [[400, 100], [700, 150]],
+				// right positions to end the lines at
+				endPts: [[600, 500], [850, 580]],
 				// list of [type, data]
 				// for target: data is position
 				// for gate: data is [startx, starty, endx, endy]

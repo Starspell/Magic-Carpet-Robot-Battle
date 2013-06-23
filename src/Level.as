@@ -4,7 +4,7 @@ package
 	import net.flashpunk.World;
 	import net.flashpunk.graphics.TiledImage;
 	import net.flashpunk.graphics.Image;
-	
+
 	/**
 	 * ...
 	 * @author Sarah
@@ -12,7 +12,7 @@ package
 	public class Level extends World
 	{
 		[Embed(source = '../assets/sprites/sea.png')] private const SEA:Class;
-		
+
 		public var size:Array = Conf.levelSize;
 		private var seaTiles:TiledImage = new TiledImage(SEA, Conf.levelSize[0], Conf.levelSize[1]);
 		public var carpetWorlds:Array;
@@ -44,8 +44,16 @@ package
 
 			addCarpet(blocks, 1, 30, 20);
 
+			var data:Object = Conf.levelData[ident];
+			var linePts:Array = [[], []];
+			var pts:Array = data.startPts;
+			
+			var hw:int = add(new Buoy(pts[0][0], pts[0][1])).halfWidth;
+			var hh:int = add(new Buoy(pts[1][0], pts[1][1])).halfHeight;
+			linePts[0].push([pts[0][0] + hw, pts[0][1] + hh]);
+			linePts[1].push([pts[1][0] + hw, pts[1][1] + hh]);
 			// add targets and gates
-			var cpData:Array = Conf.levelData[ident].checkpoints;
+			var cpData:Array = data.checkpoints;
 			var i:int;
 			for (i = 0; i < cpData.length; i++) {
 				var args:Object = cpData[i][1];
@@ -53,10 +61,18 @@ package
 					add(new Target(args[0], args[1], i));
 				} else { // cpData[i][0] == "gate"
 					add(new Gate(args[0], args[1], args[2], args[3], this, i));
+					linePts[0].push([args[0] + hw, args[1] + hh]);
+					linePts[1].push([args[2] + hw, args[3] + hh]);
 				}
 			}
-			
+
 			add(new Explosion(500, 500, 0, 60));
+			pts = data.endPts;
+			add(new Buoy(pts[0][0], pts[0][1]));
+			add(new Buoy(pts[1][0], pts[1][1]));
+			linePts[0].push([pts[0][0] + hw, pts[0][1] + hh]);
+			linePts[1].push([pts[1][0] + hw, pts[1][1] + hh]);
+			add(new GuideLines(linePts));
 		}
 
 		private function addCarpet(blocks:Object, nPlayers:int, x:int,
@@ -99,7 +115,7 @@ package
 				//Target is destroyed
 				nextCheckpoint++;
 				if (cp is Target) remove(cp);
-				else if (cp is Gate) ; //Gate code here!
+				else if (cp is Gate) false; //Gate code here!
 				trace(nextCheckpoint);
 				if (nextCheckpoint == Conf.levelData[ident].length) {
 					trace("win");
