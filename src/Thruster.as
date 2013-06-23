@@ -54,7 +54,7 @@ package
 				flare.visible = true;
 				updateFlare();
 				
-				if (dir == Conf.up) 
+				if (dir == Conf.up)
 				{
 					onGraphic.play("up");
 					flare.angle = 180;
