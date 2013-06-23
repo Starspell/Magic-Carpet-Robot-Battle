@@ -37,8 +37,9 @@ package
 		public static var carpetFriction:Number = 0.1;
 		public static var carpetRotFriction:Number = 5;
 		public static var cannonFireInterval:int = 60;
-		
-		public static var buoyRepel:Number = 3; 
+		// Carpet bouncing consts:
+		public static var buoyRepel:Number = 3; //Buoy repulsion factor on bounce.
+		public static var edgeRepel:Number = 3; //Edge of world repulsion factor on bounce.
 		
 		public static var gateCollideDist:Number = 15;
 
