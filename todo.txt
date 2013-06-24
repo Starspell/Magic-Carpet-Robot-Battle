@@ -1,0 +1,16 @@
+physics
+    fix the gate passing detection
+    better carpet/buoy collision
+sounds
+    feedback for passing wrong checkpoint
+graphics
+    better number colours
+    number 2 isn't placed perfectly
+    robot grabbing animation
+make some courses
+    level editor
+    obstacles are fun
+
+title screen/instructions
+level progression
+timing/points (score)
