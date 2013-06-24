@@ -31,21 +31,29 @@ package
 			carpetGraphics = new Array();
 			nextCheckpoint = 0;
 
+			var i:int;
 			var data:Object = Conf.levelData[ident];
+			// start buoys
 			var linePts:Array = [[], []];
 			var pts:Array = data.startPts;
-
-			var blocks:Object = { thruster: [[1, 1]], cannon: [[2, 3]] };
-			addCarpet(blocks, 1, 30, 20, .5 * (pts[0][0] + pts[1][0]),
-					  .5 * (pts[0][1] + pts[1][1]));
-			
 			var hw:int = add(new Buoy(pts[0][0], pts[0][1])).halfWidth;
 			var hh:int = add(new Buoy(pts[1][0], pts[1][1])).halfHeight;
 			linePts[0].push([pts[0][0] + hw, pts[0][1] + hh]);
 			linePts[1].push([pts[1][0] + hw, pts[1][1] + hh]);
-			// add targets and gates
+
+			// carpets
+			for (i = 0; i < data.carpet.length; i++) {
+				var blocks:Object = {};
+				blocks.thruster = data.carpet[i].thruster.slice();
+				blocks.cannon = data.carpet[i].cannon.slice();
+				addCarpet(
+					blocks, 1, Conf.carpetPos[i][0], Conf.carpetPos[i][1],
+					.5 * (pts[0][0] + pts[1][0]), .5 * (pts[0][1] + pts[1][1])
+				);
+			}
+
+			// targets and gates
 			var cpData:Array = data.checkpoints;
-			var i:int;
 			for (i = 0; i < cpData.length; i++) {
 				var args:Object = cpData[i][1];
 				if (cpData[i][0] == "target") {
@@ -56,7 +64,7 @@ package
 					linePts[1].push([args[2] + hw, args[3] + hh]);
 				}
 			}
-
+			// end buoys
 			pts = data.endPts;
 			add(new Buoy(pts[0][0], pts[0][1]));
 			add(new Buoy(pts[1][0], pts[1][1]));
