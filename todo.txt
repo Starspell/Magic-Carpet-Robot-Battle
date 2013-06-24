@@ -1,23 +1,26 @@
 physics
-    fix the gate passing detection
     better carpet/buoy collision
 sounds
+	music
     moving block sounds last longer than the time to move a block
     robot moving alone?
     bouncing off buoys (use clang?)
     use clang for hitting the wrong target?
     sea ambience
     clang sound quieter
-    (still need to test gate pass/fail - they might sound out-of-place)
+    gate pass/fail are a little out-of-place
     grinding on a carpet is just weird (METAL CARPET)
     gatePass is too loud
 graphics
     better number colours/style
-    robot grabbing animation
+		Alan says make the target pure red so numbers are readable
+		maybe make them yellow?
 make some courses
     level editor
     obstacles are fun
 
-title screen/instructions
-level progression
+title screen/level select/instructions
+	return there after completing a level
 timing/points (score)
+multiple players
+	way to choose it
