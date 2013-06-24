@@ -16,8 +16,9 @@ package
 		
 		public function Main()
 		{
+			
 			super(1000, 700, 60, true);
-			FP.world = new Level(0, [2]);
+			FP.world = new TitleScreen();
 			
 			if ( devMode )
 			{
