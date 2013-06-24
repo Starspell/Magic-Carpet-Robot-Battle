@@ -15,7 +15,8 @@ package
 		private var grid:Array;
 		public var worldBuffer:BitmapData;
 
-		public function CarpetWorld(blocks:Object, nPlayers:int = 1)
+		public function CarpetWorld(blocks:Object, firstPlayer:int,
+									nPlayers:int)
 		{
 			super();
 			
@@ -52,21 +53,25 @@ package
 			// put player in an empty tile
 			var remain:int = nPlayers;
 			var pID:int = 0;
-			for (i = 0; i < Conf.carpetSize[0]; i++) {
-				for (j = 0; j < Conf.carpetSize[1]; j++) {
-					if (grid[i][j] === null) {
-						var p:Player = new Player(this, i, j, pID);
-						p.layer = -1;
-						add(p);
-						grid[i][j] = p;
-						pID++;
-						remain -= 1;
-						if (remain == 0) break;
+			if (remain > 0) {
+				for (i = 0; i < Conf.carpetSize[0]; i++) {
+					for (j = 0; j < Conf.carpetSize[1]; j++) {
+						if (grid[i][j] === null) {
+							var p:Player = new Player(this, i, j, pID);
+							p.layer = -1;
+							add(p);
+							grid[i][j] = p;
+							pID++;
+							remain -= 1;
+							if (remain == 0) break;
+						}
 					}
+					if (remain == 0) break;
 				}
-				if (remain == 0) break;
+				if (remain > 0) {
+					throw new Error("couldn't place all players...");
+				}
 			}
-			if (remain) throw new Error("couldn't place all players...");
 		}
 		
 		override public function add(e:Entity):Entity

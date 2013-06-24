@@ -23,7 +23,7 @@ package
 		public var ident:int;
 		public var worldBoundaryCoords:Array = [];
 		
-		public function Level(ident:int, nPlayers:int)
+		public function Level(ident:int, nPlayers:Array)
 		{
 			ident = ident;
 			carpetWorlds = new Array();
@@ -42,14 +42,17 @@ package
 			linePts[1].push([pts[1][0] + hw, pts[1][1] + hh]);
 
 			// carpets
-			for (i = 0; i < data.carpets.length; i++) {
+			var donePlayers:int = 0;
+			for (i = 0; i < nPlayers.length; i++) {
 				var blocks:Object = {};
 				blocks.thruster = data.carpets[i].thrusters.slice();
 				blocks.cannon = data.carpets[i].cannons.slice();
 				addCarpet(
-					blocks, nPlayers, Conf.carpetPos[i][0], Conf.carpetPos[i][1],
-					.5 * (pts[0][0] + pts[1][0]), .5 * (pts[0][1] + pts[1][1])
+					blocks, donePlayers, nPlayers[i], Conf.carpetPos[i][0],
+					Conf.carpetPos[i][1], .5 * (pts[0][0] + pts[1][0]),
+					.5 * (pts[0][1] + pts[1][1])
 				);
+				donePlayers += nPlayers[i];
 			}
 
 			// targets and gates
@@ -102,9 +105,12 @@ package
 			seaTileEnt.y = worldBoundaryCoords[0].y;
 		}
 
-		private function addCarpet(blocks:Object, nPlayers:int, wx:int, wy:int,
-								   ex:int, ey:int):void {
-			var cw:CarpetWorld = new CarpetWorld(blocks, nPlayers);
+		private function addCarpet(
+			blocks:Object, firstPlayer:int, nPlayers:int, wx:int, wy:int,
+			ex:int, ey:int
+		):void {
+			var cw:CarpetWorld = new CarpetWorld(blocks, firstPlayer,
+												 nPlayers);
 			carpetWorlds.push(cw);
 			var e:Entity = addGraphic(new Image(cw.worldBuffer), -2, wx, wy);
 			e.graphic.scrollX = e.graphic.scrollY = 0;
