@@ -133,12 +133,12 @@ package
 			super.update();
 			if ( seaMoveLeft )
 			{
-				if ( seaTiles.x > -20 ) seaTiles.x -= Conf.seaMovementSpeed;
+				if ( seaTiles.x > -50 ) seaTiles.x -= Conf.seaMovementSpeed;
 				else seaMoveLeft = false;
 			}
 			else
 			{
-				if ( seaTiles.x < 20 ) seaTiles.x += Conf.seaMovementSpeed;
+				if ( seaTiles.x < -30 ) seaTiles.x += Conf.seaMovementSpeed;
 				else seaMoveLeft = true;
 			}
 		}
