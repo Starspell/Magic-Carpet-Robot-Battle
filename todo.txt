@@ -3,21 +3,17 @@ physics
     better carpet/buoy collision
 sounds
     moving block sounds last longer than the time to move a block
-    robot moving alone?
-    bouncing off buoys (use clang?)
-    use clang for hitting the wrong target?
-    sea ambience
-    clang sound quieter
-    (still need to test gate pass/fail - they might sound out-of-place)
-    grinding on a carpet is just weird (METAL CARPET)
-    gatePass is too loud
 graphics
-    better number colours/style
+    better number colours
+    number 2 isn't placed perfectly
     robot grabbing animation
 make some courses
     level editor
     obstacles are fun
 
-title screen/instructions - including credit for music "ditto, ditto!" by DoKashiteru on dig.ccmixter.org
+title screen/instructions 
+	- including credit for music 
+		"061013_felix_waves_10m_ecm957_tr003.mp3" 
+		by ermine on freesound.org
 level progression
 timing/points (score)
