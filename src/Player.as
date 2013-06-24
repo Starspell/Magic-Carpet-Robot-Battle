@@ -27,8 +27,10 @@ package
 		[Embed(source = '../assets/audio/blockmove3.mp3')] private const BLOCK3:Class;
 		[Embed(source = '../assets/audio/blockmove4.mp3')] private const BLOCK4:Class;
 		[Embed(source = '../assets/audio/blockmove5.mp3')] private const BLOCK5:Class;
+		[Embed(source = '../assets/audio/clang.mp3')] private const GRAB:Class;
 		
 		private var blockSoundsArr:Array = [];
+		private var grabSound:Sfx = new Sfx(GRAB);
 
 		public function Player(carpet:CarpetWorld, x:int, y:int, pID:int)
 		{
@@ -66,6 +68,8 @@ package
 				var b:Block = carpet.blockInDir(pos, dir);
 				if (b !== null) {
 					grabbedBlock = b;
+					// Play grabbed sound
+					grabSound.play();
 				}
 			}
 			if (!Input.check(grabKey)) {
