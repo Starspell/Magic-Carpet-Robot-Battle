@@ -38,9 +38,10 @@ package
 			sprite = new Spritemap(IMG, 40, 40);
 			graphic = sprite;
 			setDir(Conf.up);
-			if (pID < Conf.playerKeys.length) {
-				moveKeys = Conf.playerKeys[pID].move;
-				var args:Array = Conf.playerKeys[pID].grab.slice();
+			if (pID < Conf.playerData.length) {
+				sprite.color = Conf.playerData[pID][0];
+				moveKeys = Conf.playerData[pID][1].move;
+				var args:Array = Conf.playerData[pID][1].grab.slice();
 				args.unshift("grab" + pID);
 				Input.define.apply(null, args);
 				grabKey = "grab" + pID;

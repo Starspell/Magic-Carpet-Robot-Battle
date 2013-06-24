@@ -27,7 +27,7 @@ package
 					// list of [x, y] tile position
 					thrusters: [[2, 2], [4, 2]],
 					// list of [x, y] tile position
-					cannons: [[4, 4], [5, 10]]
+					cannons: [[4, 4], [5, 9]]
 				}]
 			}
 		];
@@ -60,14 +60,15 @@ package
 		// Other Entity Constants
 		
 		// Player related constants
-		public static const playerKeys:Array = [
-			{
+		// list of [tint, keys] for each player
+		public static const playerData:Array = [
+			[0xffffff, {
 				move: [Key.LEFT, Key.UP, Key.RIGHT, Key.DOWN],
 				grab: [Key.SHIFT]
-			}, {
+			}], [0xff9900, {
 				move: [Key.A, [Key.W, 188], [Key.D, Key.E], [Key.S, Key.O]],
 				grab: [Key.SPACE]
-			}
+			}]
 		];
 		public static const tweenTime:Number = 10;
 		public static const moveDelay:int = 4;
