@@ -1,5 +1,6 @@
 physics
     better carpet/buoy collision
+    fix carpetWorld physics (players can break everything)
 
 sounds
     moving block sounds last longer than the time to move a block
