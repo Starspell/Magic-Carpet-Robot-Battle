@@ -11,6 +11,6 @@ make some courses
     level editor
     obstacles are fun
 
-title screen/instructions
+title screen/instructions - including credit for music "ditto, ditto!" by DoKashiteru on dig.ccmixter.org
 level progression
 timing/points (score)

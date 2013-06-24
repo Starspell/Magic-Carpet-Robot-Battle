@@ -4,11 +4,15 @@ package
 	import net.flashpunk.FP;
 	import Level;
 	import net.flashpunk.utils.Key;
+	import net.flashpunk.Sfx;
 
 	[SWF(width = '1000', height = '700')]
 	public class Main extends Engine
-	{
+	{		
+		[Embed(source = '../assets/audio/waves.mp3')] private const MUSIC:Class;
+		
 		public static var devMode:Boolean = true;
+		private var music:Sfx = new Sfx(MUSIC);
 		
 		public function Main()
 		{
@@ -20,6 +24,8 @@ package
 				FP.console.enable();
 			}
 			FP.console.toggleKey = Key.F1;
+			
+			music.loop();
 		}
 	}
 }
