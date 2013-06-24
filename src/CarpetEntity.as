@@ -114,7 +114,7 @@ package
 				}
 			}
 			
-			if ( isFlaring && !jetSound.playing ) { trace("start loop"); jetSound.loop(0.25); }
+			if ( isFlaring && !jetSound.playing ) jetSound.loop(0.25);
 			else if ( !isFlaring ) jetSound.stop();
 			
 			// Friction.
