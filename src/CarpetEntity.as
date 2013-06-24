@@ -20,13 +20,9 @@ package
 		[Embed(source = '../assets/audio/fireball4.mp3')] private const FIRE4:Class;
 		[Embed(source = '../assets/audio/fireball5.mp3')] private const FIRE5:Class;
 		[Embed(source = '../assets/audio/jetsound.mp3')] private const JET:Class;
-		[Embed(source = '../assets/audio/checkpoint.mp3')] private const GATE:Class;
-		[Embed(source = '../assets/audio/wrongcheckpoint.mp3')] private const WRONG:Class;
 		
 		private var fireSoundsArr:Array = [];
 		private var jetSound:Sfx = new Sfx(JET);
-		private var passGate:Sfx = new Sfx(GATE);
-		private var passWrongGate:Sfx = new Sfx(WRONG);
 		
 		private var a:Number = 0; //The angle carpet is facing in radians ACW from +ve X axis.
 		
@@ -159,20 +155,15 @@ package
 			
 			var arr:Array = [];
 			this.world.getClass(Gate, arr);
-			var g:Gate;
-			for each( g in arr as Gate )
+			for each( var g:Gate in arr )
 			{
-				if ( g )
+				var toGate:Point = new Point(this.x - g.midX, this.y - g.midY);
+				var gateDist:Number = toGate.x * g.norm.x + toGate.y * g.norm.y;
+				var gateParllDist:Number = toGate.x * g.tang.x + toGate.y * g.tang.y;
+				if (Math.abs(gateDist) < Conf.gateCollideDist && Math.abs(gateParllDist) < g.halfLength)
 				{
-					var toGate:Point = new Point(this.x - g.midX, this.y - g.midY);
-					var gateDist:Number = toGate.x * g.norm.x + toGate.y * g.norm.y;
-					var gateParllDist:Number = toGate.x * g.tang.x + toGate.y * g.tang.y;
-					if (Math.abs(gateDist) < Conf.gateCollideDist && Math.abs(gateParllDist) < g.halfLength)
-					{
-						// Passed through the gate
-						if ( g.pass() ) passGate.play();
-						else passWrongGate.play();
-					}
+					// Passed through the gate
+					g.pass();
 				}
 			}
 			
