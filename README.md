@@ -1,7 +1,9 @@
-Magic Carpet Robot Racing
-=========================
+Magic Carpet Robot Kerfuffle
+============================
 
-A 48-hour game by some people.
+A 48-hour game by some people.  This is a competitive game where player 1 aims
+to destroy targets and player 2 aims to manoeuvre the carpet through gates.
+Cannons and thrusters moved to the carpet's edges will fire constantly.
 
 ## Controls
 
