@@ -20,9 +20,11 @@ package
 		[Embed(source = '../assets/audio/fireball4.mp3')] private const FIRE4:Class;
 		[Embed(source = '../assets/audio/fireball5.mp3')] private const FIRE5:Class;
 		[Embed(source = '../assets/audio/jetsound.mp3')] private const JET:Class;
+		[Embed(source = '../assets/audio/bounce.mp3')] private const BOUNCE:Class;
 		
 		private var fireSoundsArr:Array = [];
 		private var jetSound:Sfx = new Sfx(JET);
+		private var bounceSound:Sfx = new Sfx(BOUNCE);
 		
 		private var a:Number = 0; //The angle carpet is facing in radians ACW from +ve X axis.
 		
@@ -196,6 +198,7 @@ package
 		{
 			if (e.type == "buoy")
 				velX = -velX * Conf.buoyRepel;
+				if( !bounceSound.playing ) bounceSound.play();
 			return true;
 		}
 		
@@ -203,6 +206,7 @@ package
 		{
 			if (e.type == "buoy")
 				velY = -velY * Conf.buoyRepel;
+				if( !bounceSound.playing ) bounceSound.play();
 			return true;
 		}
 		
