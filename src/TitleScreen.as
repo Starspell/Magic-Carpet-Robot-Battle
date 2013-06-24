@@ -34,12 +34,12 @@ package
 		{
 			if ( seaMoveLeft )
 			{
-				if ( seaEnt.x > -20 ) seaEnt.x -= Conf.seaMovementSpeed;
+				if ( seaEnt.x > -50 ) seaEnt.x -= Conf.seaMovementSpeed;
 				else seaMoveLeft = false;
 			}
 			else
 			{
-				if ( seaEnt.x < 20 ) seaEnt.x += Conf.seaMovementSpeed;
+				if ( seaEnt.x < -30 ) seaEnt.x += Conf.seaMovementSpeed;
 				else seaMoveLeft = true;
 			}
 			
