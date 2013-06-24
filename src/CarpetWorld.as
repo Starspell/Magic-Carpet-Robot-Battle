@@ -21,7 +21,7 @@ package
 			
 			worldBuffer = new BitmapData(
 				Conf.carpetSize[0] * Conf.carpetTileSize[0],
-				Conf.carpetSize[1] * Conf.carpetTileSize[1], false, 0
+				Conf.carpetSize[1] * Conf.carpetTileSize[1], true, 0
 			);
 			
 			addGraphic(new Image(CARPET), 1, 0, 0);
@@ -58,6 +58,7 @@ package
 						var p:Player = new Player(this, i, j, pID);
 						p.layer = -1;
 						add(p);
+						grid[i][j] = p;
 						pID++;
 						remain -= 1;
 						if (remain == 0) break;
@@ -103,6 +104,7 @@ package
 			pos = tileInDir(pos, dir);
 			if (pos[0] < 0 || pos[0] >= Conf.carpetSize[0] - 1) return null;
 			// if row index is OoB, array returns null
+			trace(pos, grid[pos[0]][pos[1]])
 			return grid[pos[0]][pos[1]];
 		}
 

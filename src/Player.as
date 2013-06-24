@@ -17,7 +17,7 @@ package
 		private var moveCounter:int;
 		private var moveDir:int;
 		private var movingDir:int;
-		private var grabbedBlock:Block;
+		private var grabbedBlock:InanimateBlock;
 
 		[Embed(source = '../assets/sprites/player.png')] private const IMG:Class;
 		
@@ -58,7 +58,19 @@ package
 
 		private function setDir(dir:int):void {
 			this.dir = dir;
-			sprite.setFrame(dir);
+			sprite.setFrame(dir, int(grabbedBlock != null));
+		}
+
+		private function checkKeys(ks:Object):int {
+			var held:Boolean;
+			if (ks is int) held = Input.check(ks as int);
+			else {
+				held = false;
+				for each (var k:int in (ks as Array)) {
+					held ||= Input.check(k);
+				}
+			}
+			return int(held);
 		}
 
 		override public function update():void
@@ -66,25 +78,27 @@ package
 			if (!canMove) return;
 			if (Input.pressed(grabKey)) {
 				var b:Block = carpet.blockInDir(pos, dir);
-				if (b !== null) {
-					grabbedBlock = b;
+				if (b !== null && b is InanimateBlock &&
+					(b as InanimateBlock).grabber === null) {
+					grabbedBlock = b as InanimateBlock;
+					grabbedBlock.grabber = this;
 					// Play grabbed sound
 					grabSound.play();
 				}
 			}
-			if (!Input.check(grabKey)) {
+			if (!Input.check(grabKey) && grabbedBlock !== null) {
+				grabbedBlock.grabber = null;
 				grabbedBlock = null;
 			}
 			
-			sprite.setFrame(dir, int(grabbedBlock != null));
+			sprite.setFrame(dir, int(grabbedBlock !== null));
 
 			var i:int, j:int;
 			// determine input directions
 			var dp:Array = [0, 0];
 			var dirs:Array = [false, false, false, false];
 			for (i = 0; i < 2; i++) {
-				dp[i] = (int(Input.check(moveKeys[i + 2]))
-						 - int(Input.check(moveKeys[i])));
+				dp[i] = (checkKeys(moveKeys[i + 2]) - checkKeys(moveKeys[i]));
 			}
 			for (i = 0; i < 2; i++) {
 				if (dp[i] > 0) dirs[i + 2] = true;
@@ -142,6 +156,10 @@ package
 			if (blockToMove !== null) {
 				// moving a block: check if it can move
 				var bPos:Array = carpet.tileInDir(blockToMove.pos, movingDir);
+				if (!(blockToMove is InanimateBlock)) {
+					// can't move player
+					return;
+				}
 				if (bPos[0] < 1 || bPos[0] >= Conf.carpetSize[0] - 1 ||
 					bPos[1] < 1 || bPos[1] >= Conf.carpetSize[1] - 1) {
 					// block would move off screen
