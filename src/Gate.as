@@ -3,6 +3,7 @@ package
 	import flash.geom.Point;
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Image;
+	import net.flashpunk.Sfx;
 	import net.flashpunk.utils.Draw;
 	
 	/**
@@ -12,6 +13,7 @@ package
 	public class Gate extends Checkpoint
 	{
 		[Embed(source = '../assets/sprites/gateCone.png')] private const IMG:Class;
+		[Embed(source = '../assets/audio/checkpoint.mp3')] private const GATE:Class;
 		
 		public var endGate:Entity;
 		
@@ -25,6 +27,8 @@ package
 		public var tang:Point;
 		
 		public var halfLength:Number;
+		
+		private var passGate:Sfx;
 		
 		public function Gate(startX:int, startY:int, endX:int, endY:int,
 							 waterWorld:Level, num:int)
@@ -45,6 +49,14 @@ package
 			
 			numEntity.x = x + tang.x * halfLength;
 			numEntity.y = y + tang.y * halfLength - 5;
+			
+			passGate = new Sfx(GATE);
+		}
+		
+		override public function pass():void
+		{
+			super.pass();
+			passGate.play();
 		}
 		
 		override public function render():void

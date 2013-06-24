@@ -2,7 +2,7 @@ physics
     fix the gate passing detection
     better carpet/buoy collision
 sounds
-    feedback for passing wrong checkpoint
+    moving block sounds last longer than the time to move a block
 graphics
     better number colours
     number 2 isn't placed perfectly
