@@ -1,6 +1,7 @@
 package
 {
 	import net.flashpunk.graphics.Spritemap;
+	import net.flashpunk.Sfx;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.FP;
 	/**
@@ -19,6 +20,15 @@ package
 		private var grabbedBlock:Block;
 
 		[Embed(source = '../assets/sprites/player.png')] private const IMG:Class;
+		
+		// Sounds
+		[Embed(source = '../assets/audio/blockmove1.mp3')] private const BLOCK1:Class;
+		[Embed(source = '../assets/audio/blockmove2.mp3')] private const BLOCK2:Class;
+		[Embed(source = '../assets/audio/blockmove3.mp3')] private const BLOCK3:Class;
+		[Embed(source = '../assets/audio/blockmove4.mp3')] private const BLOCK4:Class;
+		[Embed(source = '../assets/audio/blockmove5.mp3')] private const BLOCK5:Class;
+		
+		private var blockSoundsArr:Array = [];
 
 		public function Player(carpet:CarpetWorld, x:int, y:int, pID:int)
 		{
@@ -36,6 +46,12 @@ package
 				throw new Error("no configuration for player ID " + pID);
 			}
 			movingDir = moveDir = dir;
+			
+			blockSoundsArr.push(new Sfx(BLOCK1));
+			blockSoundsArr.push(new Sfx(BLOCK2));
+			blockSoundsArr.push(new Sfx(BLOCK3));
+			blockSoundsArr.push(new Sfx(BLOCK4));
+			blockSoundsArr.push(new Sfx(BLOCK5));
 		}
 
 		private function setDir(dir:int):void {
@@ -135,6 +151,9 @@ package
 			carpet.moveInDir(this, movingDir, moveDone);
 			if (blockToMove !== null) {
 				carpet.moveInDir(blockToMove, movingDir, blockToMove.moveDone);
+				// Play a moving sound
+				var soundIndex:int = FP.rand(blockSoundsArr.length);
+				blockSoundsArr[soundIndex].play();
 			}
 		}
 	}
