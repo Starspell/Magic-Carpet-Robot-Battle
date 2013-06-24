@@ -9,11 +9,14 @@ make some courses
     level editor
     obstacles are fun
 
+graphics
+	draw more things on the moving carpet
+
 title screen/level select/instructions
 	return there after completing a level
-	- including credit for music 
+	- including credit for music
 		"061013_felix_waves_10m_ecm957_tr003.mp3"
 		by ermine on freesound.org
 		"jawharp_boing.wav"
 		by plingativator on freesound.org
-level progression
+	course choice
