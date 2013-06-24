@@ -4,6 +4,7 @@ package
 	{
 		public var _on:Boolean;
 		protected var sidesOrdered:Array;
+		public var grabber:Player = null;
 
 		public function InanimateBlock(carpet:CarpetWorld, x:int, y:int)
 		{

@@ -19,15 +19,15 @@ package
 				// for target: data is position
 				// for gate: data is [startx, starty, endx, endy]
 				checkpoints: [
-// 					["target", [500, 400]],
-					["gates", [600, 300, 800, 250]],
-					["gates", [600, 400, 850, 500]]
+					["target", [500, 400]],
+					["gate", [600, 300, 800, 250]],
+					["gate", [600, 400, 850, 500]]
 				],
-				carpet: [{
+				carpets: [{
 					// list of [x, y] tile position
-					thruster: [[2, 2]],
+					thrusters: [[2, 2], [4, 2]],
 					// list of [x, y] tile position
-					cannon: [[4, 4]]
+					cannons: [[4, 4], [5, 10]]
 				}]
 			}
 		];
@@ -63,7 +63,10 @@ package
 		public static const playerKeys:Array = [
 			{
 				move: [Key.LEFT, Key.UP, Key.RIGHT, Key.DOWN],
-				grab: [Key.SPACE, Key.SHIFT]
+				grab: [Key.SHIFT]
+			}, {
+				move: [Key.A, [Key.W, 188], [Key.D, Key.E], [Key.S, Key.O]],
+				grab: [Key.SPACE]
 			}
 		];
 		public static const tweenTime:Number = 10;

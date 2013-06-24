@@ -23,7 +23,7 @@ package
 		public var ident:int;
 		public var worldBoundaryCoords:Array = [];
 		
-		public function Level(ident:int)
+		public function Level(ident:int, nPlayers:int)
 		{
 			ident = ident;
 			carpetWorlds = new Array();
@@ -42,12 +42,12 @@ package
 			linePts[1].push([pts[1][0] + hw, pts[1][1] + hh]);
 
 			// carpets
-			for (i = 0; i < data.carpet.length; i++) {
+			for (i = 0; i < data.carpets.length; i++) {
 				var blocks:Object = {};
-				blocks.thruster = data.carpet[i].thruster.slice();
-				blocks.cannon = data.carpet[i].cannon.slice();
+				blocks.thruster = data.carpets[i].thrusters.slice();
+				blocks.cannon = data.carpets[i].cannons.slice();
 				addCarpet(
-					blocks, 1, Conf.carpetPos[i][0], Conf.carpetPos[i][1],
+					blocks, nPlayers, Conf.carpetPos[i][0], Conf.carpetPos[i][1],
 					.5 * (pts[0][0] + pts[1][0]), .5 * (pts[0][1] + pts[1][1])
 				);
 			}
@@ -144,8 +144,8 @@ package
 				nextCheckpoint++;
 				if (cp is Target) remove(cp);
 				else if (cp is Gate) { }; //Gate code here!
-				
-				if (nextCheckpoint == Conf.levelData[ident].length) {
+
+				if (nextCheckpoint == Conf.levelData[ident].checkpoints.length) {
 					trace("win");
 				}
 				return true;
