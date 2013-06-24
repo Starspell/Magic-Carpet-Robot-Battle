@@ -19,7 +19,7 @@ package
 				// for target: data is position
 				// for gate: data is [startx, starty, endx, endy]
 				checkpoints: [
-					["target", [500, 400]],
+// 					["target", [500, 400]],
 					["gates", [600, 300, 800, 250]],
 					["gates", [600, 400, 850, 500]]
 				],
