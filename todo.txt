@@ -5,12 +5,6 @@ sounds
     moving block sounds last longer than the time to move a block
     grinding on a carpet is just weird (METAL CARPET)
 
-graphics
-    better number colours/style
-		Alan says make the target pure red so numbers are readable
-		maybe make them yellow?
-    number 2 isn't placed perfectly
-
 make some courses
     level editor
     obstacles are fun
@@ -18,11 +12,8 @@ make some courses
 title screen/level select/instructions
 	return there after completing a level
 	- including credit for music 
-		"061013_felix_waves_10m_ecm957_tr003.mp3" 
+		"061013_felix_waves_10m_ecm957_tr003.mp3"
 		by ermine on freesound.org
 		"jawharp_boing.wav"
 		by plingativator on freesound.org
 level progression
-timing/points (score)
-multiple players
-	way to choose it
