@@ -1,6 +1,7 @@
 package
 {
 	import net.flashpunk.graphics.Image;
+	import net.flashpunk.Sfx;
 	
 	/**
 	 * ...
@@ -9,6 +10,9 @@ package
 	public class Target extends Checkpoint
 	{
 		[Embed(source = '../assets/sprites/target.png')] private const IMG:Class;
+		[Embed(source = '../assets/audio/explosion.mp3')] private const EXPLODE:Class;
+		
+		private var explodeSound:Sfx = new Sfx(EXPLODE);
 		
 		public function Target(x:int, y:int, num:int)
 		{
@@ -19,6 +23,12 @@ package
 			
 			numEntity.x = x + 10;
 			numEntity.y = y;
+		}
+		
+		override public function pass():void
+		{
+			super.pass();
+			explodeSound.play();
 		}
 	}
 }

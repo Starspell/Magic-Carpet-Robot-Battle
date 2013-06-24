@@ -5,11 +5,28 @@ package
 	import flash.utils.Dictionary;
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Image;
+	import net.flashpunk.Sfx;
 	import net.flashpunk.utils.Draw;
+	import net.flashpunk.FP;
 	
 	public class CarpetEntity extends Entity
 	{
 		[Embed(source = '../assets/sprites/carpetentity.png')] private const CARPET:Class;
+		
+		// Sounds
+		[Embed(source = '../assets/audio/fireball1.mp3')] private const FIRE1:Class;
+		[Embed(source = '../assets/audio/fireball2.mp3')] private const FIRE2:Class;
+		[Embed(source = '../assets/audio/fireball3.mp3')] private const FIRE3:Class;
+		[Embed(source = '../assets/audio/fireball4.mp3')] private const FIRE4:Class;
+		[Embed(source = '../assets/audio/fireball5.mp3')] private const FIRE5:Class;
+		[Embed(source = '../assets/audio/jetsound.mp3')] private const JET:Class;
+		[Embed(source = '../assets/audio/checkpoint.mp3')] private const GATE:Class;
+		[Embed(source = '../assets/audio/wrongcheckpoint.mp3')] private const WRONG:Class;
+		
+		private var fireSoundsArr:Array = [];
+		private var jetSound:Sfx = new Sfx(JET);
+		private var passGate:Sfx = new Sfx(GATE);
+		private var passWrongGate:Sfx = new Sfx(WRONG);
 		
 		private var a:Number = 0; //The angle carpet is facing in radians ACW from +ve X axis.
 		
@@ -40,6 +57,12 @@ package
 			layer = -2;
 			
 			type = "carpet";
+			
+			fireSoundsArr.push(new Sfx(FIRE1));
+			fireSoundsArr.push(new Sfx(FIRE2));
+			fireSoundsArr.push(new Sfx(FIRE3));
+			fireSoundsArr.push(new Sfx(FIRE4));
+			fireSoundsArr.push(new Sfx(FIRE5));
 		}
 		
 		override public function update():void
@@ -51,11 +74,15 @@ package
 			
 			var dist:Number;
 			
+			var isFlaring:Boolean = false;
+			
 			//Handle thrusters.
 			for each (var thruster:Thruster in blocks.thruster)
 			{
 				if (thruster.on)
 				{
+					isFlaring = true;
+					
 					var thrusterAngle:Number;
 					
 					switch(thruster.dir)
@@ -86,6 +113,9 @@ package
 					netMoment += dist * Conf.thrusterForce;
 				}
 			}
+			
+			if ( isFlaring && !jetSound.playing ) jetSound.loop(0.25);
+			else if ( !isFlaring ) jetSound.stop();
 			
 			// Friction.
 			netForceX -= velX * Conf.carpetFriction;
@@ -129,15 +159,20 @@ package
 			
 			var arr:Array = [];
 			this.world.getClass(Gate, arr);
-			var g:Gate = arr[0] as Gate;
-			if (g)
+			var g:Gate;
+			for each( g in arr as Gate )
 			{
-				var toGate:Point = new Point(this.x - g.midX, this.y - g.midY);
-				var gateDist:Number = toGate.x * g.norm.x + toGate.y * g.norm.y;
-				var gateParllDist:Number = toGate.x * g.tang.x + toGate.y * g.tang.y;
-				if (Math.abs(gateDist) < Conf.gateCollideDist && Math.abs(gateParllDist) < g.halfLength)
+				if ( g )
 				{
-					g.pass();
+					var toGate:Point = new Point(this.x - g.midX, this.y - g.midY);
+					var gateDist:Number = toGate.x * g.norm.x + toGate.y * g.norm.y;
+					var gateParllDist:Number = toGate.x * g.tang.x + toGate.y * g.tang.y;
+					if (Math.abs(gateDist) < Conf.gateCollideDist && Math.abs(gateParllDist) < g.halfLength)
+					{
+						// Passed through the gate
+						if ( g.pass() ) passGate.play();
+						else passWrongGate.play();
+					}
 				}
 			}
 			
@@ -212,6 +247,10 @@ package
 				Conf.bulletSpeed * Math.sin(bulletA + Math.PI) + velY, 
 				this.x + rotatedX, 
 				this.y + rotatedY));
+				
+			// Play a firing sound
+			var soundIndex:int = FP.rand(fireSoundsArr.length);
+			fireSoundsArr[soundIndex].play();
 		}
 	}
 }
