@@ -20,7 +20,7 @@ package
 		[Embed(source = '../assets/audio/fireball4.mp3')] private const FIRE4:Class;
 		[Embed(source = '../assets/audio/fireball5.mp3')] private const FIRE5:Class;
 		[Embed(source = '../assets/audio/jetsound.mp3')] private const JET:Class;
-		[Embed(source = '../assets/audio/bounce.mp3')] private const BOUNCE:Class;
+		[Embed(source = '../assets/audio/boing.mp3')] private const BOUNCE:Class;
 		
 		private var fireSoundsArr:Array = [];
 		private var jetSound:Sfx = new Sfx(JET);
@@ -176,8 +176,8 @@ package
 				var topLeft:Point = tempLevel.worldBoundaryCoords[0];
 				var bottomRight:Point = tempLevel.worldBoundaryCoords[1];
 				
-				if (left < topLeft.x || right > bottomRight.x) velX = - velX * Conf.edgeRepel;
-				if (top < topLeft.y || bottom > bottomRight.y) velY = - velY * Conf.edgeRepel;
+				if (left < topLeft.x || right > bottomRight.x) { velX = - velX * Conf.edgeRepel; playBounce(); }
+				if (top < topLeft.y || bottom > bottomRight.y) { velY = - velY * Conf.edgeRepel; playBounce(); }
 				
 				this.world.camera.x = Math.max(
 					topLeft.x, Math.min(
@@ -194,11 +194,16 @@ package
 			}
 		}
 		
+		private function playBounce():void
+		{
+			if( !bounceSound.playing ) bounceSound.play();
+		}
+		
 		override public function moveCollideX(e:Entity):Boolean
 		{
 			if (e.type == "buoy")
 				velX = -velX * Conf.buoyRepel;
-				if( !bounceSound.playing ) bounceSound.play();
+				playBounce();
 			return true;
 		}
 		
@@ -206,7 +211,7 @@ package
 		{
 			if (e.type == "buoy")
 				velY = -velY * Conf.buoyRepel;
-				if( !bounceSound.playing ) bounceSound.play();
+				playBounce();
 			return true;
 		}
 		
