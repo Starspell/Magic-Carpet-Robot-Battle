@@ -11,7 +11,7 @@ package
 	public class TitleScreen extends World
 	{
 		[Embed(source = '../assets/sprites/sea.png')] private const SEA:Class;
-		[Embed(source = '../assets/sprites/title.png')] private const TITLE:Class;
+		[Embed(source = '../assets/sprites/Title.png')] private const TITLE:Class;
 		
 		private var title:Image;
 		private var sea:TiledImage;

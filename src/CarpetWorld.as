@@ -8,7 +8,7 @@ package
 	import flash.display.BitmapData;
 
 	public class CarpetWorld extends World
-	{		
+	{
 		[Embed(source = '../assets/sprites/carpetarea.png')] private const CARPET:Class;
 		
 		private var blocks:Object;

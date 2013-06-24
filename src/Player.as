@@ -127,8 +127,9 @@ package
 			if (isMoving && mDir == movingDir) {
 				moveCounter -= 1;
 			} else {
+				if (!isMoving && grabbedBlock !== null) moveCounter = 0;
+				else moveCounter = Conf.moveDelay;
 				isMoving = true;
-				moveCounter = Conf.moveDelay;
 			}
 			movingDir = mDir;
 			if (mDir != dir && grabbedBlock === null) setDir(mDir);

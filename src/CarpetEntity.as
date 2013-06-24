@@ -43,13 +43,16 @@ package
 		
 		private var fireCounter:int = 0;
 		
-		public function CarpetEntity(blocks:Object, x:int, y:int)
+		public function CarpetEntity(blocks:Object, x:int, y:int, img:Image)
 		{
 			this.blocks = blocks;
-			image = new Image(CARPET);
+			//image = new Image(CARPET);
+			image = img;
 			a = Math.PI / 2
-			image.originX = 20;
-			image.originY = 30;
+			image.scaleX = 40 / 320;
+			image.scaleY = 60 / 480;
+			image.originX = 160;
+			image.originY = 240;
 			super(x, y, image);
 			setHitbox(60, 60, 30, 30);
 			layer = -2;
@@ -243,14 +246,18 @@ package
 					bulletA = a - (Math.PI / 2);
 					break;
 			}
-			this.world.add(new Bullet(Conf.bulletSpeed * Math.cos(bulletA + Math.PI) + velX, 
-				Conf.bulletSpeed * Math.sin(bulletA + Math.PI) + velY, 
-				this.x + rotatedX, 
-				this.y + rotatedY));
+			this.world.add(new Bullet(Conf.bulletSpeed * Math.cos(bulletA + Math.PI) + velX,
+				Conf.bulletSpeed * Math.sin(bulletA + Math.PI) + velY,
+				this.x + rotatedX, this.y + rotatedY));
 				
 			// Play a firing sound
 			var soundIndex:int = FP.rand(fireSoundsArr.length);
 			fireSoundsArr[soundIndex].play(0.5);
+		}
+
+		override public function render():void {
+			image.updateBuffer();
+			super.render();
 		}
 	}
 }

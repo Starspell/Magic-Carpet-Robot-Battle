@@ -122,7 +122,7 @@ package
 			var e:Entity = addGraphic(new Image(cw.worldBuffer), -2, wx, wy);
 			e.graphic.scrollX = e.graphic.scrollY = 0;
 			carpetGraphics.push(e.graphic as Image);
-			var ce:CarpetEntity = new CarpetEntity(blocks, ex, ey);
+			var ce:CarpetEntity = new CarpetEntity(blocks, ex, ey, new Image(cw.worldBuffer));
 			carpetEnts.push(ce);
 			add(ce);
 		}
