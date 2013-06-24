@@ -7,7 +7,8 @@ package
 		public static const screenSize:Array = [1000, 700];
 		
 		// map world
-		public static var levelData:Array = [
+		public static const carpetPos:Array = [[30, 20]];
+		public static const levelData:Array = [
 			// level 1
 			{
 				// positions to start the lines at
@@ -21,46 +22,52 @@ package
 					["target", [500, 400]],
 					["gates", [600, 300, 800, 250]],
 					["gates", [600, 400, 850, 500]]
-				]
+				],
+				carpet: [{
+					// list of [x, y] tile position
+					thruster: [[2, 2]],
+					// list of [x, y] tile position
+					cannon: [[4, 4]]
+				}]
 			}
 		];
-		public static var boundarySpace:int = 500;
+		public static const boundarySpace:int = 500;
 
 		// carpet world
-		public static var carpetSize:Array = [8, 12];
-		public static var carpetTileSize:Array = [40, 40];
+		public static const carpetSize:Array = [8, 12];
+		public static const carpetTileSize:Array = [40, 40];
 		
 		// Directions on carpet
-		public static var left:int = 0;
-		public static var up:int = 1;
-		public static var right:int = 2;
-		public static var down:int = 3;
+		public static const left:int = 0;
+		public static const up:int = 1;
+		public static const right:int = 2;
+		public static const down:int = 3;
 		
 		// Carpet related constants
-		public static var thrusterForce:Number = 0.1;
-		public static var carpetMass:Number = 1;
-		public static var carpetMOI:Number = 1000;
-		public static var carpetFriction:Number = 0.1;
-		public static var carpetRotFriction:Number = 5;
-		public static var cannonFireInterval:int = 60;
+		public static const thrusterForce:Number = 0.1;
+		public static const carpetMass:Number = 1;
+		public static const carpetMOI:Number = 1000;
+		public static const carpetFriction:Number = 0.1;
+		public static const carpetRotFriction:Number = 5;
+		public static const cannonFireInterval:int = 60;
 		// Carpet bouncing consts:
-		public static var buoyRepel:Number = 3; //Buoy repulsion factor on bounce.
-		public static var edgeRepel:Number = 3; //Edge of world repulsion factor on bounce.
+		public static const buoyRepel:Number = 3; //Buoy repulsion factor on bounce.
+		public static const edgeRepel:Number = 3; //Edge of world repulsion factor on bounce.
 		
-		public static var gateCollideDist:Number = 15;
+		public static const gateCollideDist:Number = 15;
 
 		
 		// Other Entity Constants
 		
 		// Player related constants
-		public static var playerKeys:Array = [
+		public static const playerKeys:Array = [
 			{
 				move: [Key.LEFT, Key.UP, Key.RIGHT, Key.DOWN],
 				grab: [Key.SPACE, Key.SHIFT]
 			}
 		];
-		public static var tweenTime:Number = 10;
-		public static var moveDelay:int = 4;
+		public static const tweenTime:Number = 10;
+		public static const moveDelay:int = 4;
 		
 		public static function radiansToDegrees(rad:Number):Number
 		{
@@ -70,6 +77,6 @@ package
 			return rad;
 		}
 		
-		public static var bulletSpeed:Number = 4;
+		public static const bulletSpeed:Number = 4;
 	}
 }

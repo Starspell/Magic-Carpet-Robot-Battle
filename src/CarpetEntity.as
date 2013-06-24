@@ -163,7 +163,6 @@ package
 						y - (Conf.screenSize[1] / 2)
 					)
 				);
-				trace(this.world.camera.x, this.world.camera.y);
 			}
 		}
 		
