@@ -83,7 +83,7 @@ package
 					grabbedBlock = b as InanimateBlock;
 					grabbedBlock.grabber = this;
 					// Play grabbed sound
-					grabSound.play();
+					grabSound.play(0.4);
 				}
 			}
 			if (!Input.check(grabKey) && grabbedBlock !== null) {

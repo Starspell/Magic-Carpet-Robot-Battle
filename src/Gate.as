@@ -58,10 +58,10 @@ package
 			if (!passed) {
 				if ((world as Level).checkpointPassed(this)) {
 					passed = true;
-					passGate.play();
+					if( !passGate.playing ) passGate.play(0.1);
 				} else {
 					// wrong gate order
-					passWrongGate.play();
+					if( !passWrongGate.playing ) passWrongGate.play();
 				}
 			}
 		}

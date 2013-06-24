@@ -250,7 +250,7 @@ package
 				
 			// Play a firing sound
 			var soundIndex:int = FP.rand(fireSoundsArr.length);
-			fireSoundsArr[soundIndex].play();
+			fireSoundsArr[soundIndex].play(0.5);
 		}
 	}
 }
