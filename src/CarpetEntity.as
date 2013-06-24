@@ -49,10 +49,10 @@ package
 			//image = new Image(CARPET);
 			image = img;
 			a = Math.PI / 2
-			image.originX = 20;
-			image.originY = 30;
 			image.scaleX = 40 / 320;
 			image.scaleY = 60 / 480;
+			image.originX = 160;
+			image.originY = 240;
 			super(x, y, image);
 			setHitbox(60, 60, 30, 30);
 			layer = -2;

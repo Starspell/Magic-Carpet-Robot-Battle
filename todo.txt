@@ -9,9 +9,6 @@ make some courses
     level editor
     obstacles are fun
 
-graphics
-	draw more things on the moving carpet
-
 title screen/level select/instructions
 	return there after completing a level
 	- including credit for music
