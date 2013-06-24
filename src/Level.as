@@ -24,6 +24,8 @@ package
 		private var totTargets:int, totGates:int;
 		public var ident:int;
 		public var worldBoundaryCoords:Array = [];
+		private var seaMoveLeft:Boolean = true;
+		public const seaMovementSpeed:Number = 0.25;
 		
 		public function Level(ident:int, nPlayers:Array)
 		{
@@ -102,12 +104,12 @@ package
 			worldBoundaryCoords[1] = new Point(boundaries[1] + Conf.boundarySpace, boundaries[3] + Conf.boundarySpace);
 
 			seaTiles = new TiledImage(
-				SEA, worldBoundaryCoords[1].x - worldBoundaryCoords[0].x,
+				SEA, worldBoundaryCoords[1].x - worldBoundaryCoords[0].x + 100,
 				worldBoundaryCoords[1].y - worldBoundaryCoords[0].y
 			);
 			var seaTileEnt:Entity = addGraphic(seaTiles);
 			seaTileEnt.layer = 1;
-			seaTileEnt.x = worldBoundaryCoords[0].x;
+			seaTileEnt.x = worldBoundaryCoords[0].x - 50;
 			seaTileEnt.y = worldBoundaryCoords[0].y;
 		}
 
@@ -130,6 +132,16 @@ package
 		{
 			for each (var c:CarpetWorld in carpetWorlds) c.update();
 			super.update();
+			if ( seaMoveLeft )
+			{
+				if ( seaTiles.x > -20 ) seaTiles.x -= seaMovementSpeed;
+				else seaMoveLeft = false;
+			}
+			else
+			{
+				if ( seaTiles.x < 20 ) seaTiles.x += seaMovementSpeed;
+				else seaMoveLeft = true;
+			}
 		}
 		
 		override public function updateLists():void
