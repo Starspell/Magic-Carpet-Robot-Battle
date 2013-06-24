@@ -170,6 +170,10 @@ package
 					// there's another block in its way
 					return;
 				}
+				if ((blockToMove as InanimateBlock).grabber !== this &&
+					(blockToMove as InanimateBlock).grabber !== null)
+					// another player is grabbing this block
+					return;
 			}
 			canMove = false;
 			carpet.moveInDir(this, movingDir, moveDone);
