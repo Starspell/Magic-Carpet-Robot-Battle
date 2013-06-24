@@ -32,6 +32,7 @@ package
 			}
 		];
 		public static const boundarySpace:int = 500;
+		public static const seaMovementSpeed:Number = 0.25;
 
 		// carpet world
 		public static const carpetSize:Array = [8, 12];

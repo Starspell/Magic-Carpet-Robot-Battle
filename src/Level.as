@@ -25,7 +25,6 @@ package
 		public var ident:int;
 		public var worldBoundaryCoords:Array = [];
 		private var seaMoveLeft:Boolean = true;
-		public const seaMovementSpeed:Number = 0.25;
 		
 		public function Level(ident:int, nPlayers:Array)
 		{
@@ -134,12 +133,12 @@ package
 			super.update();
 			if ( seaMoveLeft )
 			{
-				if ( seaTiles.x > -20 ) seaTiles.x -= seaMovementSpeed;
+				if ( seaTiles.x > -20 ) seaTiles.x -= Conf.seaMovementSpeed;
 				else seaMoveLeft = false;
 			}
 			else
 			{
-				if ( seaTiles.x < 20 ) seaTiles.x += seaMovementSpeed;
+				if ( seaTiles.x < 20 ) seaTiles.x += Conf.seaMovementSpeed;
 				else seaMoveLeft = true;
 			}
 		}

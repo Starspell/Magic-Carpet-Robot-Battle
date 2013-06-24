@@ -15,20 +15,34 @@ package
 		
 		private var title:Image;
 		private var sea:TiledImage;
+		private var seaMoveLeft:Boolean;
+		private var seaEnt:Entity;
 		
 		public function TitleScreen()
 		{
-			sea = new TiledImage(SEA, 1000, 700);
+			sea = new TiledImage(SEA, 1100, 700);
 			title = new Image(TITLE);
 			var titleEnt:Entity = addGraphic(title);
 			titleEnt.layer = 0;
 			titleEnt.x = 150; titleEnt.y = 100;
-			var seaEnt:Entity = addGraphic(sea);
+			seaEnt = addGraphic(sea);
 			seaEnt.layer = 1;
+			seaEnt.x = -50;
 		}
 		
 		override public function update():void
 		{
+			if ( seaMoveLeft )
+			{
+				if ( seaEnt.x > -20 ) seaEnt.x -= Conf.seaMovementSpeed;
+				else seaMoveLeft = false;
+			}
+			else
+			{
+				if ( seaEnt.x < 20 ) seaEnt.x += Conf.seaMovementSpeed;
+				else seaMoveLeft = true;
+			}
+			
 			if (Input.pressed(Key.ENTER))
 				FP.world = new Level(0, [2]);
 		}
