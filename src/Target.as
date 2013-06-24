@@ -14,15 +14,15 @@ package
 		
 		private var explodeSound:Sfx = new Sfx(EXPLODE);
 		
-		public function Target(x:int, y:int, num:int)
+		public function Target(x:int, y:int)//, num:int)
 		{
-			super(x, y, num);
+			super(x, y);//, num);
 			graphic = new Image(IMG);
 			setHitbox(40, 40);
 			type = "Target";
 			
-			numEntity.x = x + 10;
-			numEntity.y = y;
+// 			numEntity.x = x + 10;
+// 			numEntity.y = y;
 		}
 		
 		override public function pass():void

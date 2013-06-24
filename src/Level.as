@@ -19,7 +19,9 @@ package
 		public var carpetWorlds:Array;
 		public var carpetGraphics:Array;
 		public var carpetEnts:Array;
-		public var nextCheckpoint:int;
+// 		public var nextCheckpoint:int;
+		private var doneTargets:int, doneGates:int;
+		private var totTargets:int, totGates:int;
 		public var ident:int;
 		public var worldBoundaryCoords:Array = [];
 		
@@ -29,7 +31,8 @@ package
 			carpetWorlds = new Array();
 			carpetEnts = new Array();
 			carpetGraphics = new Array();
-			nextCheckpoint = 0;
+// 			nextCheckpoint = 0;
+			doneTargets = doneGates = 0;
 
 			var i:int;
 			var data:Object = Conf.levelData[ident];
@@ -56,15 +59,18 @@ package
 			}
 
 			// targets and gates
+			totTargets = totGates = 0;
 			var cpData:Array = data.checkpoints;
 			for (i = 0; i < cpData.length; i++) {
 				var args:Object = cpData[i][1];
 				if (cpData[i][0] == "target") {
-					add(new Target(args[0], args[1], i));
+					add(new Target(args[0], args[1]));
+					++totTargets;
 				} else { // cpData[i][0] == "gate"
-					add(new Gate(args[0], args[1], args[2], args[3], this, i));
+					add(new Gate(args[0], args[1], args[2], args[3], this));
 					linePts[0].push([args[0] + hw, args[1] + hh]);
 					linePts[1].push([args[2] + hw, args[3] + hh]);
+					++totGates;
 				}
 			}
 			// end buoys
@@ -144,18 +150,27 @@ package
 
 		public function checkpointPassed(cp:Checkpoint):Boolean
 		{
-			if (cp.num == nextCheckpoint)
-			{
+// 			if (cp.num == nextCheckpoint)
+// 			{
 				//Target is destroyed
-				nextCheckpoint++;
-				if (cp is Target) remove(cp);
-				else if (cp is Gate) { }; //Gate code here!
+// 				nextCheckpoint++;
+				if (cp is Target) {
+					remove(cp);
+					doneTargets++;
+					if (doneTargets == totTargets) {
+						trace("player 1 wins");
+					}
+				} else if (cp is Gate) {
+					if (doneGates == totGates) {
+						trace("player 2 wins");
+					}
+				};
 
-				if (nextCheckpoint == Conf.levelData[ident].checkpoints.length) {
-					trace("win");
-				}
+// 				if (nextCheckpoint == Conf.levelData[ident].checkpoints.length) {
+// 					trace("win");
+// 				}
 				return true;
-			} else return false;
+// 			} else return false;
 		}
 		
 	}

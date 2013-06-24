@@ -14,7 +14,7 @@ package
 	{
 		[Embed(source = '../assets/sprites/gateCone.png')] private const IMG:Class;
 		[Embed(source = '../assets/audio/checkpoint.mp3')] private const GATE:Class;
-		[Embed(source = '../assets/audio/wrongcheckpoint.mp3')] private const WRONG:Class;
+// 		[Embed(source = '../assets/audio/wrongcheckpoint.mp3')] private const WRONG:Class;
 		
 		public var endGate:Entity;
 		
@@ -30,12 +30,12 @@ package
 		public var halfLength:Number;
 
 		private var passGate:Sfx = new Sfx(GATE);
-		private var passWrongGate:Sfx = new Sfx(WRONG);
+// 		private var passWrongGate:Sfx = new Sfx(WRONG);
 		
 		public function Gate(startX:int, startY:int, endX:int, endY:int,
-							 waterWorld:Level, num:int)
+							 waterWorld:Level)//, num:int)
 		{
-			super(startX, startY, num);
+			super(startX, startY);//, num);
 			this.endX = endX;
 			this.endY = endY;
 						
@@ -49,8 +49,8 @@ package
 			tang.normalize(1);
 			norm = new Point(tang.y, -tang.x);
 			
-			numEntity.x = x + tang.x * halfLength;
-			numEntity.y = y + tang.y * halfLength;
+// 			numEntity.x = x + tang.x * halfLength;
+// 			numEntity.y = y + tang.y * halfLength;
 		}
 
 		override public function pass():void
@@ -61,7 +61,7 @@ package
 					if( !passGate.playing ) passGate.play(0.1);
 				} else {
 					// wrong gate order
-					if( !passWrongGate.playing ) passWrongGate.play();
+					//if( !passWrongGate.playing ) passWrongGate.play();
 				}
 			}
 		}
