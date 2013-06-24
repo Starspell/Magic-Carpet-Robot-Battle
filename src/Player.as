@@ -75,6 +75,8 @@ package
 			if (!Input.check(grabKey)) {
 				grabbedBlock = null;
 			}
+			
+			sprite.setFrame(dir, int(grabbedBlock != null));
 
 			var i:int, j:int;
 			// determine input directions
